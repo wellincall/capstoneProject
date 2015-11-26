@@ -1,7 +1,7 @@
 package br.usp.poli.pcs.capstoneProject.server;
 
 import static spark.Spark.*;
-import br.usp.poli.pcs.capstoneProject.handlers.PageHandler;
+import br.usp.poli.pcs.capstoneProject.handlers.NewUserHandler;
 
 public class Server {
 	static int PORT = 3000;
@@ -15,7 +15,7 @@ public class Server {
 		});
 		
 		get("/page", (request, response) -> {
-			return (new PageHandler(request, response)).call();			
+			return (new NewUserHandler(request, response)).call();			
 		});
 	}
 }

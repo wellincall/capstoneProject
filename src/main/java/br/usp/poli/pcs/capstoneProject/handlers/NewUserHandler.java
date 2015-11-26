@@ -4,19 +4,19 @@ import java.util.Map;
 import java.util.HashMap;
 import spark.Request;
 import spark.Response;
+import br.usp.poli.pcs.capstoneProject.forms.NewUserForm;
 
-public class PageHandler extends DefaultHandler {
+public class NewUserHandler extends DefaultHandler {
 	
-	public PageHandler(Request request, Response response) {
+	public NewUserHandler(Request request, Response response) {
 		super(request, response);
-		filePath = "page.ftl";
+		filePath = "newUser.ftl";
 	}
 	
 	protected Map<String, Object> process() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
-		attributes.put("message", "This is my first page");
+		attributes.put("formfields", (new NewUserForm()).getFormFields());
 		return attributes;
-		
 	}
 	
 }
