@@ -20,7 +20,7 @@
 				   				${formField.formFieldCaption}
 				   				</label>
 				   				<div class="col-md-10">
-				   					<input id="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
+				   					<input id="${formField.formFieldId}" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
 				   				</div>
 			   				</div>
 			   			</#list>
