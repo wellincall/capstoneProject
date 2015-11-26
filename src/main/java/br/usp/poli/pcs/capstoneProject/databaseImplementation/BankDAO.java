@@ -21,7 +21,7 @@ public class BankDAO implements IBank{
 	public Bank createBank(Sql2o sql2o, Map<String, Object> bankInformation) {
 		Bank bank;
 		try (Connection connection = sql2o.beginTransaction()) {
-			int bankId = connection.createQuery("INSERT INTO banks(name) VALUES (:name)")
+			int bankId = connection.createQuery("INSERT INTO banks(name) VALUES (:name)", true)
 				.addParameter("name", bankInformation.get("name"))
 				.executeUpdate()
 				.getKey(Integer.class);

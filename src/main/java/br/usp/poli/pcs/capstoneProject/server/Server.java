@@ -1,10 +1,8 @@
 package br.usp.poli.pcs.capstoneProject.server;
 
 import static spark.Spark.*;
-import br.usp.poli.pcs.capstoneProject.handlers.*;
-import br.usp.poli.pcs.capstoneProject.handlers.getHandlers.NewBankHandler;
-import br.usp.poli.pcs.capstoneProject.handlers.getHandlers.NewUserHandler;
-import br.usp.poli.pcs.capstoneProject.handlers.postHandlers.RegisterUserHandler;
+import br.usp.poli.pcs.capstoneProject.handlers.getHandlers.*;
+import br.usp.poli.pcs.capstoneProject.handlers.postHandlers.*;
 
 public class Server {
 	static int PORT = 3000;
@@ -26,7 +24,7 @@ public class Server {
 		});
 		
 		post("/register-bank", (request, response) -> {
-			 
+			 return (new RegisterNewBankHandler(request, response)).call();
 		});
 		
 		
