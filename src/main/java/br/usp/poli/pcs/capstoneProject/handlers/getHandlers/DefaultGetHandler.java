@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.handlers;
+package br.usp.poli.pcs.capstoneProject.handlers.getHandlers;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
@@ -6,6 +6,8 @@ import spark.template.freemarker.FreeMarkerEngine;
 import spark.Request;
 import spark.Response;
 import java.util.Map;
+
+import br.usp.poli.pcs.capstoneProject.handlers.DefaultHandler;
 import spark.ModelAndView;
 
 public abstract class DefaultGetHandler extends DefaultHandler{

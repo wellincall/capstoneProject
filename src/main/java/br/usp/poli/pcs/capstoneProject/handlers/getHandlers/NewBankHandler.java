@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.handlers;
+package br.usp.poli.pcs.capstoneProject.handlers.getHandlers;
 
 import java.util.Map;
 import java.util.HashMap;

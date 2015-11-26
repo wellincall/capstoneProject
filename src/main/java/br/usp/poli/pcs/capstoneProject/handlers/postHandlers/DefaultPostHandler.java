@@ -1,5 +1,6 @@
-package br.usp.poli.pcs.capstoneProject.handlers;
+package br.usp.poli.pcs.capstoneProject.handlers.postHandlers;
 
+import br.usp.poli.pcs.capstoneProject.handlers.DefaultHandler;
 import spark.Request;
 import spark.Response;
 
