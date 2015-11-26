@@ -10,4 +10,6 @@ import org.sql2o.Sql2o;
 public interface IBank {
 	public List<Bank> getBanks(Sql2o sql2o);
 	public Bank createBank(Sql2o sql2o, Map<String, Object> bankInformation);
+	public boolean receiveWithdraw(Sql2o sql2o, int withdrawId);
+	public boolean receiveDeposit(Sql2o sql2o, int depositId);
 }
