@@ -17,6 +17,9 @@ public class Server {
 		get("/new-user", (request, response) -> {
 			return (new NewUserHandler(request, response)).call();			
 		});
+		get("/new-bank", (request, response) -> {
+			return (new NewBankHandler(request, response)).call();
+		});
 		
 		post("/register-user", (request, response) -> {
 			return (new RegisterUserHandler(request, response).call());
