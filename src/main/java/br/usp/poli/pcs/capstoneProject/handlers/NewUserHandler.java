@@ -18,5 +18,4 @@ public class NewUserHandler extends DefaultGetHandler {
 		attributes.put("formfields", (new NewUserForm()).getFormFields());
 		return attributes;
 	}
-	
 }
