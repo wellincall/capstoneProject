@@ -11,13 +11,14 @@ import br.usp.poli.pcs.capstoneProject.models.Bank;
 
 public class BankDAO implements IBank{
 
-	@Override
 	public List<Bank> getBanks(Sql2o sql2o) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = sql2o.beginTransaction();
+		List<Bank> banks = connection.createQuery("SELECT * FROM banks")
+								.executeAndFetch(Bank.class);
+		connection.commit();
+		return banks;
 	}
 
-	@Override
 	public Bank createBank(Sql2o sql2o, Map<String, Object> bankInformation) {
 		Bank bank;
 		try (Connection connection = sql2o.beginTransaction()) {
