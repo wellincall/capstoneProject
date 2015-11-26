@@ -15,22 +15,28 @@ public class UserDAO implements IUser{
 
 	@Override
 	public User createUser(Sql2o sql2o, Map<String, Object> userInformation) {
+		User user;
 		String hashedPassword = PasswordHashService.call((String) userInformation.get("password"));
 		try(Connection connection = sql2o.beginTransaction()) {
-			connection.createQuery("INSERT INTO users(name, phoneNumber," 
+			int userId = connection.createQuery("INSERT INTO users(name, phoneNumber," 
 					+ "cpf, email, birthdayDate, password, creationDate) "
 					+ "VALUES (:name, :phoneNumber, :cpf, :email, :birthdayDate, "
-					+ ":password, :creationDate)")
+					+ ":password, :creationDate)", true)
 				.addParameter("name", (String) userInformation.get("name"))
 				.addParameter("phoneNumber", (String) userInformation.get("phone-number"))
 				.addParameter("cpf", (String) userInformation.get("cpf"))
 				.addParameter("email", (String) userInformation.get("email"))
 				.addParameter("password", hashedPassword)
 				.addParameter("birthdayDate", userInformation.get("birthday-date"))
-				.addParameter("creationDate", new Date());
+				.addParameter("creationDate", new Date())
+				.executeUpdate()
+				.getKey(Integer.class);
+			user = connection.createQuery("SELECT * FROM users WHERE id = :id")
+					.addParameter("id", userId)
+					.executeAndFetch(User.class).get(0);
 			connection.commit();
 		}
-		return null;
+		return user;
 	}
 
 	@Override
