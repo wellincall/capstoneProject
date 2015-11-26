@@ -1,11 +1,11 @@
 package br.usp.poli.pcs.capstoneProject.models;
 
 public class TransferIntention {
-	int id;
-	double value;
-	int recipientId;
-	int senderId;
-	int status;
-	Withdraw withdraw;
-	Deposit deposit;
+	private int id;
+	private double value;
+	private int recipientId;
+	private int senderId;
+	private int status;
+	private Withdraw withdraw;
+	private Deposit deposit;
 }

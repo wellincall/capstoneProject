@@ -1,6 +1,12 @@
 package br.usp.poli.pcs.capstoneProject.models;
 
 public class Bank {
-	int id;
-	String name;
+	private int id;
+	private String name;
+	public int getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
 }
