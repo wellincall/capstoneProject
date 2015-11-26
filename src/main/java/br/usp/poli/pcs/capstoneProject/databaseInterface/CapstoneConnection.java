@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.database;
+package br.usp.poli.pcs.capstoneProject.databaseInterface;
 import org.sql2o.Sql2o;
 
 public class CapstoneConnection {

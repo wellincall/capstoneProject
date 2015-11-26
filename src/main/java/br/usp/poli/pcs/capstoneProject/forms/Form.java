@@ -18,7 +18,6 @@ public abstract class Form {
 		for (FormField formField : formFields) {
 			String paramInRequest = request.queryParams(formField.getFormFieldId());
 			if (paramInRequest == null || !formField.validates(paramInRequest)) {
-				System.out.println("Didn't validate: "+paramInRequest+" for "+formField.getFormFieldId());
 				isValid = false;
 			}
 		}

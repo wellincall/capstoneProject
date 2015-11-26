@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.database;
+package br.usp.poli.pcs.capstoneProject.databaseInterface;
 
 import java.util.List;
 import java.util.Map;
