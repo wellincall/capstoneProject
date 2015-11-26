@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.captstoneProject.models;
+package br.usp.poli.pcs.capstoneProject.models;
 
 public class TransferIntention {
 	int id;

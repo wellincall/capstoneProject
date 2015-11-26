@@ -14,8 +14,11 @@ import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 
 public class Server {
+	static int PORT = 3000;
+	static String STATIC_FILES_LOCATION = "/public";
 	public static void main(String[] args) {
-		staticFileLocation("/public");
+		port(PORT);
+		staticFileLocation(STATIC_FILES_LOCATION);
 		get("/hello", (request, response) -> {
 			return "it works";
 		});
