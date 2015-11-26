@@ -38,7 +38,7 @@ public class PasswordHashService {
 		StringBuffer salt = new StringBuffer();
 		for(int i = 0; i <= 1; i++) {
 			Random numberGenerator = new SecureRandom();
-			salt.append(CHARS.charAt(numberGenerator.nextInt(CHARS.length() - 1)));
+			salt.append(CHARS.charAt(numberGenerator.nextInt(CHARS.length())));
 		}
 		return salt.toString();
 	}
