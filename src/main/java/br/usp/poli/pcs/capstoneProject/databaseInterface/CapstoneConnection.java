@@ -5,7 +5,7 @@ public class CapstoneConnection {
 	private Sql2o databaseConnection;
 	
 	public CapstoneConnection() {
-		databaseConnection = new Sql2o("jdbc:postgresql//localhost:5432/capstoneproject", "postgres", "");
+		databaseConnection = new Sql2o("jdbc:postgresql://localhost:5432/capstoneProject", "postgres", "postgres");
 	}
 	
 	public Sql2o getConnection() {
