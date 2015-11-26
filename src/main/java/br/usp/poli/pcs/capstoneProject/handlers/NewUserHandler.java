@@ -6,7 +6,7 @@ import spark.Request;
 import spark.Response;
 import br.usp.poli.pcs.capstoneProject.forms.NewUserForm;
 
-public class NewUserHandler extends DefaultHandler {
+public class NewUserHandler extends DefaultGetHandler {
 	
 	public NewUserHandler(Request request, Response response) {
 		super(request, response);
