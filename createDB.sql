@@ -40,6 +40,7 @@ CREATE TABLE transferIntentions (
 	recipientId integer NOT NULL,
 	senderId integer NOT NULL,
 	status integer NOT NULL,
+	creationDate date NOT NULL,
 	CONSTRAINT transferIntentionPK PRIMARY KEY (id),
 	CONSTRAINT recipientForeignKey FOREIGN KEY (recipientId) REFERENCES userBankAccounts(id),
 	CONSTRAINT senderForeingKey FOREIGN KEY (senderId) REFERENCES userBankAccounts(id)
