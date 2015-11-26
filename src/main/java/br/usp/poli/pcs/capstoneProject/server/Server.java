@@ -19,6 +19,10 @@ public class Server {
 			return (new RegisterUserHandler(request, response).call());
 		});
 		
+		get("new-bank-account", (request, response) -> {
+			return "abcd";
+		});
+		
 		get("/new-bank", (request, response) -> {
 			return (new NewBankHandler(request, response)).call();
 		});

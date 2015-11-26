@@ -45,5 +45,11 @@ public class BankDAO implements IBank{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	public List<Integer> getBankIds(Sql2o sql2o) {
+		Connection connection = sql2o.beginTransaction();
+		List<Integer> ids = connection.createQuery("SELECT id FROM banks").executeAndFetch(Integer.class);
+		connection.commit();
+		return ids;
+	}
 }
