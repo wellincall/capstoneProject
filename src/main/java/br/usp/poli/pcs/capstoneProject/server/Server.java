@@ -15,6 +15,7 @@ import freemarker.template.Configuration;
 
 public class Server {
 	public static void main(String[] args) {
+		staticFileLocation("/public");
 		get("/hello", (request, response) -> {
 			return "it works";
 		});
