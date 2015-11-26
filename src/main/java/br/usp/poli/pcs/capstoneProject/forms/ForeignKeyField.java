@@ -2,6 +2,7 @@ package br.usp.poli.pcs.capstoneProject.forms;
 
 import br.usp.poli.pcs.capstoneProject.fieldValidators.IForeignKeyValidator;
 import java.util.Map;
+import java.util.Set;
 
 public class ForeignKeyField extends FormField {
 	private IForeignKeyValidator validator;
@@ -17,5 +18,8 @@ public class ForeignKeyField extends FormField {
 	public boolean validates(int foreignKey) {
 		return validator.validates(foreignKey);
 	}
-
+	
+	public Map<String, String> getOptions() {
+		return options;
+	}
 }
