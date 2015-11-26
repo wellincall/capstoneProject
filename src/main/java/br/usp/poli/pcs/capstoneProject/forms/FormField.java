@@ -4,12 +4,14 @@ import br.usp.poli.pcs.capstoneProject.fieldValidators.IValidator;
 
 
 public class FormField {
-	private String formFieldId;
-	private String formFieldCaption;
+	protected String formFieldId;
+	protected String formFieldCaption;
 	private String formFieldType; 
 	private IValidator validator;
 	
-	protected FormField(String formFieldId, String formFieldCaption, String formFieldType, IValidator validator) {
+	public FormField() {}
+	
+	public FormField(String formFieldId, String formFieldCaption, String formFieldType, IValidator validator) {
 		this.formFieldId = formFieldId;
 		this.formFieldCaption = formFieldCaption;
 		this.formFieldType = formFieldType;
