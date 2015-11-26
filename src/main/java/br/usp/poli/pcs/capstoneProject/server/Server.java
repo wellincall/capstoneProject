@@ -14,7 +14,7 @@ public class Server {
 			return "it works";
 		});
 		
-		get("/page", (request, response) -> {
+		get("/new-user", (request, response) -> {
 			return (new NewUserHandler(request, response)).call();			
 		});
 		
