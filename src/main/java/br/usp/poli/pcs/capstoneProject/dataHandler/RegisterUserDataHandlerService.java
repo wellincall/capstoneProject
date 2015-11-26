@@ -15,7 +15,6 @@ public class RegisterUserDataHandlerService implements IDataHandlerService {
 		NewUserForm form = new NewUserForm();
 		for (FormField field : form.getFormFields()) {
 			if (field.getFormFieldId().equals("birthday-date")) {
-				System.out.println(request.queryParams(field.getFormFieldId()));
 				Date birthdayDate = StringToDateService.call(request.queryParams(field.getFormFieldId()));
 				userInformation.put(field.getFormFieldId(), birthdayDate);
 			} else {

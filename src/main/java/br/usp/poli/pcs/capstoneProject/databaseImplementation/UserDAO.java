@@ -31,9 +31,12 @@ public class UserDAO implements IUser{
 				.addParameter("creationDate", new Date())
 				.executeUpdate()
 				.getKey(Integer.class);
+			user = connection.createQuery("SELECT * FROM users WHERE id = :id")
+				.addParameter("id", userId)
+				.executeAndFetchFirst(User.class);
 			connection.commit();
 		}
-		return null;
+		return user;
 	}
 
 	@Override

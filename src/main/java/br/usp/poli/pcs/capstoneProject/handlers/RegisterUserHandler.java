@@ -11,6 +11,7 @@ import br.usp.poli.pcs.capstoneProject.databaseInterface.IUser;
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.databaseImplementation.UserDAO;
 
+
 public class RegisterUserHandler extends DefaultPostHandler {
 	public RegisterUserHandler(Request request, Response response) {
 		super(request, response);
