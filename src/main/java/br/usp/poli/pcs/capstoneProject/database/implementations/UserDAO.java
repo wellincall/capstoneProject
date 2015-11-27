@@ -10,14 +10,14 @@ import org.sql2o.Connection;
 
 import br.usp.poli.pcs.capstoneProject.database.interfaces.IUser;
 import br.usp.poli.pcs.capstoneProject.models.User;
-import br.usp.poli.pcs.capstoneProject.security.PasswordHashService;
+import br.usp.poli.pcs.capstoneProject.security.NewPasswordHashService;
 
 public class UserDAO implements IUser{
 
 	@Override
 	public User createUser(Sql2o sql2o, Map<String, Object> userInformation) {
 		User user = null;
-		String hashedPassword = PasswordHashService.call((String) userInformation.get("password"));
+		String hashedPassword = (new NewPasswordHashService()).call((String) userInformation.get("password"));
 		try(Connection connection = sql2o.beginTransaction()) {
 			if (canRegisterUser(connection, userInformation)) {
 				int userId = connection.createQuery("INSERT INTO users(name, phoneNumber," 
