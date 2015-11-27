@@ -13,8 +13,8 @@ import br.usp.poli.pcs.capstoneProject.models.Bank;
 import br.usp.poli.pcs.capstoneProject.databaseImplementation.BankDAO;
 import br.usp.poli.pcs.capstoneProject.dataHandler.RegisterBankDataHandlerService;
 
-public class RegisterNewBankHandler extends DefaultPostHandler {
-	public RegisterNewBankHandler(Request request, Response response) {
+public class RegisterBankHandler extends DefaultPostHandler {
+	public RegisterBankHandler(Request request, Response response) {
 		super(request, response);
 	}
 	

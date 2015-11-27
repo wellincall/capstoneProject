@@ -28,7 +28,7 @@ public class Server {
 		});
 		
 		post("/register-bank", (request, response) -> {
-			 return (new RegisterNewBankHandler(request, response)).call();
+			 return (new RegisterBankHandler(request, response)).call();
 		});
 		
 		
