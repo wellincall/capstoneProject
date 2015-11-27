@@ -20,12 +20,12 @@ public class AuthenticationService {
 	private Map<String, Object> prepare(Request request) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		if (request.queryMap("email") != null) {
-				parameters.put("email", request.queryMap("email"));
+				parameters.put("email", request.queryParams("email"));
 		}
 		if (request.queryMap("phone-number") != null) {
-			parameters.put("phone-number", request.queryMap("phone-number"));
+			parameters.put("phone-number", request.queryParams("phone-number"));
 		}
-		parameters.put("password", request.queryMap("password"));
+		parameters.put("password", request.queryParams("password"));
 		return parameters;
 	}
 	
