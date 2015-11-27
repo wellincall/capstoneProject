@@ -44,9 +44,20 @@ public class UserDAO implements IUser{
 	}
 
 	@Override
-	public User getUser(Sql2o sql2o, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUser(Sql2o sql2o, Map<String, Object> userInformation) {
+		User user = null;
+		try (Connection connection = sql2o.beginTransaction()) {
+			if (userInformation.get("email") != null) {
+				user = connection.createQuery("SELECT * FROM users WHERE email = :email")
+						.addParameter("email", userInformation.get("email"))
+						.executeAndFetchFirst(User.class);
+			} else if (userInformation.get("phoneNumber") != null) {
+				user = connection.createQuery("SELECT * FROM users WHERE phoneNumber = :phoneNumber")
+						.addParameter("phoneNumber", userInformation.get("phone-number"))
+						.executeAndFetchFirst(User.class);
+			}
+		}
+		return user;
 	}
 
 	@Override
