@@ -16,7 +16,7 @@ public class LoginDisplayHandler extends DefaultGetHandler{
 	
 	public Map<String, Object> process() {
 		Map<String, Object> form = new HashMap<String, Object>();
-		form.put("formField", (new LoginForm()).getFormFields());
+		form.put("formfields", (new LoginForm()).getFormFields());
 		return form;
 	}
 }
