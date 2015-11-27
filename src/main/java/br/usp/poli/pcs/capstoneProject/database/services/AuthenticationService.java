@@ -17,10 +17,10 @@ public class AuthenticationService extends DatabaseService{
 	
 	private Map<String, Object> prepare(Request request) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		if (request.queryMap("email") != null) {
+		if (request.queryParams("email") != null) {
 				parameters.put("email", request.queryParams("email"));
 		}
-		if (request.queryMap("phone-number") != null) {
+		if (request.queryParams("phone-number") != null) {
 			parameters.put("phone-number", request.queryParams("phone-number"));
 		}
 		parameters.put("password", request.queryParams("password"));
@@ -31,5 +31,8 @@ public class AuthenticationService extends DatabaseService{
 		return dao.authenticatesUser(db.getConnection(), prepare(request));
 	}
 	
+	public boolean call(Map<String, Object> userInfo) {
+		return dao.authenticatesUser(db.getConnection(), userInfo);
+	}
 	
 }
