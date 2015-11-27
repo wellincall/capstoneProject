@@ -80,7 +80,11 @@ public class UserDAO implements IUser{
 				.addParameter("cpf", userInformation.get("cpf"))
 				.addParameter("phoneNumber", userInformation.get("phone-number"))
 				.executeScalar(Integer.class);
-		return usersRegistered == 0;
+		int phonesRegistered = connection.createQuery("SELECT count(id) FROM users WHERE"
+				+ " phoneNumber = :phoneNumber")
+				.addParameter("phoneNumber", userInformation.get("phone-number"))
+				.executeScalar(Integer.class);
+		return usersRegistered == 0 && phonesRegistered == 0;
 	}
 
 }
