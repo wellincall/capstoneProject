@@ -11,10 +11,19 @@ import br.usp.poli.pcs.capstoneProject.models.Bank;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class NewBankAccountForm extends FormWithForeignKey {
-	public NewBankAccountForm(){}
+	public NewBankAccountForm(){
+		formFields.add(new ForeignKeyField("bank-id", "Bank", new BankForeignKeyValidator(), generateOptions(new ArrayList<Bank>())));
+		formFields.add(new FormField("agency-number", "Agency Number", "text", new BankAgencyValidator()));
+		formFields.add(new FormField("account-number", "Account Number", "text", new BankAccountNumberValidator()));
+		formFields.add(new FormField("account-owner-name", "Owner Name", "text", new TextFieldValidator()));
+		formFields.add(new FormField("account-owner-cpf", "Owner CPF", "text", new CPFValidator()));
+		formFields.add(new FormField("account-owner-birthday-date", "Owner Birthday Date", "text", new DateValidator()));
+		formFields.add(new FormField("account-owner-phone-number", "Owner Phone Number", "text", new PhoneNumberValidator())); 
+	}
 	
 	public NewBankAccountForm(List<Bank> banks) {
 		super();
