@@ -35,8 +35,12 @@ public class Server {
 			 return (new RegisterBankHandler(request, response)).call();
 		});
 		
-		get("login", (request, response) -> {
+		get("/login", (request, response) -> {
 			return (new LoginDisplayHandler(request, response)).call();
+		});
+		
+		post("/authenticate", (request, response) -> {
+			return (new AuthenticationHandler(request, response)).call();
 		});
 		
 	}
