@@ -21,8 +21,12 @@ public class RegisterBankHandler extends DefaultPostHandler {
 	public String process() {
 		Form form = new NewBankForm();
 		if (form.isValid(request)) {
-			persistBank();
-			return "{Success: \"Check DB\"}";
+			Bank bank = persistBank();
+			if (bank != null) {
+				return "{Success: \"Check DB\"}";
+			} else {
+				return "{Error: \"Bank already registered\"}";
+			}
 		} else {
 			return "{Error: \"MotherFucker\"}";
 		}

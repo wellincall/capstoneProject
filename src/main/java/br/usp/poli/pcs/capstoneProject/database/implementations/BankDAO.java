@@ -20,15 +20,17 @@ public class BankDAO implements IBank{
 	}
 
 	public Bank createBank(Sql2o sql2o, Map<String, Object> bankInformation) {
-		Bank bank;
+		Bank bank = null;
 		try (Connection connection = sql2o.beginTransaction()) {
-			int bankId = connection.createQuery("INSERT INTO banks(name) VALUES (:name)", true)
-				.addParameter("name", bankInformation.get("name"))
-				.executeUpdate()
-				.getKey(Integer.class);
-			bank = connection.createQuery("SELECT * FROM banks WHERE id = :id ")
-				.addParameter("id", bankId)
-				.executeAndFetchFirst(Bank.class);
+			if (canCreateBank(connection, bankInformation)) {
+				int bankId = connection.createQuery("INSERT INTO banks(name) VALUES (:name)", true)
+					.addParameter("name", bankInformation.get("name"))
+					.executeUpdate()
+					.getKey(Integer.class);
+				bank = connection.createQuery("SELECT * FROM banks WHERE id = :id ")
+					.addParameter("id", bankId)
+					.executeAndFetchFirst(Bank.class);
+			}
 			connection.commit();
 		} 
 		return bank;
@@ -51,5 +53,12 @@ public class BankDAO implements IBank{
 		List<Integer> ids = connection.createQuery("SELECT id FROM banks").executeAndFetch(Integer.class);
 		connection.commit();
 		return ids;
+	}
+	
+	private boolean canCreateBank(Connection connection, Map<String, Object> bankInformation) {
+		int registeredBanks = connection.createQuery("SELECT count(id) FROM banks WHERE name = :name")
+					.addParameter("name", bankInformation.get("name"))
+					.executeScalar(Integer.class);
+		return registeredBanks == 0;
 	}
 }
