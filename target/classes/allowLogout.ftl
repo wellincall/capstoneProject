@@ -15,7 +15,7 @@
 		   		<div class="col-md-12">
 			   		<form class="form-horizontal" action="/deauthenticate" method="DELETE">
 			   			<div class="form-action">
-				   			<input type="submit" value="I want to logout" class="btn btn-default btn-primary pull-right" />
+				   			<input type="submit" value="I want to logout" class="btn btn-default btn-primary" />
 			   			</div>
 			   		</form>
 		   		</div>

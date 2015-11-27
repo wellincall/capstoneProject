@@ -3,15 +3,13 @@ package br.usp.poli.pcs.capstoneProject.database.services;
 import java.util.List;
 
 import br.usp.poli.pcs.capstoneProject.database.implementations.BankDAO;
-import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
 
 
-public class GetBankIdsService {
-	private CapstoneConnection db;
+public class GetBankIdsService extends DatabaseService{
 	private BankDAO dao;
 	
 	public GetBankIdsService() {
-		db = new CapstoneConnection();
+		super();
 		dao = new BankDAO();
 	}
 	public List<Integer> call() {

@@ -1,19 +1,17 @@
 package br.usp.poli.pcs.capstoneProject.database.services;
 
-import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.database.implementations.UserDAO;
 
 import java.util.Map;
 import java.util.HashMap;
 import spark.Request;
 
-public class AuthenticationService {
+public class AuthenticationService extends DatabaseService{
 	
-	private CapstoneConnection db;
 	private UserDAO dao;
 	
 	public AuthenticationService() {
-		db = new CapstoneConnection();
+		super();
 		dao = new UserDAO();
 	}
 	

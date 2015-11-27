@@ -36,7 +36,12 @@ public class Server {
 		});
 		
 		get("/login", (request, response) -> {
-			return (new LoginDisplayHandler(request, response)).call();
+			if(request.session().attribute("user-id") != null) {
+				response.redirect("/allow-logout");
+				return "";
+			} else {
+				return (new LoginDisplayHandler(request, response)).call();
+			}
 		});
 		
 		post("/authenticate", (request, response) -> {

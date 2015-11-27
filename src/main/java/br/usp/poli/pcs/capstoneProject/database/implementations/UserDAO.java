@@ -59,7 +59,17 @@ public class UserDAO implements IUser{
 		}
 		return user;
 	}
-
+	
+	public User getUserById(Sql2o sql2o, int userId) {
+		User user = null;
+		try (Connection connection = sql2o.beginTransaction()){
+			user = connection.createQuery("SELECT * FROM users WHERE id = :id")
+					.addParameter("id", userId)
+					.executeAndFetchFirst(User.class);
+			connection.commit();
+		}
+		return user;
+	}
 	@Override
 	public boolean authenticatesUser(Sql2o sql2o, Map<String, Object> userLogin) {
 		try(Connection connection = sql2o.beginTransaction()) {

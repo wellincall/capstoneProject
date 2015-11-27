@@ -7,12 +7,11 @@ import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.models.Bank;
 
 
-public class GetBanksService {
-	private CapstoneConnection db;
+public class GetBanksService extends DatabaseService {
 	private BankDAO dao;
 	
 	public GetBanksService() {
-		db = new CapstoneConnection();
+		super();
 		dao = new BankDAO();
 	}
 	public List<Bank> call() {
