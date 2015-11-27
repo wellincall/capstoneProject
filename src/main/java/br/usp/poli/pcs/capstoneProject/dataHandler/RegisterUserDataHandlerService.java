@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Date;
 
 import br.usp.poli.pcs.capstoneProject.forms.NewUserForm;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
 import br.usp.poli.pcs.capstoneProject.helpers.StringToDateService;
-import br.usp.poli.pcs.capstoneProject.forms.FormField;
 
 public class RegisterUserDataHandlerService implements IDataHandlerService {
 	public Map<String, Object> call(Request request) {

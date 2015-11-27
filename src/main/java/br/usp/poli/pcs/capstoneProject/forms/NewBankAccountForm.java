@@ -2,6 +2,9 @@ package br.usp.poli.pcs.capstoneProject.forms;
 
 import br.usp.poli.pcs.capstoneProject.fieldValidators.BankForeignKeyValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.TextFieldValidator;
+import br.usp.poli.pcs.capstoneProject.forms.components.ForeignKeyField;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormWithForeignKey;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.BankAccountNumberValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.BankAgencyValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.CPFValidator;

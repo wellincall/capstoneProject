@@ -4,9 +4,10 @@ import spark.Request;
 import spark.Response;
 import java.util.Map;
 import java.util.HashMap;
-import br.usp.poli.pcs.capstoneProject.forms.ForeignKeyField;
+
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.NewBankAccountForm;
+import br.usp.poli.pcs.capstoneProject.forms.components.ForeignKeyField;
 import br.usp.poli.pcs.capstoneProject.database.implementations.BankDAO;
 import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.database.services.GetBanksService;

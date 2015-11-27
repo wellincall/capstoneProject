@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.forms;
+package br.usp.poli.pcs.capstoneProject.forms.components;
 
 import br.usp.poli.pcs.capstoneProject.fieldValidators.IValidator;
 

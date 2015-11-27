@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.HashMap;
 import spark.Request;
 import br.usp.poli.pcs.capstoneProject.forms.NewBankAccountForm;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
-import br.usp.poli.pcs.capstoneProject.forms.FormField;
 import br.usp.poli.pcs.capstoneProject.helpers.StringToDateService;
 
 public class RegisterBankAccountHandlerService implements IDataHandlerService {

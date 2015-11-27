@@ -5,7 +5,7 @@ import java.util.HashMap;
 import spark.Request;
 
 import br.usp.poli.pcs.capstoneProject.forms.NewBankForm;
-import br.usp.poli.pcs.capstoneProject.forms.FormField;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
 
 public class RegisterBankDataHandlerService implements IDataHandlerService{
 	public Map<String, Object> call(Request request) {

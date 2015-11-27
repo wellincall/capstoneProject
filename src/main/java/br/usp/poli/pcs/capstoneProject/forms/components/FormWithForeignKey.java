@@ -1,7 +1,8 @@
-package br.usp.poli.pcs.capstoneProject.forms;
+package br.usp.poli.pcs.capstoneProject.forms.components;
 
+import br.usp.poli.pcs.capstoneProject.forms.Form;
+import br.usp.poli.pcs.capstoneProject.forms.components.ForeignKeyField;
 import spark.Request;
-import br.usp.poli.pcs.capstoneProject.forms.ForeignKeyField;
 
 public abstract class FormWithForeignKey extends Form {
 	public boolean isValid(Request request) {

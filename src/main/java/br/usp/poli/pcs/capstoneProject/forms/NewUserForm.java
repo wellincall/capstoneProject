@@ -1,6 +1,7 @@
 package br.usp.poli.pcs.capstoneProject.forms;
 
 import br.usp.poli.pcs.capstoneProject.fieldValidators.*;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
 
 public class NewUserForm extends Form {
 	public NewUserForm() {
