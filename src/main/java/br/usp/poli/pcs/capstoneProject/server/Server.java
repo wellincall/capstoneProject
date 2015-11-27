@@ -62,7 +62,7 @@ public class Server {
 			}
 		});
 		
-		get("/deauthenticate", (request, response) -> {
+		post("/deauthenticate", (request, response) -> {
 			if (request.session().attribute("user-id") == null) {
 				response.redirect("/login");
 				return "";

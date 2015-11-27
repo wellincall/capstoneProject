@@ -20,7 +20,7 @@
 		   		</table>
 		   		</div>
 		   		<div class="col-md-12">
-			   		<form class="form-horizontal" action="/deauthenticate" method="GET">
+			   		<form class="form-horizontal" action="/deauthenticate" method="POST">
 			   			<div class="form-action">
 				   			<input type="submit" value="I want to logout" class="btn btn-default btn-primary" />
 			   			</div>
