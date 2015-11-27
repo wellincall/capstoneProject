@@ -19,13 +19,18 @@ public class Server {
 			return (new RegisterUserHandler(request, response).call());
 		});
 		
-		get("new-bank-account", (request, response) -> {
+		get("/new-bank-account", (request, response) -> {
 			return (new NewBankAccountHandler(request, response)).call();
+		});
+		
+		post("/register-bank-account", (request, response) -> {
+			return (new RegisterBankAccountHandler(request, response)).call();
 		});
 		
 		get("/new-bank", (request, response) -> {
 			return (new NewBankHandler(request, response)).call();
 		});
+		
 		
 		post("/register-bank", (request, response) -> {
 			 return (new RegisterBankHandler(request, response)).call();

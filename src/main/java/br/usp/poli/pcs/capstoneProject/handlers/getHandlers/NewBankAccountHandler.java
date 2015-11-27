@@ -7,6 +7,7 @@ import java.util.HashMap;
 import br.usp.poli.pcs.capstoneProject.forms.ForeignKeyField;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.NewBankAccountForm;
+import br.usp.poli.pcs.capstoneProject.helpers.GetBanksService;
 import br.usp.poli.pcs.capstoneProject.databaseInterface.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.databaseImplementation.BankDAO;
 import java.util.List;
@@ -19,10 +20,7 @@ public class NewBankAccountHandler extends DefaultGetHandler {
 	}
 	
 	protected Map<String,Object> process() {
-		CapstoneConnection db = new CapstoneConnection();
-		BankDAO dao = new BankDAO();
-		List<Bank> banks = dao.getBanks(db.getConnection());
-		Form bankForm = new NewBankAccountForm(banks);
+		Form bankForm = new NewBankAccountForm((new GetBanksService()).call());
 		Map<String, Object> form = new HashMap<String, Object>();
 		form.put("ForeignKeyField", ForeignKeyField.class);
 		form.put("formfields", bankForm.getFormFields());

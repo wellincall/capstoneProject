@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class NewBankAccountForm extends Form {
+public class NewBankAccountForm extends FormWithForeignKey {
 	public NewBankAccountForm(){}
 	
 	public NewBankAccountForm(List<Bank> banks) {
@@ -26,6 +26,7 @@ public class NewBankAccountForm extends Form {
 		formFields.add(new FormField("account-owner-birthday-date", "Owner Birthday Date", "text", new DateValidator()));
 		formFields.add(new FormField("account-owner-phone-number", "Owner Phone Number", "text", new PhoneNumberValidator())); 
 	}
+	
 	
 	
 	private Map<String, String> generateOptions(List<Bank> banks) {
