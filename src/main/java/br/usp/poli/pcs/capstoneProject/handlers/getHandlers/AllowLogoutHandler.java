@@ -6,6 +6,8 @@ import java.util.HashMap;
 import spark.Request;
 import spark.Response;
 
+import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;;
+
 public class AllowLogoutHandler extends DefaultGetHandler {
 	public AllowLogoutHandler(Request request, Response response) {
 		super(request, response);
@@ -13,6 +15,8 @@ public class AllowLogoutHandler extends DefaultGetHandler {
 	}
 	
 	public Map<String, Object> process() {
-		return new HashMap<String, Object>();
+		Map<String, Object> objects = new HashMap<String, Object>();
+		objects.put("user", (new GetUserByIdService()).call(request.session().attribute("user-id")));
+		return objects;
 	}
 }

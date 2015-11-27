@@ -8,12 +8,19 @@
 	    <div class="container-fluid">
 	    <div class="row">
 	    	<div class="col-md-12">
-	    		<h1>Logout</h1>
+	    		<h1>You are logged in as:</h1>
 	    	</div>
 	    </div>
 		   	<div class="row">
 		   		<div class="col-md-12">
-			   		<form class="form-horizontal" action="/deauthenticate" method="DELETE">
+		   		<table class="table">
+		   			<tr><th>Name:</th><td class="text-right">${user.name}</td></tr>
+		   			<tr><th>Email:</th><td class="text-right">${user.email}</td></tr>
+		   			<tr><th>Phone number:</th><td class="text-right">${user.phoneNumber}</td></tr>
+		   		</table>
+		   		</div>
+		   		<div class="col-md-12">
+			   		<form class="form-horizontal" action="/deauthenticate" method="GET">
 			   			<div class="form-action">
 				   			<input type="submit" value="I want to logout" class="btn btn-default btn-primary" />
 			   			</div>

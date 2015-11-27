@@ -49,7 +49,23 @@ public class Server {
 		});
 		
 		get("/allow-logout", (request, response) -> {
-			return (new AllowLogoutHandler(request, response)).call();
+			if (request.session().attribute("user-id") == null) {
+				response.redirect("/login");
+				return "";
+			} else {
+				return (new AllowLogoutHandler(request, response)).call();
+			}
+		});
+		
+		get("/deauthenticate", (request, response) -> {
+			if (request.session().attribute("user-id") == null) {
+				response.redirect("/login");
+				return "";
+			} else {
+				request.session().removeAttribute("user-id");
+				response.redirect("/login");
+				return "";
+			}
 		});
 		
 	}
