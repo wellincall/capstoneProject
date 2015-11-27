@@ -23,8 +23,12 @@ public class RegisterBankAccountHandler extends DefaultPostHandler {
 	public String process() {
 		Form form = new NewBankAccountForm((new GetBanksService()).call());
 		if (form.isValid(request)) {
-			persistBankAccount();
-			return "{Success: \"Check dB\" }";
+			BankAccount account = persistBankAccount();
+			if (account != null) {
+				return "{Success: \"Check dB\" }";
+			} else {
+				return "{Error: \"Account already registered. Please confirm provided data and try again.\"}";
+			}
 		} else {
 			return "{Error: \"Motherfocker\"}";
 		}
