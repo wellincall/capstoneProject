@@ -49,7 +49,7 @@ public class UserDAO implements IUser{
 	}
 
 	@Override
-	public boolean authenticatesUser(String phoneNumber, String password) {
+	public boolean authenticatesUser(Sql2o sql2o, Map<String, Object> userLogin) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -66,11 +66,6 @@ public class UserDAO implements IUser{
 		return null;
 	}
 
-	@Override
-	public boolean setPassword(Sql2o sql2o, int userId, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean updatePassword(Sql2o sql2o, int userId, String currentPassword, String newPassword) {
@@ -80,8 +75,7 @@ public class UserDAO implements IUser{
 	
 	private boolean canRegisterUser(Connection connection, Map<String, Object> userInformation) {
 		int usersRegistered = connection.createQuery("SELECT count(id) FROM users WHERE email = :email"
-				+ " AND cpf = :cpf AND phoneNumber = :phoneNumber AND name = :name")
-				.addParameter("name", userInformation.get("name"))
+				+ " AND cpf = :cpf AND phoneNumber = :phoneNumber")
 				.addParameter("email", userInformation.get("email"))
 				.addParameter("cpf", userInformation.get("cpf"))
 				.addParameter("phoneNumber", userInformation.get("phone-number"))
