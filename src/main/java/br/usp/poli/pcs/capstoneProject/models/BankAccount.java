@@ -6,7 +6,7 @@ public class BankAccount {
 	private int id;
 	private int bankId;
 	private String agencyNumber;
-	private String accountNumer;
+	private String accountNumber;
 	private String accountOwnerName;
 	private String accountOwnerCPF;
 	private Date accountOwnerBirthdayDate;
@@ -21,8 +21,8 @@ public class BankAccount {
 	public String getAgencyNumber() {
 		return agencyNumber;
 	}
-	public String getAccountNumer() {
-		return accountNumer;
+	public String getAccountNumber() {
+		return accountNumber;
 	}
 	public String getAccountOwnerName() {
 		return accountOwnerName;
