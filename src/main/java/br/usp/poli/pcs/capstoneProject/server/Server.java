@@ -73,6 +73,9 @@ public class Server {
 			}
 		});
 		
+		get("/user/reset-password", (request, response) -> {
+			return (new NewPasswordDisplayHandler(request, response)).call();
+		});
 		
 	}
 }

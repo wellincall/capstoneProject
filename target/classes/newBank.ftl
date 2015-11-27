@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>SATB Test</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> 
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" /> 
 	</head>
 	<body>
 	    <div class="container-fluid">
@@ -32,6 +32,6 @@
 		   		</div>
 		   	</div>
 	    </div>
-	    <script type="text/javascript" src="js/bootstrap.min.js" /> 
+	    <script type="text/javascript" src="/js/bootstrap.min.js" /> 
 	</body>
 </html>
