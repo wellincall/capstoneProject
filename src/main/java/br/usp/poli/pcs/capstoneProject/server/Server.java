@@ -10,6 +10,11 @@ public class Server {
 	public static void main(String[] args) {
 		port(PORT);
 		staticFileLocation(STATIC_FILES_LOCATION);
+		before("/user/*", (request, response) -> {
+			if (request.session().attribute("user-id") == null) {
+				response.redirect("/login");
+			}
+		});
 		
 		get("/new-user", (request, response) -> {
 			return (new NewUserHandler(request, response)).call();			

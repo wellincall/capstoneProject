@@ -28,7 +28,7 @@ public class RegisterUserHandler extends DefaultPostHandler {
 				return "{status: 1, message: \"User already registered\"}";
 			}
 		} else {
-			return "{status: 2, message: \"Missing information to register user\"}";
+			return "{status: 2, message: \"Missing information or invalid information when trying to register user\"}";
 		}
 	}
 	

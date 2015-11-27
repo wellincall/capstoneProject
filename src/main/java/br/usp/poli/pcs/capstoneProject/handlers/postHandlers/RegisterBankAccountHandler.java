@@ -30,7 +30,7 @@ public class RegisterBankAccountHandler extends DefaultPostHandler {
 				return "{status: 1, message:  \"Account already registered. Please confirm provided data and try again.\"}";
 			}
 		} else {
-			return "{status: 2, message: \"Missing information to register bank account\"}";
+			return "{status: 2, message: \"Missing information or invalid information when trying to register bank account\"}";
 		}
 	}
 	private BankAccount persistBankAccount() {

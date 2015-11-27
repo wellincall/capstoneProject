@@ -32,7 +32,7 @@ public class AuthenticationHandler extends DefaultPostHandler {
 
 			}
 		} else {
-			return "{status: 2, message: \"Missing information to try authenticating\"}";
+			return "{status: 2, message: \"Missing information or invalid data when trying to authenticate\"}";
 		}
 	}
 	

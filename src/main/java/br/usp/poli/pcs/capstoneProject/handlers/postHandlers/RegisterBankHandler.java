@@ -28,7 +28,7 @@ public class RegisterBankHandler extends DefaultPostHandler {
 				return "{status: 1, message: \"Bank already registered\"}";
 			}
 		} else {
-			return "{status: 2, message: \"Missing information to register bank\"}";
+			return "{status: 2, message: \"Missing information or invalid data when trying to register bank\"}";
 		}
 	}
 	
