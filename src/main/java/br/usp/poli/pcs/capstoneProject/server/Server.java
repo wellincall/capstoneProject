@@ -31,11 +31,13 @@ public class Server {
 			return (new NewBankHandler(request, response)).call();
 		});
 		
-		
 		post("/register-bank", (request, response) -> {
 			 return (new RegisterBankHandler(request, response)).call();
 		});
 		
+		get("login", (request, response) -> {
+			return (new LoginDisplayHandler(request, response)).call();
+		});
 		
 	}
 }

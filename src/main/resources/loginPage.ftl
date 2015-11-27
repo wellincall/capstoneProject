@@ -13,7 +13,7 @@
 	    </div>
 		   	<div class="row">
 		   		<div class="col-md-12">
-			   		<form class="form-horizontal" action="/register-bank" method="POST">
+			   		<form class="form-horizontal" action="/authenticate" method="POST">
 			   			<#list formfields as formField>
 			   				<div class="form-group">
 				   				<label for="${formField.formFieldId}" class="col-md-2 control-label">
