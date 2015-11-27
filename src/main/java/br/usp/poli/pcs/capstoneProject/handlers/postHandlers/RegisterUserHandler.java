@@ -21,8 +21,12 @@ public class RegisterUserHandler extends DefaultPostHandler {
 	public String process() {
 		Form form = new NewUserForm();
 		if (form.isValid(request)) {
-			persistUser();
-			return "{Success: 'Check DB'}";
+			User user = persistUser();
+			if (user != null) {
+				return "{Success: 'Check DB'}";
+			} else {
+				return "{Error: \"User already registered\"}";
+			}
 		} else {
 			return "{Error: \"Motherfucker\"}";
 		}

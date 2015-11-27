@@ -16,25 +16,27 @@ public class UserDAO implements IUser{
 
 	@Override
 	public User createUser(Sql2o sql2o, Map<String, Object> userInformation) {
-		User user;
+		User user = null;
 		String hashedPassword = PasswordHashService.call((String) userInformation.get("password"));
 		try(Connection connection = sql2o.beginTransaction()) {
-			int userId = connection.createQuery("INSERT INTO users(name, phoneNumber," 
-					+ "cpf, email, birthdayDate, password, creationDate) "
-					+ "VALUES (:name, :phoneNumber, :cpf, :email, :birthdayDate, "
-					+ ":password, :creationDate)", true)
-				.addParameter("name", (String) userInformation.get("name"))
-				.addParameter("phoneNumber", (String) userInformation.get("phone-number"))
-				.addParameter("cpf", (String) userInformation.get("cpf"))
-				.addParameter("email", (String) userInformation.get("email"))
-				.addParameter("password", hashedPassword)
-				.addParameter("birthdayDate", userInformation.get("birthday-date"))
-				.addParameter("creationDate", new Date())
-				.executeUpdate()
-				.getKey(Integer.class);
-			user = connection.createQuery("SELECT * FROM users WHERE id = :id")
-				.addParameter("id", userId)
-				.executeAndFetchFirst(User.class);
+			if (canRegisterUser(connection, userInformation)) {
+				int userId = connection.createQuery("INSERT INTO users(name, phoneNumber," 
+						+ "cpf, email, birthdayDate, password, creationDate) "
+						+ "VALUES (:name, :phoneNumber, :cpf, :email, :birthdayDate, "
+						+ ":password, :creationDate)", true)
+					.addParameter("name", (String) userInformation.get("name"))
+					.addParameter("phoneNumber", (String) userInformation.get("phone-number"))
+					.addParameter("cpf", (String) userInformation.get("cpf"))
+					.addParameter("email", (String) userInformation.get("email"))
+					.addParameter("password", hashedPassword)
+					.addParameter("birthdayDate", userInformation.get("birthday-date"))
+					.addParameter("creationDate", new Date())
+					.executeUpdate()
+					.getKey(Integer.class);
+				user = connection.createQuery("SELECT * FROM users WHERE id = :id")
+					.addParameter("id", userId)
+					.executeAndFetchFirst(User.class);
+			}
 			connection.commit();
 		}
 		return user;
@@ -76,6 +78,15 @@ public class UserDAO implements IUser{
 		return false;
 	}
 	
-	
+	private boolean canRegisterUser(Connection connection, Map<String, Object> userInformation) {
+		int usersRegistered = connection.createQuery("SELECT count(id) FROM users WHERE email = :email"
+				+ " AND cpf = :cpf AND phoneNumber = :phoneNumber AND name = :name")
+				.addParameter("name", userInformation.get("name"))
+				.addParameter("email", userInformation.get("email"))
+				.addParameter("cpf", userInformation.get("cpf"))
+				.addParameter("phoneNumber", userInformation.get("phone-number"))
+				.executeScalar(Integer.class);
+		return usersRegistered == 0;
+	}
 
 }
