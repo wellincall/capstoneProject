@@ -25,12 +25,12 @@ public class RegisterBankAccountHandler extends DefaultPostHandler {
 		if (form.isValid(request)) {
 			BankAccount account = persistBankAccount();
 			if (account != null) {
-				return "{Success: \"Check dB\" }";
+				return "{status: 0, message: \"Bank account successfully registered\" }";
 			} else {
-				return "{Error: \"Account already registered. Please confirm provided data and try again.\"}";
+				return "{status: 1, message:  \"Account already registered. Please confirm provided data and try again.\"}";
 			}
 		} else {
-			return "{Error: \"Motherfocker\"}";
+			return "{status: 2, message: \"Missing information to register bank account\"}";
 		}
 	}
 	private BankAccount persistBankAccount() {

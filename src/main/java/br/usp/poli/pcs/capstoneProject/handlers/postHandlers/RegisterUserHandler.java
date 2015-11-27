@@ -23,12 +23,12 @@ public class RegisterUserHandler extends DefaultPostHandler {
 		if (form.isValid(request)) {
 			User user = persistUser();
 			if (user != null) {
-				return "{Success: 'Check DB'}";
+				return "{status: 0, message: \"User successfully registered \"}";
 			} else {
-				return "{Error: \"User already registered\"}";
+				return "{status: 1, message: \"User already registered\"}";
 			}
 		} else {
-			return "{Error: \"Motherfucker\"}";
+			return "{status: 2, message: \"Missing information to register user\"}";
 		}
 	}
 	
