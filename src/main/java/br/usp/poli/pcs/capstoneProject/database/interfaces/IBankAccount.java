@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.databaseInterface;
+package br.usp.poli.pcs.capstoneProject.database.interfaces;
 
 import java.util.Map;
 import org.sql2o.Sql2o;

@@ -5,13 +5,13 @@ import spark.Response;
 import java.util.Map;
 
 import br.usp.poli.pcs.capstoneProject.forms.NewUserForm;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.dataHandler.IDataHandlerService;
 import br.usp.poli.pcs.capstoneProject.dataHandler.RegisterUserDataHandlerService;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.IUser;
+import br.usp.poli.pcs.capstoneProject.database.implementations.UserDAO;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.IUser;
 import br.usp.poli.pcs.capstoneProject.models.User;
-import br.usp.poli.pcs.capstoneProject.databaseImplementation.UserDAO;
 
 
 public class RegisterUserHandler extends DefaultPostHandler {

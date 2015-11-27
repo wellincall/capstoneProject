@@ -7,12 +7,12 @@ import java.util.Map;
 
 import br.usp.poli.pcs.capstoneProject.dataHandler.IDataHandlerService;
 import br.usp.poli.pcs.capstoneProject.dataHandler.RegisterBankAccountHandlerService;
-import br.usp.poli.pcs.capstoneProject.databaseImplementation.BankAccountDAO;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.CapstoneConnection;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.IBankAccount;
+import br.usp.poli.pcs.capstoneProject.database.implementations.BankAccountDAO;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.IBankAccount;
+import br.usp.poli.pcs.capstoneProject.database.services.GetBanksService;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.NewBankAccountForm;
-import br.usp.poli.pcs.capstoneProject.helpers.GetBanksService;
 import br.usp.poli.pcs.capstoneProject.models.BankAccount;
 
 public class RegisterBankAccountHandler extends DefaultPostHandler {

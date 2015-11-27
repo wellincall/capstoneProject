@@ -1,11 +1,12 @@
-package br.usp.poli.pcs.capstoneProject.databaseImplementation;
+package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.Map;
 
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.IBankAccount;
+
 import br.usp.poli.pcs.capstoneProject.models.BankAccount;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.IBankAccount;
 import br.usp.poli.pcs.capstoneProject.helpers.TokenGenerator;
 
 public class BankAccountDAO implements IBankAccount {

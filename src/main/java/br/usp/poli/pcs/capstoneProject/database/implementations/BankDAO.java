@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.databaseImplementation;
+package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
 
-import br.usp.poli.pcs.capstoneProject.databaseInterface.IBank;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.IBank;
 import br.usp.poli.pcs.capstoneProject.models.Bank;
 
 public class BankDAO implements IBank{

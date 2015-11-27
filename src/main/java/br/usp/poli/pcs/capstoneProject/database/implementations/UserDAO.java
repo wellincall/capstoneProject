@@ -1,4 +1,4 @@
-package br.usp.poli.pcs.capstoneProject.databaseImplementation;
+package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,8 @@ import java.util.Date;
 
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.IUser;
+
+import br.usp.poli.pcs.capstoneProject.database.interfaces.IUser;
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.security.PasswordHashService;
 

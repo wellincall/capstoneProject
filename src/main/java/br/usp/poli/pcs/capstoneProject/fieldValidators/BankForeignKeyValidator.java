@@ -1,7 +1,8 @@
 package br.usp.poli.pcs.capstoneProject.fieldValidators;
 
 import java.util.List;
-import br.usp.poli.pcs.capstoneProject.helpers.GetBankIdsService;
+
+import br.usp.poli.pcs.capstoneProject.database.services.GetBankIdsService;
 
 public class BankForeignKeyValidator implements IForeignKeyValidator{
 	public boolean validates(int foreignKey) {

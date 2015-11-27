@@ -1,8 +1,9 @@
-package br.usp.poli.pcs.capstoneProject.helpers;
+package br.usp.poli.pcs.capstoneProject.database.services;
 
 import java.util.List;
-import br.usp.poli.pcs.capstoneProject.databaseImplementation.BankDAO;
-import br.usp.poli.pcs.capstoneProject.databaseInterface.CapstoneConnection;
+
+import br.usp.poli.pcs.capstoneProject.database.implementations.BankDAO;
+import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.models.Bank;
 
 
