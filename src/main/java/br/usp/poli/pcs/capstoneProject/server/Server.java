@@ -43,6 +43,9 @@ public class Server {
 			return (new AuthenticationHandler(request, response)).call();
 		});
 		
+		get("/allow-logout", (request, response) -> {
+			return (new AllowLogoutHandler(request, response)).call();
+		});
 		
 	}
 }
