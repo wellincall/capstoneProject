@@ -20,7 +20,7 @@ public class Server {
 		});
 		
 		get("new-bank-account", (request, response) -> {
-			return "abcd";
+			return (new NewBankAccountHandler(request, response)).call();
 		});
 		
 		get("/new-bank", (request, response) -> {

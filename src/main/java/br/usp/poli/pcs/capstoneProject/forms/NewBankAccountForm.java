@@ -4,6 +4,7 @@ import br.usp.poli.pcs.capstoneProject.fieldValidators.BankForeignKeyValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.TextFieldValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.CPFValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.DateValidator;
+import br.usp.poli.pcs.capstoneProject.fieldValidators.PhoneNumberValidator;
 import br.usp.poli.pcs.capstoneProject.models.Bank;
 import java.util.Map;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class NewBankAccountForm extends Form {
 		formFields.add(new FormField("account-owner-name", "Owner Name", "text", new TextFieldValidator()));
 		formFields.add(new FormField("account-owner-cpf", "Owner CPF", "text", new CPFValidator()));
 		formFields.add(new FormField("account-owner-birthday-date", "Owner Birthday Date", "text", new DateValidator()));
+		formFields.add(new FormField("account-owner-phone-number", "Owner Phone Number", "text", new PhoneNumberValidator())); 
 	}
 	
 	

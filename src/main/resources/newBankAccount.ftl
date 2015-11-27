@@ -8,7 +8,7 @@
 	    <div class="container-fluid">
 	    <div class="row">
 	    	<div class="col-md-12">
-	    		<h1>Register new bank</h1>
+	    		<h1>Register new bank account</h1>
 	    	</div>
 	    </div>
 		   	<div class="row">
@@ -20,11 +20,11 @@
 				   				${formField.formFieldCaption}
 				   				</label>
 				   				<div class="col-md-10">
-				   					<#if formField instanceOf ForeignKeyField>
+				   					<#if ForeignKeyField.isInstance(formField)>
 				   						<select name=${formField.formFieldId} id="${formField.formFieldId}" class="form-control">
-				   						<#list formField?options as id>
-				   							<option value="${id}" label="${formField.get(id)}"></option>
-				   						<#/list>
+				   							<#list formField.options?keys as bankId>
+				   								<option value="${bankId}" label="${formField.options[bankId]}">${formField.options[bankId]}</option>
+				   							</#list>
 				   						</select>
 				   					<#else>
 				   						<input id="${formField.formFieldId}" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
