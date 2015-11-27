@@ -77,5 +77,9 @@ public class Server {
 			return (new NewPasswordDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/update-password", (request, response) -> {
+			return (new UpdatePasswordHandler(request, response)).call();
+		});
+		
 	}
 }
