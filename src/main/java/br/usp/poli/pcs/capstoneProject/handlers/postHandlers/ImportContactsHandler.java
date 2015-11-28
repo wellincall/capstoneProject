@@ -8,6 +8,7 @@ import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.ImportContactsForm;
 import br.usp.poli.pcs.capstoneProject.database.services.ImportContactsService;
+import br.usp.poli.pcs.capstoneProject.jsonHelpers.ContactsListToJson;
 
 public class ImportContactsHandler extends DefaultPostHandler {
 	public ImportContactsHandler(Request request, Response response) {
@@ -18,7 +19,7 @@ public class ImportContactsHandler extends DefaultPostHandler {
 		Form contactsForm = new ImportContactsForm();
 		if (contactsForm.isValid(request)) {
 			List<User> users = (new ImportContactsService()).call(request.queryParamsValues("phone-number[]"));
-			return "{status: 0, message: \"Registered users are given in contacts field\", contacts: \""+String.valueOf(users.size())+"\"}"; 
+			return "{status: 0, message: \"Registered users are given in contacts field\", contacts: "+(new ContactsListToJson()).call(users)+"}"; 
 		} else {
 			return "{status: 2, message: \"Some of the provided numbers are not valid. Please, double check and submit them again\"}"; 
 		}
