@@ -14,16 +14,18 @@
 		   	<div class="row">
 		   		<div class="col-md-12">
 			   		<form class="form-horizontal" action="/user/import-contacts" method="POST">
-			   			<#list formfields as formField>
-			   				<div class="form-group">
-				   				<label for="${formField.formFieldId}__REPLACE" class="col-md-2 control-label">
-				   				${formField.formFieldCaption}
-				   				</label>
-				   				<div class="col-md-10">
-				   					<input id="${formField.formFieldId}__REPLACE" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
+			   			<div class="fields-container">
+				   			<#list formfields as formField>
+				   				<div class="form-group base-group">
+					   				<label for="${formField.formFieldId}__REPLACE" class="col-md-2 control-label">
+					   				${formField.formFieldCaption}
+					   				</label>
+					   				<div class="col-md-10">
+					   					<input id="${formField.formFieldId}__REPLACE" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
+					   				</div>
 				   				</div>
-			   				</div>
-			   			</#list>
+				   			</#list>
+			   			</div>
 			   			<div class="form-action">
 				   			<input type="submit" value="Submit" class="btn btn-default btn-primary pull-right" />
 				   			<input type="reset" value="Clean form" class="btn btn-default btn-danger pull-right" />
