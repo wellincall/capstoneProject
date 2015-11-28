@@ -25,8 +25,12 @@ public class UpdatePasswordHandler extends DefaultPostHandler {
 	public String process() {
 		Form form = new ResetPasswordForm();
 		if (form.isValid(request)) {
-			if (updatePassword()) {
-				return "{aehoo: true}";
+			Map<String, Object> passwordFields = dataHandler.call(request);
+			User user = (new GetUserByIdService()).call(request.session().attribute("user-id"));
+			passwordFields.put("email", user.getEmail());
+			passwordFields.put("user-id", user.getId());
+			if (canUpdatePassword(passwordFields)) {
+				return "{status: 0, message: \"Password successfully updated\"}";
 			} else {
 				return "{status: 1, message: \"New password and its confirmation don't match or given passeword is incorrect \"}";
 			}
@@ -35,12 +39,7 @@ public class UpdatePasswordHandler extends DefaultPostHandler {
 		}
 	}
 	
-	private boolean updatePassword() {
-		Map<String, Object> passwordFields = dataHandler.call(request);
-		User user = (new GetUserByIdService()).call(request.session().attribute("user-id"));
-		passwordFields.put("email", user.getEmail());
-		return canUpdatePassword(passwordFields);
-	}
+
 	
 	private boolean canUpdatePassword(Map<String, Object> passwordFields) {
 		return matchInNewPassword(passwordFields) && providedCorrectCurrentPassword(passwordFields);

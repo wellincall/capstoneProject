@@ -112,8 +112,15 @@ public class UserDAO implements IUser{
 
 
 	@Override
-	public boolean updatePassword(Sql2o sql2o, int userId, String currentPassword, String newPassword) {
-		// TODO Auto-generated method stub
+	public boolean updatePassword(Sql2o sql2o, Map<String, Object> passwordInformation) {
+		try (Connection connection = sql2o.beginTransaction()) {
+			String salt = getUserSalt(connection, passwordInformation);
+			String secret = salt + passwordInformation.get("password");
+			String hashedSecret = (new PasswordHashService()).call(secret);
+			String dataInDB = salt + hashedSecret;
+			
+			connection.commit();
+		}
 		return false;
 	}
 	
