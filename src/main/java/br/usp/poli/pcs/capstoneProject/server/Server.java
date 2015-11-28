@@ -91,5 +91,8 @@ public class Server {
 			return (new ImportContactsHandler(request, response)).call();
 		});
 		
+		get("/user/ask-banks", (request, response) -> {
+			return (new AskBanksHandler(request, response)).call();
+		});
 	}
 }
