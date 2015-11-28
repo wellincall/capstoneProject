@@ -106,5 +106,9 @@ public class Server {
 		post("/user/banks", (request, response) -> {
 			return (new GetBanksHandler(request, response)).call();
 		});
+		
+		get("/user/new-account", (request, response) -> {
+			return (new NewUserBankAccountDisplayHandler(request, response)).call();
+		});
 	}
 }
