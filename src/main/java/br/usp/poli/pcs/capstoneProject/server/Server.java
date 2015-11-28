@@ -87,6 +87,9 @@ public class Server {
 			return (new ImportContactsDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/import-contacts", (request, response) -> {
+			return (new ImportContactsHandler(request, response)).call();
+		});
 		
 	}
 }
