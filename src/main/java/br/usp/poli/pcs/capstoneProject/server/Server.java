@@ -14,8 +14,14 @@ public class Server {
 		
 		before("/user/*", (request, response) -> {
 			if (request.session().attribute("user-id") == null) {
-				response.redirect("/login");
+				response.redirect("/not-authenticated");
 			}
+		});
+		
+		get("/not-authenticated", (request, response) -> {
+			response.status(403);
+			response.type("application/json");
+			return "{status: 2, message: \"User not authenticated\"}"; 
 		});
 		
 		get("/new-user", (request, response) -> {
@@ -94,5 +100,6 @@ public class Server {
 		get("/user/ask-banks", (request, response) -> {
 			return (new AskBanksHandler(request, response)).call();
 		});
+		
 	}
 }
