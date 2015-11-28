@@ -47,8 +47,23 @@ public class BankAccountDAO implements IBankAccount {
 
 	@Override
 	public boolean hasValidInformation(Sql2o sql2o, Map<String, Object> accountDetails) {
-		// TODO Auto-generated method stub
-		return false;
+		BankAccount bankAccount = null;
+		try(Connection connection = sql2o.beginTransaction()) {
+			bankAccount = connection.createQuery("SELECT * FROM bankAccounts WHERE"
+					+ "accountownercpf = :cpf AND accountownername = :name "
+					+ "AND accountownerbirthdaydate = :birthdayDate AND "
+					+ "accountnumber = :accountNumber AND agencynumber = :agencyNumber"
+					+ "and bankid = :bankId")
+					.addParameter("name" , accountDetails.get("name"))
+					.addParameter("cpf" , accountDetails.get("cpf"))
+					.addParameter("birthdayDate" , accountDetails.get("birthday-date"))
+					.addParameter("accountNumber" , accountDetails.get("account-number"))
+					.addParameter("agencyNumber" , accountDetails.get("agency-number"))
+					.addParameter("bankId" , accountDetails.get("bankId"))
+					.executeAndFetchFirst(BankAccount.class);
+			connection.commit();
+		}
+		return bankAccount != null;
 	}
 
 	@Override
