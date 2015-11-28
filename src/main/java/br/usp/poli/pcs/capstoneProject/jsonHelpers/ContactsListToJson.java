@@ -6,10 +6,10 @@ import br.usp.poli.pcs.capstoneProject.models.User;
 
 public class ContactsListToJson {
 	public String call(List<User> users) {
-		StringJoiner joiner = new StringJoiner(",", "[", "]");
+		StringJoiner joiner = new StringJoiner(", ", "[", "]");
 		for (User user : users) {
-			StringJoiner userJSON = new StringJoiner(",", "{", "}");
-			userJSON.add("name: \""+user.getName()+"\"").add("phoneNumber: \""+user.getPhoneNumber()+"\"");
+			StringJoiner userJSON = new StringJoiner(", ", "{", "}");
+			userJSON.add("id: "+user.getId()).add("name: \""+user.getName()+"\"").add("phoneNumber: \""+user.getPhoneNumber()+"\"");
 			joiner.add(userJSON.toString());
 		}
 		return joiner.toString();

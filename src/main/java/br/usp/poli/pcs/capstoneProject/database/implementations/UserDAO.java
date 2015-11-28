@@ -104,7 +104,7 @@ public class UserDAO implements IUser{
 		List<User> registeredUsers = new ArrayList<User>();
 		try(Connection connection = sql2o.beginTransaction()) {
 			for (String phoneNumber : phoneNumbers) {
-				User user = connection.createQuery("SELECT name, phoneNumber FROM users WHERE phoneNumber = :phoneNumber")
+				User user = connection.createQuery("SELECT id, name, phoneNumber FROM users WHERE phoneNumber = :phoneNumber")
 						.addParameter("phoneNumber", phoneNumber)
 						.executeAndFetchFirst(User.class);
 				if (user != null) {
