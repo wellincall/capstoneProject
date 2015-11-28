@@ -40,7 +40,7 @@ public class NewBankAccountForm extends FormWithForeignKey {
 	
 	
 	
-	private Map<String, String> generateOptions(List<Bank> banks) {
+	protected Map<String, String> generateOptions(List<Bank> banks) {
 		Map<String, String> options = new HashMap<String, String>();
 		for (Bank bank : banks) {
 			options.put(String.valueOf(bank.getId()), bank.getName());

@@ -5,8 +5,10 @@ import br.usp.poli.pcs.capstoneProject.handlers.getHandlers.*;
 import br.usp.poli.pcs.capstoneProject.handlers.postHandlers.*;
 
 public class Server {
+	
 	static int PORT = 3000;
 	static String STATIC_FILES_LOCATION = "/public";
+	
 	public static void main(String[] args) {
 		
 		port(PORT);
