@@ -100,7 +100,7 @@ public class UserDAO implements IUser{
 	}
 
 	@Override
-	public List<User> getPlataformUsers(Sql2o sql2o, List<String> phoneNumbers) {
+	public List<User> getPlataformUsers(Sql2o sql2o, String[] phoneNumbers) {
 		List<User> registeredUsers = new ArrayList<User>();
 		try(Connection connection = sql2o.beginTransaction()) {
 			for (String phoneNumber : phoneNumbers) {

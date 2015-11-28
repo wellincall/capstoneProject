@@ -12,7 +12,7 @@ public class ImportContactsService extends DatabaseService {
 		dao = new UserDAO();
 	}
 	
-	public List<User> call(List<String> phoneNumbers) {
+	public List<User> call(String[] phoneNumbers) {
 		return dao.getPlataformUsers(db.getConnection(), phoneNumbers);
 	}
 }
