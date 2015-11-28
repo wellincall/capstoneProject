@@ -110,5 +110,9 @@ public class Server {
 		get("/user/new-account", (request, response) -> {
 			return (new NewUserBankAccountDisplayHandler(request, response)).call();
 		});
+		
+		post("/user/register-bank-account", (request, response) -> {
+			return (new AssociateUserAccountHandler(request, response)).call();
+		});
 	}
 }
