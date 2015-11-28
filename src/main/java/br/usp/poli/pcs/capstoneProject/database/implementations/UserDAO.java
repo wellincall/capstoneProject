@@ -1,6 +1,7 @@
 package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Date;
 
@@ -100,8 +101,19 @@ public class UserDAO implements IUser{
 
 	@Override
 	public List<User> getPlataformUsers(Sql2o sql2o, List<String> phoneNumbers) {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> registeredUsers = new ArrayList<User>();
+		try(Connection connection = sql2o.beginTransaction()) {
+			for (String phoneNumber : phoneNumbers) {
+				User user = connection.createQuery("SELECT name, phoneNumber FROM users WHERE phoneNumber = :phoneNumber")
+						.addParameter("phoneNumber", phoneNumber)
+						.executeAndFetchFirst(User.class);
+				if (user != null) {
+					registeredUsers.add(user);
+				}
+			}
+			connection.commit();
+		}
+		return registeredUsers;
 	}
 
 
