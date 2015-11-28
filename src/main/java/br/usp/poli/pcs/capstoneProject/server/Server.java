@@ -83,5 +83,10 @@ public class Server {
 			return (new UpdatePasswordHandler(request, response)).call();
 		});
 		
+		get("/user/import-contacts", (request, response) -> {
+			return (new ImportContactsDisplayHandler(request, response)).call();
+		});
+		
+		
 	}
 }

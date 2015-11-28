@@ -13,7 +13,7 @@
 	    </div>
 		   	<div class="row">
 		   		<div class="col-md-12">
-			   		<form class="form-horizontal" action="/authenticate" method="POST">
+			   		<form class="form-horizontal" action="/user/import-contacts" method="POST">
 			   			<#list formfields as formField>
 			   				<div class="form-group">
 				   				<label for="${formField.formFieldId}__REPLACE" class="col-md-2 control-label">
@@ -33,6 +33,7 @@
 		   		</div>
 		   	</div>
 	    </div>
-	    <script type="text/javascript" src="/js/bootstrap.min.js" /> 
+	    <script type="text/javascript" src="/js/bootstrap.min.js"> </script> 
+	    <script type="text/javascript" src="/js/insert-field.js"></script>
 	</body>
 </html>
