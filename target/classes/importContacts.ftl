@@ -33,7 +33,6 @@
 		   		</div>
 		   	</div>
 	    </div>
-	    <script type="text/javascript" src="/js/bootstrap.min.js"> </script> 
 	    <script type="text/javascript" src="/js/insert-field.js"></script>
 	</body>
 </html>
