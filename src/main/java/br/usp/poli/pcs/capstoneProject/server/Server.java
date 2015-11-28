@@ -101,5 +101,8 @@ public class Server {
 			return (new AskBanksHandler(request, response)).call();
 		});
 		
+		post("/user/banks", (request, response) -> {
+			return (new GetBanksHandler(request, response)).call();
+		});
 	}
 }
