@@ -114,11 +114,15 @@ public class UserDAO implements IUser{
 	@Override
 	public boolean updatePassword(Sql2o sql2o, Map<String, Object> passwordInformation) {
 		try (Connection connection = sql2o.beginTransaction()) {
-			String salt = getUserSalt(connection, passwordInformation);
-			String secret = salt + passwordInformation.get("password");
-			String hashedSecret = (new PasswordHashService()).call(secret);
-			String dataInDB = salt + hashedSecret;
-			
+			if (authenticatesUser(sql2o, passwordInformation)) {
+				String newPassword = (new NewPasswordHashService()).call(String.valueOf(passwordInformation.get("new-password")));
+				connection.createQuery("UPDATE users SET password = :password WHERE id = :id")
+					.addParameter("password", newPassword)
+					.addParameter("id", passwordInformation.get("user-id"))
+					.executeUpdate();
+				connection.commit();
+				return true;
+			}
 			connection.commit();
 		}
 		return false;
