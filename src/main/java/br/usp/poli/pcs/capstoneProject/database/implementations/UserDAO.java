@@ -99,12 +99,6 @@ public class UserDAO implements IUser{
 	}
 
 	@Override
-	public User editUser(Sql2o sql2o, Map<String, Object> newUserInformation) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<User> getPlataformUsers(Sql2o sql2o, List<String> phoneNumbers) {
 		// TODO Auto-generated method stub
 		return null;

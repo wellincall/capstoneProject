@@ -11,7 +11,6 @@ public interface IUser {
 	public User getUser(Sql2o sql2o, Map<String, Object> userInformation);
 	public User getUserById(Sql2o sql2o, int userId);
 	public boolean authenticatesUser(Sql2o sql2o, Map<String, Object>userLogin);
-	public User editUser(Sql2o sql2o, Map<String, Object> newUserInformation);
 	public List<User> getPlataformUsers(Sql2o sql2o, List<String> phoneNumbers);
 	public boolean updatePassword(Sql2o sql2o, Map<String, Object> passwordInformation);
 	
