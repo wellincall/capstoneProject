@@ -6,6 +6,8 @@ import spark.Request;
 import br.usp.poli.pcs.capstoneProject.forms.NewAccountAssociationForm;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
+import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;
+import br.usp.poli.pcs.capstoneProject.models.User;
 
 public class AssociateBankAccountHandlerService implements IDataHandlerService {
 	public Map<String, Object> call(Request request) {
@@ -14,6 +16,10 @@ public class AssociateBankAccountHandlerService implements IDataHandlerService {
 		for (FormField field : form.getFormFields()) {
 			formData.put(field.getFormFieldId(), request.queryParams(field.getFormFieldId()));
 		}
+		User user = (new GetUserByIdService()).call(request.session().attribute("user-id"));
+		formData.put("name" , user.getName());
+		formData.put("cpf", user.getCpf());
+		formData.put("birthday-date", user.getBirthdayDate());
 		return formData;
 	}
 }

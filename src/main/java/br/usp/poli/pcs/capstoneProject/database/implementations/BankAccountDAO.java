@@ -49,17 +49,17 @@ public class BankAccountDAO implements IBankAccount {
 	public boolean hasValidInformation(Sql2o sql2o, Map<String, Object> accountDetails) {
 		BankAccount bankAccount = null;
 		try(Connection connection = sql2o.beginTransaction()) {
-			bankAccount = connection.createQuery("SELECT * FROM bankAccounts WHERE"
+			bankAccount = connection.createQuery("SELECT * FROM bankaccounts WHERE "
 					+ "accountownercpf = :cpf AND accountownername = :name "
 					+ "AND accountownerbirthdaydate = :birthdayDate AND "
-					+ "accountnumber = :accountNumber AND agencynumber = :agencyNumber"
-					+ "and bankid = :bankId")
+					+ "accountnumber = :accountNumber AND agencynumber = :agencyNumber "
+					+ "AND bankid = :bankId")
 					.addParameter("name" , accountDetails.get("name"))
 					.addParameter("cpf" , accountDetails.get("cpf"))
 					.addParameter("birthdayDate" , accountDetails.get("birthday-date"))
 					.addParameter("accountNumber" , accountDetails.get("account-number"))
 					.addParameter("agencyNumber" , accountDetails.get("agency-number"))
-					.addParameter("bankId" , accountDetails.get("bankId"))
+					.addParameter("bankId" , Integer.valueOf(String.valueOf(accountDetails.get("bank-id"))))
 					.executeAndFetchFirst(BankAccount.class);
 			connection.commit();
 		}

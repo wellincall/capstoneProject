@@ -2,22 +2,31 @@ package br.usp.poli.pcs.capstoneProject.handlers.postHandlers;
 
 import spark.Request;
 import spark.Response;
-
-import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
-import br.usp.poli.pcs.capstoneProject.database.interfaces.IUserBankAccount;
+import java.util.Map;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.NewAccountAssociationForm;
+import br.usp.poli.pcs.capstoneProject.database.services.BankAccountValidatorService;
+import br.usp.poli.pcs.capstoneProject.dataHandler.IDataHandlerService;
+import br.usp.poli.pcs.capstoneProject.dataHandler.AssociateBankAccountHandlerService;
 
 public class AssociateUserAccountHandler extends DefaultPostHandler {
 	
+	private IDataHandlerService dataHandler;
+	
 	public AssociateUserAccountHandler(Request request, Response response) {
 		super(request, response);
+		dataHandler = new AssociateBankAccountHandlerService();
 	}
 	
 	public String process() {
 		Form form = new NewAccountAssociationForm();
 		if (form.isValid(request)) {
-			return "{status: \"Need to improve it\"}";
+			Map<String, Object> accountInformation = dataHandler.call(request);
+			if ((new BankAccountValidatorService()).call(accountInformation)) {
+				return "{Should persist}";
+			} else {
+				return "{status: 1, message: \"Information provided does not relate to any account\"}";
+			}
 		} else {
 			return "{status: 2, message: \"Missing information or data provided is invalid\"}";
 		}
