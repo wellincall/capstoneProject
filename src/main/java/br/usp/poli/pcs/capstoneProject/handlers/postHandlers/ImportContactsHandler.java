@@ -12,6 +12,6 @@ public class ImportContactsHandler extends DefaultPostHandler {
 	}
 	
 	public String process() {
-		Form contactsForm = 
+		Form contactsForm = new
 	}
 }
