@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.models.UserBankAccount;
+import spark.Request;
 
 public class NewTransferIntentionForm extends FormWithForeignKey {
 
@@ -20,6 +21,31 @@ public class NewTransferIntentionForm extends FormWithForeignKey {
 		formFields.add(new ForeignKeyField("recipient-id", "Recipient", new UserForeignKeyValidator(), generateOptionsForUser()));
 		formFields.add(new ForeignKeyField("sender-account-id", "Remove amount from", new UserBankAccountForeignKeyValidator(), generateOptionsForBankAccount(userId)));
 		formFields.add(new FormField("amount", "Amount", "text", new AmountValidator()));
+	}
+	
+	public boolean isValid(Request request) {
+		boolean isValid = true;
+		for (FormField formField : formFields) {
+			if (formField instanceof ForeignKeyField && formField.getFormFieldId().equals("recipient-id")) {
+				int foreignKeyValue = Integer.valueOf(request.queryParams(formField.getFormFieldId()));
+				if (!((ForeignKeyField) formField).validates(foreignKeyValue)) {
+					isValid = false;
+				}
+			} else if(formField instanceof ForeignKeyField && formField.getFormFieldId().equals("sender-account-id")) {
+				int foreignKeyValue = Integer.valueOf(request.queryParams(formField.getFormFieldId()));
+				int userId = request.session().attribute("user-id");
+				if (!(new UserBankAccountForeignKeyValidator()).validates(foreignKeyValue, userId)) {
+					isValid = false;
+				}
+			} else {
+				String paramInRequest = request.queryParams(formField.getFormFieldId());
+				if (paramInRequest == null || !formField.validates(paramInRequest)) {
+					isValid = false;
+				}
+			}
+			
+		}
+		return isValid;
 	}
 	
 	
