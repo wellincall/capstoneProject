@@ -69,7 +69,7 @@ public class UserBankAccountDAO implements IUserBankAccount{
 	private boolean userHasAccount(Connection connection, int userId, int userBankAccountId) {
 		int registeredAccounts = connection.createQuery("SELECT count(id) FROM userbankaccounts WHERE userid = :userId AND id = :userBankAccountId")
 					.addParameter("userId", userId)
-					.addParameter("id", userBankAccountId)
+					.addParameter("userBankAccountId", userBankAccountId)
 					.executeScalar(Integer.class);
 		
 		return registeredAccounts == 1;
