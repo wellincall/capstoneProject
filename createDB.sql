@@ -42,8 +42,8 @@ CREATE TABLE transferIntentions (
 	status integer NOT NULL,
 	creationDate date NOT NULL,
 	CONSTRAINT transferIntentionPK PRIMARY KEY (id),
-	CONSTRAINT recipientForeignKey FOREIGN KEY (recipientId) REFERENCES userBankAccounts(id),
-	CONSTRAINT senderForeingKey FOREIGN KEY (senderId) REFERENCES userBankAccounts(id)
+	CONSTRAINT recipientForeignKey FOREIGN KEY (recipientId) REFERENCES users(id),
+	CONSTRAINT senderForeingKey FOREIGN KEY (senderId) REFERENCES users(id)
 );
 CREATE TABLE deposits (
 	id serial NOT NULL,

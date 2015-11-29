@@ -20,30 +20,35 @@ public class TransferIntentionDAO implements ITransferIntention {
 		TransferIntention transfer = null;
 		try(Connection connection = sql2o.beginTransaction()) {
 			int senderId = Integer.valueOf(String.valueOf(transferDetails.get("sender-id")));
-			int transferId = connection.createQuery("INSERT INTO transferintentions(value, recipientid, senderid, status, creationdate)"
-					+ " VALUES (:value, :recipientId, :senderId, :status, :creationDate)", true)
-					.addParameter("value", transferDetails.get("amount"))
-					.addParameter("recipientId", transferDetails.get("recipient-id"))
-					.addParameter("senderId", transferDetails.get("sender-id"))
-					.addParameter("status", TransferIntention.CREATED)
-					.addParameter("creationDate", new Date())
-					.executeUpdate()
-					.getKey(Integer.class);
-			Map<String, Object> withdrawDetails = new HashMap<String, Object>();
-			int accountId = Integer.valueOf(String.valueOf(transferDetails.get("sender-account-id")));
-			UserBankAccount senderAccount = (new UserBankAccountDAO()).getUserBankAccountById(connection, accountId, senderId);
-			int bankId = (new GetBankIdFromTokenService()).call(senderAccount.getAccountToken());
-			withdrawDetails.put("bank-id", bankId);
-			withdrawDetails.put("account-token", senderAccount.getAccountToken());
-			withdrawDetails.put("value", transferDetails.get("value"));
-			withdrawDetails.put("transfer-id", transferId);
-			if ((new WithdrawDAO()).createWithdraw(connection, withdrawDetails) != null) {
-				transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :id")
-										.addParameter("id", transferId)
-										.executeAndFetchFirst(TransferIntention.class);
-				connection.commit();
+			int recipientId = Integer.valueOf(String.valueOf(transferDetails.get("recipient-id")));
+			if (senderId != recipientId) {
+				int transferId = connection.createQuery("INSERT INTO transferintentions(value, recipientid, senderid, status, creationdate)"
+						+ " VALUES (:value, :recipientId, :senderId, :status, :creationDate)", true)
+						.addParameter("value", Double.valueOf(String.valueOf(transferDetails.get("amount"))))
+						.addParameter("recipientId", recipientId)
+						.addParameter("senderId", transferDetails.get("sender-id"))
+						.addParameter("status", TransferIntention.CREATED)
+						.addParameter("creationDate", new Date())
+						.executeUpdate()
+						.getKey(Integer.class);
+				Map<String, Object> withdrawDetails = new HashMap<String, Object>();
+				int accountId = Integer.valueOf(String.valueOf(transferDetails.get("sender-account-id")));
+				UserBankAccount senderAccount = (new UserBankAccountDAO()).getUserBankAccountById(connection, accountId, senderId);
+				int bankId = (new GetBankIdFromTokenService()).call(senderAccount.getAccountToken());
+				withdrawDetails.put("bank-id", bankId);
+				withdrawDetails.put("account-token", senderAccount.getAccountToken());
+				withdrawDetails.put("value", transferDetails.get("value"));
+				withdrawDetails.put("transfer-id", transferId);
+				if ((new WithdrawDAO()).createWithdraw(connection, withdrawDetails) != null) {
+					transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :id")
+											.addParameter("id", transferId)
+											.executeAndFetchFirst(TransferIntention.class);
+					connection.commit();
+				} else {
+					connection.rollback();
+				}
 			} else {
-				connection.rollback();
+				connection.commit();
 			}
 		}
 		return transfer;
