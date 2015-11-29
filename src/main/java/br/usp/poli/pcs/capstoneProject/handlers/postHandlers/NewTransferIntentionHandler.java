@@ -6,11 +6,17 @@ import spark.Response;
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.NewTransferIntentionForm;
 
+import br.usp.poli.pcs.capstoneProject.dataHandler.IDataHandlerService;
+import br.usp.poli.pcs.capstoneProject.dataHandler.NewTransferIntentionDataHandler;
+
 
 public class NewTransferIntentionHandler extends DefaultPostHandler {
 	
+	private IDataHandlerService dataHandler;
+	
 	public NewTransferIntentionHandler(Request request, Response response) {
 		super(request, response);
+		dataHandler = new NewTransferIntentionDataHandler();
 	}
 	
 	public String process() {

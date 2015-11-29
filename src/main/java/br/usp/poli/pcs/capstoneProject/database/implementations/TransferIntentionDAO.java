@@ -3,6 +3,7 @@ package br.usp.poli.pcs.capstoneProject.database.implementations;
 import java.util.List;
 import java.util.Map;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
@@ -16,6 +17,7 @@ public class TransferIntentionDAO implements ITransferIntention {
 
 	@Override
 	public TransferIntention createTransferIntention(Sql2o sql2o, Map<String, Object> transferDetails) {
+		TransferIntention transfer = null;
 		try(Connection connection = sql2o.beginTransaction()) {
 			int senderId = Integer.valueOf(String.valueOf(transferDetails.get("sender-id")));
 			int transferId = connection.createQuery("INSERT INTO transferintentions(value, recipientid, senderid, status, creationdate)"
@@ -27,11 +29,24 @@ public class TransferIntentionDAO implements ITransferIntention {
 					.addParameter("creationDate", new Date())
 					.executeUpdate()
 					.getKey(Integer.class);
+			Map<String, Object> withdrawDetails = new HashMap<String, Object>();
 			int accountId = Integer.valueOf(String.valueOf(transferDetails.get("sender-account-id")));
 			UserBankAccount senderAccount = (new UserBankAccountDAO()).getUserBankAccountById(connection, accountId, senderId);
-			connection.commit();
+			int bankId = (new GetBankIdFromTokenService()).call(senderAccount.getAccountToken());
+			withdrawDetails.put("bank-id", bankId);
+			withdrawDetails.put("account-token", senderAccount.getAccountToken());
+			withdrawDetails.put("value", transferDetails.get("value"));
+			withdrawDetails.put("transfer-id", transferId);
+			if ((new WithdrawDAO()).createWithdraw(connection, withdrawDetails) != null) {
+				transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :id")
+										.addParameter("id", transferId)
+										.executeAndFetchFirst(TransferIntention.class);
+				connection.commit();
+			} else {
+				connection.rollback();
+			}
 		}
-		return null;
+		return transfer;
 	}
 
 	@Override
