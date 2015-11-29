@@ -94,4 +94,13 @@ public class UserBankAccountDAO implements IUserBankAccount{
 		connection.commit();
 		return accountsIds;
 	}
+
+	@Override
+	public UserBankAccount getUserBankAccountById(Connection connection, int userBankAccountId, int userId) {
+		UserBankAccount account = connection.createQuery("SELECT * FROM userbankaccounts WHERE id = :id AND userid = :userId")
+					.addParameter("id", userBankAccountId)
+					.addParameter("userId", userId)
+					.executeAndFetchFirst(UserBankAccount.class);
+		return account;
+	}
 }
