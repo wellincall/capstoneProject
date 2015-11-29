@@ -3,7 +3,7 @@ package br.usp.poli.pcs.capstoneProject.database.services;
 import br.usp.poli.pcs.capstoneProject.database.interfaces.IUserBankAccount;
 import br.usp.poli.pcs.capstoneProject.database.implementations.UserBankAccountDAO;
 import java.util.Map;
-
+import br.usp.poli.pcs.capstoneProject.models.UserBankAccount;
 public class AssociateAccountService extends DatabaseService {
 	
 	private IUserBankAccount dao;
@@ -13,8 +13,8 @@ public class AssociateAccountService extends DatabaseService {
 		dao = new UserBankAccountDAO();
 	}
 	
-	public void call(Map<String, Object> accountInformation) {
-		dao.associateAccount(db.getConnection(), accountInformation);
+	public UserBankAccount call(Map<String, Object> accountInformation) {
+		return dao.associateAccount(db.getConnection(), accountInformation);
 	}
 
 }

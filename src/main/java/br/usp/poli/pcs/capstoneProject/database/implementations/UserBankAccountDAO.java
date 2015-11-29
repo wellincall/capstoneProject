@@ -27,13 +27,15 @@ public class UserBankAccountDAO implements IUserBankAccount{
 		try(Connection connection = sql2o.beginTransaction()) {
 			if ((new BankAccountValidatorService()).call(associationInformation)) {
 				String token = (new GetTokenService()).call(associationInformation);
-				int associationId = connection.createQuery("INSERT INTO userbankaccounts(userid, accounttoken) VALUES (:userId, :token)", true)
-								.addParameter("userId" , Integer.valueOf(String.valueOf(associationInformation.get("user-id"))))
-								.addParameter("token" , token)
-								.executeUpdate().getKey(Integer.class);
-				userAccount = connection.createQuery("SELECT * FROM userbankaccounts WHERE id = :id")
-									.addParameter("id", associationId)
-									.executeAndFetchFirst(UserBankAccount.class);
+				if (canCreateAssociation(connection, token, associationInformation)) {
+					int associationId = connection.createQuery("INSERT INTO userbankaccounts(userid, accounttoken) VALUES (:userId, :token)", true)
+									.addParameter("userId" , associationInformation.get("user-id"))
+									.addParameter("token" , token)
+									.executeUpdate().getKey(Integer.class);
+					userAccount = connection.createQuery("SELECT * FROM userbankaccounts WHERE id = :id")
+										.addParameter("id", associationId)
+										.executeAndFetchFirst(UserBankAccount.class);
+				}
 			}			
 			connection.commit();
 		}
@@ -45,5 +47,14 @@ public class UserBankAccountDAO implements IUserBankAccount{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	
+	private boolean canCreateAssociation(Connection connection, String token, Map<String, Object> accountInformation) {
+		int existingAccounts = connection.createQuery("SELECT count(id) FROM userbankaccounts WHERE accounttoken = :token AND userid = :userId")
+				.addParameter("userId" , accountInformation.get("user-id"))
+				.addParameter("token" , token)
+				.executeScalar(Integer.class);
+		return existingAccounts == 0;
+		
+	}
 }

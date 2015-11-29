@@ -24,10 +24,13 @@ public class AssociateUserAccountHandler extends DefaultPostHandler {
 		if (form.isValid(request)) {
 			Map<String, Object> accountInformation = dataHandler.call(request);
 			if ((new BankAccountValidatorService()).call(accountInformation)) {
-				(new AssociateAccountService()).call(accountInformation);
-				return "{status: 0, message: \"Bank account was sucessfully associated to your profile\"}";
+				if ( (new AssociateAccountService()).call(accountInformation) != null) {
+					return "{status: 0, message: \"Bank account was sucessfully associated to your profile\"}";
+				} else {
+					return "{status: 1, message: \"Bank account is already associated to your profile\"}";
+				}
 			} else {
-				return "{status: 1, message: \"Information provided does not relate to any account\"}";
+				return "{status: 3, message: \"Information provided does not relate to any account\"}";
 			}
 		} else {
 			return "{status: 2, message: \"Missing information or data provided is invalid\"}";
