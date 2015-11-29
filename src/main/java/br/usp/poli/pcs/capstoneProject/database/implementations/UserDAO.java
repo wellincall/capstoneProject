@@ -163,6 +163,14 @@ public class UserDAO implements IUser{
 		}
 		return salt.toString().substring(0, 2);
 	}
+
+	@Override
+	public List<Integer> getUsersId(Sql2o sql2o) {
+		Connection connection = sql2o.beginTransaction();
+		List<Integer> ids = connection.createQuery("SELECT id FROM users").executeAndFetch(Integer.class);
+		connection.commit();
+		return ids;
+	}
 	
 
 }
