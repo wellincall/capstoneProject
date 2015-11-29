@@ -124,5 +124,9 @@ public class Server {
 			return (new ListUserAccountsHandler(request, response)).call();
 		});
 		
+		post("/user/remove-account", (request, response) -> {
+			return (new RemoveUserAccountHandler(request, response)).call();
+		});
+		
 	}
 }
