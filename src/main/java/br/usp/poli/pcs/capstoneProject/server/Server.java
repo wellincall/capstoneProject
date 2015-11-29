@@ -73,14 +73,11 @@ public class Server {
 		});
 		
 		post("/deauthenticate", (request, response) -> {
-			if (request.session().attribute("user-id") == null) {
-				response.redirect("/login");
-				return "";
-			} else {
+			if (request.session().attribute("user-id") != null) {
 				request.session().removeAttribute("user-id");
-				response.redirect("/login");
-				return "";
 			}
+			response.redirect("/login");
+			return "";
 		});
 		
 		get("/user/reset-password", (request, response) -> {
