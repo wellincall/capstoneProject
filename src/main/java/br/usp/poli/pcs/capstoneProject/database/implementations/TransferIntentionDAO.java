@@ -37,8 +37,8 @@ public class TransferIntentionDAO implements ITransferIntention {
 				int bankId = (new GetBankIdFromTokenService()).call(senderAccount.getAccountToken());
 				withdrawDetails.put("bank-id", bankId);
 				withdrawDetails.put("account-token", senderAccount.getAccountToken());
-				withdrawDetails.put("value", transferDetails.get("value"));
-				withdrawDetails.put("transfer-id", transferId);
+				withdrawDetails.put("value", transferDetails.get("amount"));
+				withdrawDetails.put("transfer-intention-id", transferId);
 				if ((new WithdrawDAO()).createWithdraw(connection, withdrawDetails) != null) {
 					transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :id")
 											.addParameter("id", transferId)

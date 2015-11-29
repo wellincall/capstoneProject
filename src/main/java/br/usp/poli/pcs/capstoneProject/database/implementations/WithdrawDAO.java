@@ -23,7 +23,7 @@ public class WithdrawDAO implements IWithdraw {
 				+ "(:bankId, :accountToken, :transferIntentionId, :value, :status)", true)
 					.addParameter("bankId", withdrawInformation.get("bank-id"))
 					.addParameter("accountToken", withdrawInformation.get("account-token"))
-					.addParameter("tranferIntentionId", withdrawInformation.get("transfer-intention-id"))
+					.addParameter("transferIntentionId", withdrawInformation.get("transfer-intention-id"))
 					.addParameter("value", Double.valueOf(String.valueOf(withdrawInformation.get("value"))))
 					.addParameter("status", Withdraw.CREATED)
 					.executeUpdate().getKey(Integer.class);

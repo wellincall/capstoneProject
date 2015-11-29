@@ -40,7 +40,7 @@ CREATE TABLE transferIntentions (
 	recipientId integer NOT NULL,
 	senderId integer NOT NULL,
 	status integer NOT NULL,
-	creationDate date NOT NULL,
+	creationDate timestamp NOT NULL,
 	CONSTRAINT transferIntentionPK PRIMARY KEY (id),
 	CONSTRAINT recipientForeignKey FOREIGN KEY (recipientId) REFERENCES users(id),
 	CONSTRAINT senderForeingKey FOREIGN KEY (senderId) REFERENCES users(id)
@@ -52,6 +52,7 @@ CREATE TABLE deposits (
 	transferIntentionId integer NOT NULL,
 	value numeric NOT NULL,
 	status integer NOT NULL,
+	creationDate timestamp NOT NULL,
 	CONSTRAINT depositPK PRIMARY KEY (id),
 	CONSTRAINT transferIntentionFK FOREIGN KEY (transferIntentionId) REFERENCES transferIntentions (id),
 	CONSTRAINT bankFK FOREIGN KEY (bankId) REFERENCES banks (id)
@@ -63,6 +64,7 @@ CREATE TABLE withdraws (
 	transferIntentionId integer NOT NULL,
 	value numeric NOT NULL,
 	status integer NOT NULL,
+	creationDate timestamp NOT NULL,
 	CONSTRAINT withdrawPK PRIMARY KEY (id),
 	CONSTRAINT transferIntentionFK FOREIGN KEY (transferIntentionId) REFERENCES transferIntentions (id),
 	CONSTRAINT bankFK FOREIGN KEY (bankId) REFERENCES banks (id)
