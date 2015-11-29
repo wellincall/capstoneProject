@@ -132,5 +132,9 @@ public class Server {
 			return (new NewTransferDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/new-transfer-intention", (request, response) -> {
+			return (new NewTransferIntentionHandler(request, response)).call();
+		});
+		
 	}
 }
