@@ -128,5 +128,9 @@ public class Server {
 			return (new RemoveUserAccountHandler(request, response)).call();
 		});
 		
+		get("/user/new-transfer", (request, response) -> {
+			return (new NewTransferDisplayHandler(request, response)).call();
+		});
+		
 	}
 }

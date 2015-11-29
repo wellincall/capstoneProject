@@ -27,7 +27,7 @@ public class NewTransferIntentionForm extends FormWithForeignKey {
 		Map<String, String> options = new HashMap<String, String>();
 		List<User> users = (new GetUsersService()).call();
 		for (User user : users) {
-			options.put(String.valueOf(user.getId()), user.getPhoneNumber() + user.getName());
+			options.put(String.valueOf(user.getId()), user.getPhoneNumber() +" "+ user.getName());
 		}
 		return options;
 	}
