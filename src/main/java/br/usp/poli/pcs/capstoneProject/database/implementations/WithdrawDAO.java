@@ -2,6 +2,7 @@ package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -19,13 +20,14 @@ public class WithdrawDAO implements IWithdraw {
 
 	@Override
 	public Withdraw createWithdraw(Connection connection, Map<String, Object> withdrawInformation) {
-		int withdrawId = connection.createQuery("INSERT INTO withdraws(bankid, accounttoken, transferintentionid, value, status) VALUES "
-				+ "(:bankId, :accountToken, :transferIntentionId, :value, :status)", true)
+		int withdrawId = connection.createQuery("INSERT INTO withdraws(bankid, accounttoken, transferintentionid, value, status, creationdate) VALUES "
+				+ "(:bankId, :accountToken, :transferIntentionId, :value, :status, :creationDate)", true)
 					.addParameter("bankId", withdrawInformation.get("bank-id"))
 					.addParameter("accountToken", withdrawInformation.get("account-token"))
 					.addParameter("transferIntentionId", withdrawInformation.get("transfer-intention-id"))
 					.addParameter("value", Double.valueOf(String.valueOf(withdrawInformation.get("value"))))
 					.addParameter("status", Withdraw.CREATED)
+					.addParameter("creationDate", new Date())
 					.executeUpdate().getKey(Integer.class);
 		Withdraw withdraw = connection.createQuery("SELECT * FROM withdraws WHERE id = :id")
 					.addParameter("id", withdrawId)
