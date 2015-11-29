@@ -9,13 +9,15 @@ import org.sql2o.Connection;
 
 import br.usp.poli.pcs.capstoneProject.database.interfaces.ITransferIntention;
 import br.usp.poli.pcs.capstoneProject.models.TransferIntention;
-
+import br.usp.poli.pcs.capstoneProject.database.services.GetBankIdFromTokenService;
+import br.usp.poli.pcs.capstoneProject.models.UserBankAccount;
 
 public class TransferIntentionDAO implements ITransferIntention {
 
 	@Override
 	public TransferIntention createTransferIntention(Sql2o sql2o, Map<String, Object> transferDetails) {
 		try(Connection connection = sql2o.beginTransaction()) {
+			int senderId = Integer.valueOf(String.valueOf(transferDetails.get("sender-id")));
 			int transferId = connection.createQuery("INSERT INTO transferintentions(value, recipientid, senderid, status, creationdate)"
 					+ " VALUES (:value, :recipientId, :senderId, :status, :creationDate)", true)
 					.addParameter("value", transferDetails.get("amount"))
@@ -25,7 +27,8 @@ public class TransferIntentionDAO implements ITransferIntention {
 					.addParameter("creationDate", new Date())
 					.executeUpdate()
 					.getKey(Integer.class);
-			
+			int accountId = Integer.valueOf(String.valueOf(transferDetails.get("sender-account-id")));
+			UserBankAccount senderAccount = (new UserBankAccountDAO()).getUserBankAccountById(connection, accountId, senderId);
 			connection.commit();
 		}
 		return null;
