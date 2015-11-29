@@ -1,8 +1,10 @@
 package br.usp.poli.pcs.capstoneProject.forms;
 
 import br.usp.poli.pcs.capstoneProject.forms.components.ForeignKeyField;
+import br.usp.poli.pcs.capstoneProject.forms.components.FormField;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.UserForeignKeyValidator;
 import br.usp.poli.pcs.capstoneProject.fieldValidators.UserBankAccountForeignKeyValidator;
+import br.usp.poli.pcs.capstoneProject.fieldValidators.AmountValidator;
 import br.usp.poli.pcs.capstoneProject.database.services.GetUserAccountsService;
 import br.usp.poli.pcs.capstoneProject.database.services.GetUsersService;
 import java.util.Map;
@@ -17,6 +19,7 @@ public class NewTransferIntentionForm extends FormWithForeignKey {
 		super();
 		formFields.add(new ForeignKeyField("recipient-id", "Recipient", new UserForeignKeyValidator(), generateOptionsForUser()));
 		formFields.add(new ForeignKeyField("sender-account-id", "Remove amount from", new UserBankAccountForeignKeyValidator(), generateOptionsForBankAccount(userId)));
+		formFields.add(new FormField("amount", "Amount", "text", new AmountValidator()));
 	}
 	
 	
