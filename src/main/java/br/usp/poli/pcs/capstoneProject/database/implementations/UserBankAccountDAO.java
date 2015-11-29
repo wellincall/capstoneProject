@@ -27,11 +27,11 @@ public class UserBankAccountDAO implements IUserBankAccount{
 		try(Connection connection = sql2o.beginTransaction()) {
 			if ((new BankAccountValidatorService()).call(associationInformation)) {
 				String token = (new GetTokenService()).call(associationInformation);
-				int associationId = connection.createQuery("INSERT INTO useraccounts(userid, accounttoken) VALUES (:userId, :token)", true)
+				int associationId = connection.createQuery("INSERT INTO userbankaccounts(userid, accounttoken) VALUES (:userId, :token)", true)
 								.addParameter("userId" , Integer.valueOf(String.valueOf(associationInformation.get("user-id"))))
 								.addParameter("token" , token)
 								.executeUpdate().getKey(Integer.class);
-				userAccount = connection.createQuery("SELECT * FROM useraccounts WHERE id = :id")
+				userAccount = connection.createQuery("SELECT * FROM userbankaccounts WHERE id = :id")
 									.addParameter("id", associationId)
 									.executeAndFetchFirst(UserBankAccount.class);
 			}			
