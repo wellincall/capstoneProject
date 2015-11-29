@@ -97,5 +97,16 @@ public class BankAccountDAO implements IBankAccount {
 				.executeScalar(Integer.class);
 		return registeredAccounts == 0;
 	}
+
+	@Override
+	public int getBankIdFromToken(Sql2o sql2o, String token) {
+		int bankId = -1;
+		try(Connection connection = sql2o.beginTransaction()) {
+			bankId = connection.createQuery("SELECT bankid FROM bankaccounts WHERE token = :token")
+						.addParameter("token", token)
+						.executeScalar(Integer.class);
+		}
+		return bankId;
+	}
 	
 }

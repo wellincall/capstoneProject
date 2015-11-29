@@ -9,4 +9,5 @@ public interface IBankAccount {
 	public boolean deleteBankAccount(Sql2o sql2o, int bankAccountId, int bankId);
 	public boolean hasValidInformation(Sql2o sql2o, Map<String, Object> accountDetails);
 	public String tokenFromAccount(Sql2o sql2o, Map<String, Object> accountDetails);
+	public int getBankIdFromToken(Sql2o sql2o, String token);
 }
