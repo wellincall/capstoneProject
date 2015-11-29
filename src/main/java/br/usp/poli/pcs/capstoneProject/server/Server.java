@@ -120,5 +120,9 @@ public class Server {
 			return (new GetUserAccountsHandler(request, response)).call();
 		});
 		
+		get("/user/list-accounts", (request, response) -> {
+			return (new ListUserAccountsHandler(request, response)).call();
+		});
+		
 	}
 }

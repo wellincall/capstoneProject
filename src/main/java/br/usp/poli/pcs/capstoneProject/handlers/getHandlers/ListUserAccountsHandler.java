@@ -14,7 +14,7 @@ public class ListUserAccountsHandler extends DefaultGetHandler {
 	
 	public Map<String, Object> process() {
 		Map<String, Object> objects = new HashMap<String, Object>();
-		objects.put("accounts", (new GetUserAccountsService()).call(request.session().attribute("user-id")));
+		objects.put("userAccounts", (new GetUserAccountsService()).call(request.session().attribute("user-id")));
 		return objects;
 	}
 }
