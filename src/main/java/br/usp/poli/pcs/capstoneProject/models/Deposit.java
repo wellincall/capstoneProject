@@ -1,5 +1,7 @@
 package br.usp.poli.pcs.capstoneProject.models;
 
+import java.util.Date;
+
 public class Deposit {
 	public static final int CREATED = 0;
 	public static final int DECLINED = 1;
@@ -12,6 +14,7 @@ public class Deposit {
 	private int transferIntentionId;
 	private double value;
 	private int status;
+	private Date creationDate;
 	private TransferIntention transferIntention;
 	public int getId() {
 		return id;
@@ -30,6 +33,9 @@ public class Deposit {
 	}
 	public int getStatus() {
 		return status;
+	}
+	public Date getCreationDate() {
+		return creationDate;
 	}
 	public TransferIntention getTransferIntention() {
 		return transferIntention;
