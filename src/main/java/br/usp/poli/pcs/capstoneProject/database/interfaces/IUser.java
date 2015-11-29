@@ -14,4 +14,5 @@ public interface IUser {
 	public List<User> getPlataformUsers(Sql2o sql2o, String[] phoneNumbers);
 	public boolean updatePassword(Sql2o sql2o, Map<String, Object> passwordInformation);
 	public List<Integer> getUsersId(Sql2o sql2o);
+	public List<User> getUsers(Sql2o sql2o);
 }

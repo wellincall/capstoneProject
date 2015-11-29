@@ -171,6 +171,15 @@ public class UserDAO implements IUser{
 		connection.commit();
 		return ids;
 	}
+
+	@Override
+	public List<User> getUsers(Sql2o sql2o) {
+		List<User> users = null;
+		Connection connection = sql2o.beginTransaction();
+		users = connection.createQuery("SELECT id, name, phonenumber FROM users").executeAndFetch(User.class);
+		connection.commit();
+		return users;
+	}
 	
 
 }
