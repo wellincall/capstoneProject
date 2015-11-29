@@ -17,8 +17,14 @@ public class UserBankAccountDAO implements IUserBankAccount{
 
 	@Override
 	public List<UserBankAccount> getUserAccounts(Sql2o sql2o, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<UserBankAccount> userBankAccounts = null;
+		try(Connection connection = sql2o.beginTransaction()) {
+			userBankAccounts = connection.createQuery("SELECT * FROM userbankaccounts WHERE userid = :userId")
+						.addParameter("userId", userId)
+						.executeAndFetch(UserBankAccount.class);
+			connection.commit();
+		}
+		return userBankAccounts;
 	}
 
 	@Override
