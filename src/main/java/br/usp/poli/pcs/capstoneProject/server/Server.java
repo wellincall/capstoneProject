@@ -115,5 +115,9 @@ public class Server {
 		get("/user/ask-accounts", (request, response) -> {
 			return (new AskAccountsHandler(request, response)).call();
 		});
+		
+		post("/user/accounts", (request, response) -> {
+			return (new GetUserAccountsHandler(request, response)).call();
+		});
 	}
 }

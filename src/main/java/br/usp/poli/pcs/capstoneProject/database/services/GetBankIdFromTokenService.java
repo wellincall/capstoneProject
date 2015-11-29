@@ -3,10 +3,10 @@ package br.usp.poli.pcs.capstoneProject.database.services;
 import br.usp.poli.pcs.capstoneProject.database.interfaces.IBankAccount;
 import br.usp.poli.pcs.capstoneProject.database.implementations.BankAccountDAO;
 
-public class GetBankFromTokenService extends DatabaseService {
+public class GetBankIdFromTokenService extends DatabaseService {
 	private IBankAccount dao;
 	
-	public GetBankFromTokenService() {
+	public GetBankIdFromTokenService() {
 		super();
 		dao = new BankAccountDAO();
 	}
