@@ -23,7 +23,7 @@ public class AssociateUserAccountHandler extends DefaultPostHandler {
 		if (form.isValid(request)) {
 			Map<String, Object> accountInformation = dataHandler.call(request);
 			if ((new BankAccountValidatorService()).call(accountInformation)) {
-				return "{Should persist}";
+				return "{status: 0, message: \"Bank account was sucessfully associated to your profile\"}";
 			} else {
 				return "{status: 1, message: \"Information provided does not relate to any account\"}";
 			}

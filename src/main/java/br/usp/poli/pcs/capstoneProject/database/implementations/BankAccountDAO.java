@@ -68,8 +68,23 @@ public class BankAccountDAO implements IBankAccount {
 
 	@Override
 	public String tokenFromAccount(Sql2o sql2o, Map<String, Object> accountDetails) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer token = new StringBuffer();
+		try(Connection connection = sql2o.beginTransaction()) {
+			token.append(connection.createQuery("SELECT token FROM bankaccounts WHERE "
+					+ "accountownercpf = :cpf AND accountownername = :name "
+					+ "AND accountownerbirthdaydate = :birthdayDate AND "
+					+ "accountnumber = :accountNumber AND agencynumber = :agencyNumber "
+					+ "AND bankid = :bankId")
+					.addParameter("name" , accountDetails.get("name"))
+					.addParameter("cpf" , accountDetails.get("cpf"))
+					.addParameter("birthdayDate" , accountDetails.get("birthday-date"))
+					.addParameter("accountNumber" , accountDetails.get("account-number"))
+					.addParameter("agencyNumber" , accountDetails.get("agency-number"))
+					.addParameter("bankId" , Integer.valueOf(String.valueOf(accountDetails.get("bank-id"))))
+					.executeAndFetchFirst(String.class));
+			connection.commit();
+		}
+		return token.toString();
 	}
 	
 	private boolean canRegisterAccount(Connection connection, Map<String, Object> accountInformation) {
