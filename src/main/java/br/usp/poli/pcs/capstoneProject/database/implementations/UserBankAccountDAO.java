@@ -50,10 +50,30 @@ public class UserBankAccountDAO implements IUserBankAccount{
 
 	@Override
 	public boolean removeAccount(Sql2o sql2o, int userId, int userBankAccountId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean removedAccount = false;
+		try (Connection connection = sql2o.beginTransaction()) {
+			if (userHasAccount(connection, userId, userBankAccountId)) {
+				connection.createQuery("DELETE FROM userbankaccounts WHERE id = :userBankAccountId AND userid = :userId ")
+					.addParameter("userBankAccountId", userBankAccountId)
+					.addParameter("userId", userId)
+					.executeUpdate();
+				removedAccount = true;
+			}
+			
+			connection.commit();
+		}
+		return removedAccount;
 	}
 	
+	
+	private boolean userHasAccount(Connection connection, int userId, int userBankAccountId) {
+		int registeredAccounts = connection.createQuery("SELECT count(id) FROM userbankaccounts WHERE userid = :userId AND id = :userBankAccountId")
+					.addParameter("userId", userId)
+					.addParameter("id", userBankAccountId)
+					.executeScalar(Integer.class);
+		
+		return registeredAccounts == 1;
+	}
 	
 	private boolean canCreateAssociation(Connection connection, String token, Map<String, Object> accountInformation) {
 		int existingAccounts = connection.createQuery("SELECT count(id) FROM userbankaccounts WHERE accounttoken = :token AND userid = :userId")
