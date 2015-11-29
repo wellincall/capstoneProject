@@ -17,7 +17,7 @@
 		   				<form class="form-horizontal" action="/user/remove-account" method="POST">
 			   				<div class="form-group">
 				   				<span>Account ${userAccount.id} token ${userAccount.accountToken}</span>
-				   				<input type="hidden" value="${userAccount.id}" />
+				   				<input type="hidden" value="${userAccount.id}" name="account-id"/>
 				   				<input type="submit" value="Remove" class="btn btn-danger btn-default" />
 				   			</div>
 			   			</form>
