@@ -83,4 +83,15 @@ public class UserBankAccountDAO implements IUserBankAccount{
 		return existingAccounts == 0;
 		
 	}
+
+	@Override
+	public List<Integer> getUserBankAccountsId(Sql2o sql2o, int userId) {
+		List<Integer> accountsIds = null;
+		Connection connection = sql2o.beginTransaction();
+		accountsIds = connection.createQuery("SELECT id FROM userbankaccounts WHERE userid = :userId")
+						.addParameter("userId", userId)
+						.executeAndFetch(Integer.class);
+		connection.commit();
+		return accountsIds;
+	}
 }

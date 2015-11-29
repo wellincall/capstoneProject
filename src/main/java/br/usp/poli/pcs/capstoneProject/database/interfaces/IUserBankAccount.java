@@ -9,5 +9,5 @@ public interface IUserBankAccount {
 	public List<UserBankAccount> getUserAccounts(Sql2o sql2o, int userId);
 	public UserBankAccount associateAccount(Sql2o sql2o, Map<String, Object> associationInformation);
 	public boolean removeAccount(Sql2o sql2o, int userId, int userBankAccountId);
-	
+	public List<Integer> getUserBankAccountsId(Sql2o sql2o, int userId);
 }
