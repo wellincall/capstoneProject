@@ -12,4 +12,5 @@ public interface IBank {
 	public Bank createBank(Sql2o sql2o, Map<String, Object> bankInformation);
 	public boolean receiveWithdraw(Sql2o sql2o, int withdrawId);
 	public boolean receiveDeposit(Sql2o sql2o, int depositId);
+	public Bank getBankById(Sql2o sql2o, int bankId);
 }

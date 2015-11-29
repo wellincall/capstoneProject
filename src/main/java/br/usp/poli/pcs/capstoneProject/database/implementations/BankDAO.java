@@ -61,4 +61,16 @@ public class BankDAO implements IBank{
 					.executeScalar(Integer.class);
 		return registeredBanks == 0;
 	}
+
+	@Override
+	public Bank getBankById(Sql2o sql2o, int bankId) {
+		Bank bank = null;
+		try(Connection connection = sql2o.beginTransaction()) {
+			bank = connection.createQuery("SELECT * FROM banks WHERE id = :id")
+						.addParameter("id", bankId)
+						.executeAndFetchFirst(Bank.class);
+			connection.commit();
+		}
+		return bank;
+	}
 }
