@@ -58,4 +58,23 @@ public class TransferIntention {
 			return "invalid";
 		}
 	}
+	
+	public boolean isCreated() {
+		return status == CREATED;
+	}
+	
+	public boolean isDeclined() {
+		return status == DECLINED;
+	}
+	
+	public boolean isAccepted() {
+		return status == ACCEPTED;
+	}
+	
+	public boolean isVoided() {
+		return status == VOIDED;
+	}
+	
+	
+	
 }
