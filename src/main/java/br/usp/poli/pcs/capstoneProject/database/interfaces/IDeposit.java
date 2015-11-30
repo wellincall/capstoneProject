@@ -9,5 +9,8 @@ import br.usp.poli.pcs.capstoneProject.models.Deposit;
 public interface IDeposit {
 	public List<Deposit> getUserDeposits(Sql2o sql2o, int userId);
 	public Deposit createDeposit(Connection connection, Map<String, Object> depositInformation);
-	public boolean bankReceivedDeposit(Connection connection, int depositId);
+	public boolean consolidateDeposit(Connection connection, int transferIntentionId);
+	public boolean acceptDeposit(Connection connection, int transferIntentionId);
+	public boolean declineDeposit(Connection connection, int transferIntentionId);
+	public boolean voidDeposit(Connection connection, int transferIntentionId);
 }
