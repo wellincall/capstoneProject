@@ -43,4 +43,19 @@ public class TransferIntention {
 	public Date getCreationDate() {
 		return creationDate;
 	}
+	
+	public String statusToHuman() {
+		switch (status) {
+		case CREATED: 
+			return "created";
+		case DECLINED:
+			return "declined";
+		case ACCEPTED:
+			return "accepted";
+		case VOIDED:
+			return "voided";
+		default:
+			return "invalid";
+		}
+	}
 }

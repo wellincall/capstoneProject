@@ -71,7 +71,7 @@ public class TransferIntentionDAO implements ITransferIntention {
 	public List<TransferIntention> getPendingUserTransferIntentionsAsSender(Sql2o sql2o, int userId) {
 		List<TransferIntention> transferIntentions = null;
 		try(Connection connection = sql2o.beginTransaction()) {
-			transferIntentions = connection.createQuery("SELECT * FROM transferintentions WHERE sender = :userId")
+			transferIntentions = connection.createQuery("SELECT * FROM transferintentions WHERE senderId = :userId")
 									.addParameter("userId", userId)
 									.executeAndFetch(TransferIntention.class);
 			

@@ -140,5 +140,9 @@ public class Server {
 			return (new ListTransferIntentionsDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/list-transfer-intentions", (request, response) -> {
+			return (new ListTransferIntentionsHandler(request, response)).call();
+		});
+		
 	}
 }
