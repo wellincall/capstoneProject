@@ -19,7 +19,7 @@ public class MenuTransferIntentionsDisplayHandler extends DefaultGetHandler {
 	public Map<String, Object> process() {
 		int userId = request.session().attribute("user-id");
 		Map<String, Object> transferIntentions = new HashMap<String, Object>();
-		transferIntentions.put("recieved", (new GetTransferIntentionsForRecipientService()).call(userId));
+		transferIntentions.put("received", (new GetTransferIntentionsForRecipientService()).call(userId));
 		transferIntentions.put("sent", (new GetTransferIntentionsForSenderService()).call(userId));
 		return transferIntentions;
 	}

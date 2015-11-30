@@ -20,8 +20,8 @@
 	   						</a>
 	   					</li>
 		   				<li role="presentation">
-		   					<a href="javascript:void(0);" class="js-show-recieved text-center">
-		   						Recieved
+		   					<a href="javascript:void(0);" class="js-show-received text-center">
+		   						Received
 	   						</a>
 	   					</li>
 		   			</ul>
@@ -31,6 +31,7 @@
 		   					<thead>
 		   						<tr>
 		   							<th>Id</th>
+		   							<th>Sent on</th>
 		   							<th>Recipient's name</th>
 		   							<th>Recipient's phone number</th>
 		   							<th>Amount</th>
@@ -42,6 +43,7 @@
 		   						<#list sent as transferIntention>
 		   							<tr>
 		   								<td>${transferIntention.id}</td>
+		   								<td>${transferIntention.creationDateInString()}</td>
 		   								<td>${transferIntention.recipientName}</td>
 		   								<td>${transferIntention.recipientPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>
@@ -59,12 +61,13 @@
 		   				</table>
 		   			</div>
 		   			
-		   			<div class="recieved-container">
-		   				<h2>Transfers recieved</h2>
+		   			<div class="received-container">
+		   				<h2>Transfers received</h2>
 		   				<table class="table table-hover">
 		   					<thead>
 		   						<tr>
 		   							<th>Id</th>
+		   							<th>Received on</th>
 		   							<th>Sender's name</th>
 		   							<th>Sender's phone number</th>
 		   							<th>Amount</th>
@@ -73,9 +76,10 @@
 		   						</tr>
 		   					</thead>
 		   					<tbody>
-		   						<#list recieved as transferIntention>
+		   						<#list received as transferIntention>
 		   							<tr>
 		   								<td>${transferIntention.id}</td>
+		   								<td>${trasnferIntention.creationDateInString()}</td>
 		   								<td>${transferIntention.senderName}</td>
 		   								<td>${transferIntention.senderPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>

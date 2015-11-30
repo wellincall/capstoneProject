@@ -3,6 +3,7 @@ package br.usp.poli.pcs.capstoneProject.models;
 import java.util.Date;
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;
+import br.usp.poli.pcs.capstoneProject.helpers.DateFormatter;
 
 public class TransferIntention {
 	public static final int CREATED = 0;
@@ -121,6 +122,10 @@ public class TransferIntention {
 	
 	public boolean canChangeStatus() {
 		return status == ACCEPTED || status == CREATED;
+	}
+	
+	public String creationDateInString() {
+		return (new DateFormatter()).call(creationDate);
 	}
 	
 }
