@@ -14,7 +14,7 @@ public class UserAccountsListToJson {
 			StringJoiner jsonObject = new StringJoiner(", ", "{", "}");
 			int bankId = (new GetBankIdFromTokenService()).call(account.getAccountToken());
 			Bank bank = (new GetBankByIdService()).call(bankId);
-			jsonObject.add("id: "+account.getId()).add("bankName: \""+bank.getName()+"\"").add("token: \""+account.getAccountToken()+"\"");
+			jsonObject.add("\"id\": "+account.getId()).add("\"bankName\": \""+bank.getName()+"\"").add("\"token\": \""+account.getAccountToken()+"\"");
 			jsonList.add(jsonObject.toString());
 		}
 		

@@ -32,12 +32,12 @@ public class UpdatePasswordHandler extends DefaultPostHandler {
 			passwordFields.put("user-id", user.getId());
 			if (canUpdatePassword(passwordFields)) {
 				(new UpdatePasswordService()).call(passwordFields);
-				return "{status: 0, message: \"Password successfully updated\"}";
+				return "{\"status\": 0, \"message\": \"Password successfully updated\"}";
 			} else {
-				return "{status: 1, message: \"New password and its confirmation don't match or given passeword is incorrect \"}";
+				return "{\"status\": 1, \"message\": \"New password and its confirmation don't match or given passeword is incorrect \"}";
 			}
 		} else {
-			return "{status: 2, message: \"Missing information or invalid data to update password\"}";
+			return "{\"status\": 2, \"message\": \"Missing information or invalid data to update password\"}";
 		}
 	}
 	

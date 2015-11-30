@@ -22,9 +22,9 @@ public class ListTransferIntentionsHandler extends DefaultPostHandler {
 		List<TransferIntention> recievedTransfers = (new GetTransferIntentionsForRecipientService()).call(userId);
 		List<TransferIntention> sentTransfers = (new GetTransferIntentionsForSenderService()).call(userId);
 		return "{"
-				+ "status: 0, message: \"Transfers that you sent are present in sent field. Transfers that you recieved are in recieved field\", "
-				+ "sent: "+(new TransferIntentionsListToJson()).call(sentTransfers, true)+", "
-				+ "recieved: "+(new TransferIntentionsListToJson()).call(recievedTransfers, false)+""
+				+ "\"status\": 0, \"message\": \"Transfers that you sent are present in sent field. Transfers that you recieved are in recieved field\", "
+				+ "\"sent\": "+(new TransferIntentionsListToJson()).call(sentTransfers, true)+", "
+				+ "\"recieved\": "+(new TransferIntentionsListToJson()).call(recievedTransfers, false)+""
 			+ "}";
 	}
 	

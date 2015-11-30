@@ -15,6 +15,6 @@ public class GetBanksHandler extends DefaultPostHandler {
 	
 	public String process() {
 		List<Bank> banks = (new GetBanksService()).call();
-		return "{status: 0, message: \"All registered banks are in field banks\", banks: "+(new BanksListToJson()).call(banks)+" }";
+		return "{\"status\": 0, \"message\": \"All registered banks are in field banks\", \"banks\": "+(new BanksListToJson()).call(banks)+" }";
 	}
 }

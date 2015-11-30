@@ -27,12 +27,12 @@ public class NewTransferIntentionHandler extends DefaultPostHandler {
 		if (form.isValid(request)) {
 			Map<String, Object> transferDetails = dataHandler.call(request);
 			if ((new CreateTransferIntentionService()).call(transferDetails) != null) {
-				return "{status: 0, message: \"Transfer intention successfully created. It will be sent to the bank as soon as recipient approves it\"}";
+				return "{\"status\": 0, \"message\": \"Transfer intention successfully created. It will be sent to the bank as soon as recipient approves it\"}";
 			} else {
-				return "{status: 1, message: \"An error occurred while processing your request. Please, try again\"}";
+				return "{\"status\": 1, \"message\": \"An error occurred while processing your request. Please, try again\"}";
 			}
 		} else {
-			return "{status: 2, message: \"Missing information or invalid data provided.\"}";
+			return "{\"status\": 2, \"message\": \"Missing information or invalid data provided.\"}";
 		}
 	}
 }

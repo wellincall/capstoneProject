@@ -21,13 +21,13 @@ public class TransferIntentionsListToJson {
 	
 	private String transferToJson(TransferIntention transfer, boolean userIsSender) {
 		StringJoiner objectJSON = new StringJoiner(", ", "{", "}");
-		objectJSON.add("id: "+transfer.getId()).add("amount: "+transfer.getValue()).add("status: \""+transfer.statusToHuman()+"\"");
+		objectJSON.add("\"id\": "+transfer.getId()).add("\"amount\": "+transfer.getValue()).add("\"status\": \""+transfer.statusToHuman()+"\"");
 		if (userIsSender) {
-			objectJSON.add("recipientId: " + transfer.getRecipientId())
-						.add("sentOn: \"" + formatDate(transfer.getCreationDate())+"\"");
+			objectJSON.add("\"recipientId\": " + transfer.getRecipientId())
+						.add("\"sentOn\": \"" + formatDate(transfer.getCreationDate())+"\"");
 		} else {
-			objectJSON.add("senderId: " + transfer.getSenderId())
-						.add("recievedOn: \""+formatDate(transfer.getCreationDate())+"\"");
+			objectJSON.add("\"senderId\": " + transfer.getSenderId())
+						.add("\"recievedOn\": \""+formatDate(transfer.getCreationDate())+"\"");
 		}
 		return objectJSON.toString();
 	}

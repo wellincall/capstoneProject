@@ -26,13 +26,13 @@ public class AuthenticationHandler extends DefaultPostHandler {
 				request.session(true);
 				User user = (new GetUserService()).call(getUserFields());
 				request.session().attribute("user-id", user.getId());
-				return "{status: 0, message:\"User authenticated\"}";
+				return "{\"status\": 0, \"message\":\"User authenticated\"}";
 			} else {
-				return "{status: 1, message: \"Invalid credentials\"}";
+				return "{\"status\": 1, \"message\": \"Invalid credentials\"}";
 
 			}
 		} else {
-			return "{status: 2, message: \"Missing information or invalid data when trying to authenticate\"}";
+			return "{\"status\": 2, \"message\": \"Missing information or invalid data when trying to authenticate\"}";
 		}
 	}
 	

@@ -23,12 +23,12 @@ public class RegisterBankHandler extends DefaultPostHandler {
 		if (form.isValid(request)) {
 			Bank bank = persistBank();
 			if (bank != null) {
-				return "{status: 0, message: \"Bank sucessfully registered\"}";
+				return "{\"status\": 0, \"message\": \"Bank sucessfully registered\"}";
 			} else {
-				return "{status: 1, message: \"Bank already registered\"}";
+				return "{\"status\": 1, \"message\": \"Bank already registered\"}";
 			}
 		} else {
-			return "{status: 2, message: \"Missing information or invalid data when trying to register bank\"}";
+			return "{\"status\": 2, \"message\": \"Missing information or invalid data when trying to register bank\"}";
 		}
 	}
 	

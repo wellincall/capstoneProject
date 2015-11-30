@@ -19,9 +19,9 @@ public class ImportContactsHandler extends DefaultPostHandler {
 		Form contactsForm = new ImportContactsForm();
 		if (contactsForm.isValid(request)) {
 			List<User> users = (new ImportContactsService()).call(request.queryParamsValues("phone-number[]"));
-			return "{status: 0, message: \"Registered users are given in contacts field\", contacts: "+(new ContactsListToJson()).call(users)+"}"; 
+			return "{\"status\": 0, \"message\": \"Registered users are given in contacts field\", \"contacts\": "+(new ContactsListToJson()).call(users)+"}"; 
 		} else {
-			return "{status: 2, message: \"Some of the provided numbers are not valid. Please, double check and submit them again\"}"; 
+			return "{\"status\": 2, \"message\": \"Some of the provided numbers are not valid. Please, double check and submit them again\"}"; 
 		}
 	}
 }

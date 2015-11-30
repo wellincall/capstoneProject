@@ -9,7 +9,7 @@ public class BanksListToJson {
 		StringJoiner joiner = new StringJoiner(", ", "[", "]");
 		for (Bank bank : banks) {
 			StringJoiner bankJSON = new StringJoiner(", ", "{", "}");
-			bankJSON.add("id: "+bank.getId()).add("name: \""+bank.getName()+"\"");
+			bankJSON.add("\"id\": "+bank.getId()).add("\"name\": \""+bank.getName()+"\"");
 			joiner.add(bankJSON.toString());
 		}
 		return joiner.toString();
