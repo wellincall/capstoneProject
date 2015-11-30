@@ -103,7 +103,7 @@ public class TransferIntentionDAO implements ITransferIntention {
 		boolean hasVoidedTransfer = false;
 		try(Connection connection = sql2o.beginTransaction()){
 			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE "
-					+ "id = :transferId AND (recipientId = :recipientId OR senderId = :senderId)")
+					+ "id = :transferId AND senderId = :senderId")
 						.addParameter("transferId", transferIntentionId)
 						.addParameter("recipientId", userId)
 						.addParameter("senderId", userId)

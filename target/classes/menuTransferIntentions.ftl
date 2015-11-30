@@ -104,12 +104,6 @@
 				   										<input type="submit" value="Accept transaction" class="btn btn-default btn-success" />
 				   									</form>
 				   								</#if>
-				   								<#if transferIntention.canBeVoided() >
-				   									<form action="/user/void-transfer" method="POST">
-				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
-				   										<input type="submit" value="Void transaction" class="btn btn-default btn-warning" />
-				   									</form>
-				   								</#if>
 			   								<#else>
 			   									No more actions to be done
 			   								</#if>
