@@ -100,8 +100,26 @@ public class TransferIntentionDAO implements ITransferIntention {
 
 	@Override
 	public boolean voidTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean hasVoidedTransfer = false;
+		try(Connection connection = sql2o.beginTransaction()){
+			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE "
+					+ "id = :transferId AND (recipientId = :recipientId OR senderId = :senderId)")
+						.addParameter("transferId", transferIntentionId)
+						.addParameter("recipientId", userId)
+						.addParameter("senderId", userId)
+						.executeAndFetchFirst(TransferIntention.class);
+			if (transfer != null) {
+				if (transfer.canBeVoided()) {
+					connection.createQuery("UPDATE transferintentions SET status = :status WHERE id = :id")
+						.addParameter("id", transfer.getId())
+						.addParameter("status", TransferIntention.VOIDED)
+						.executeUpdate();
+					
+				}
+			}
+			connection.commit();
+		}
+		return hasVoidedTransfer;
 	}
 
 
