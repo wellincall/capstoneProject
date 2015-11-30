@@ -51,6 +51,7 @@ public class WithdrawDAO implements IWithdraw {
 			connection.createQuery("UPDATE withdraws SET status = :status WHERE id = :id AND transferintentionid = :transferId")
 						.addParameter("id", withdraw.getId())
 						.addParameter("status", Withdraw.VOIDED)
+						.addParameter("transferId", transferIntentionId)
 						.executeUpdate();
 			hasVoidedWithdraw = true;
 		}

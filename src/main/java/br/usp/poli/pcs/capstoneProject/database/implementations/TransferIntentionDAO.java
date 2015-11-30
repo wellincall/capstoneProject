@@ -116,6 +116,7 @@ public class TransferIntentionDAO implements ITransferIntention {
 						.executeUpdate();
 					(new WithdrawDAO()).voidWithdraw(connection, transfer.getId());
 					(new DepositDAO()).voidDeposit(connection, transfer.getId());
+					hasVoidedTransfer = true;
 				}
 			}
 			connection.commit();

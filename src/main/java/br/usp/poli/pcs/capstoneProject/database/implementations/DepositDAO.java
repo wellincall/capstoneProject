@@ -45,7 +45,7 @@ public class DepositDAO implements IDeposit {
 	public boolean voidDeposit(Connection connection, int transferIntentionId) {
 		boolean hasVoidedDeposit = false;
 		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE transferintentionid = :transferId")
-							.addParameter("trasnferId", transferIntentionId)
+							.addParameter("transferId", transferIntentionId)
 							.executeAndFetchFirst(Deposit.class);
 		if (deposit != null) {
 			connection.createQuery("UPDATE deposits SET status = :status WHERE id = :id AND transferintentionid = :transferId")
