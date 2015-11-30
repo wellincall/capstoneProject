@@ -11,6 +11,5 @@ public interface ITransferIntention {
 	public List<TransferIntention> getPendingUserTransferIntentionsAsSender(Sql2o sql2o, int userId);
 	public boolean rejectTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
 	public boolean approveTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
-	public boolean suspendTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
 	public boolean voidTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
 }

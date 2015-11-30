@@ -92,11 +92,6 @@ public class TransferIntentionDAO implements ITransferIntention {
 		return false;
 	}
 
-	@Override
-	public boolean suspendTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean voidTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
