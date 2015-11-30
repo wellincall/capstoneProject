@@ -8,7 +8,7 @@ import java.util.List;
 import br.usp.poli.pcs.capstoneProject.models.TransferIntention;
 import br.usp.poli.pcs.capstoneProject.database.services.GetTransferIntentionsForRecipientService;
 import br.usp.poli.pcs.capstoneProject.database.services.GetTransferIntentionsForSenderService;
-
+import br.usp.poli.pcs.capstoneProject.jsonHelpers.TransferIntentionsListToJson;
 
 
 public class ListTransferIntentionsHandler extends DefaultPostHandler {
@@ -22,7 +22,9 @@ public class ListTransferIntentionsHandler extends DefaultPostHandler {
 		List<TransferIntention> recievedTransfers = (new GetTransferIntentionsForRecipientService()).call(userId);
 		List<TransferIntention> sentTransfers = (new GetTransferIntentionsForSenderService()).call(userId);
 		return "{"
-				+ "status: 0, message: \"Transfers that you sent are present in sent field. Trasnfer that you recived are in recieved field\""
+				+ "status: 0, message: \"Transfers that you sent are present in sent field. Transfers that you recieved are in recieved field\", "
+				+ "sent: "+(new TransferIntentionsListToJson()).call(sentTransfers)+", "
+				+ "recieved: "+(new TransferIntentionsListToJson()).call(recievedTransfers)+""
 			+ "}";
 	}
 	
