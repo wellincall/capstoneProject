@@ -9,8 +9,8 @@ public interface ITransferIntention {
 	public TransferIntention createTransferIntention(Sql2o sql2o, Map<String, Object> transferDetails);
 	public List<TransferIntention> getPendingUserTransferIntentionsAsRecipient(Sql2o sql2o, int userId);
 	public List<TransferIntention> getPendingUserTransferIntentionsAsSender(Sql2o sql2o, int userId);
-	public boolean userRejectedTransferIntention(Sql2o sql2o, int transferIntentionId);
-	public boolean userApprovedTransferIntention(Sql2o sql2o, int transferIntentionId);
-	public boolean userSuspendedTransferIntention(Sql2o sql2o, int transferIntentionId);
-	public boolean userVoidedTransferIntention(Sql2o sql2o, int transferIntentionId);
+	public boolean rejectTransferIntention(Sql2o sql2o, int transferIntentionId);
+	public boolean approveTransferIntention(Sql2o sql2o, int transferIntentionId);
+	public boolean suspendTransferIntention(Sql2o sql2o, int transferIntentionId);
+	public boolean voidTransferIntention(Sql2o sql2o, int transferIntentionId);
 }
