@@ -36,7 +36,25 @@ public class WithdrawDAO implements IWithdraw {
 	}
 
 	@Override
-	public boolean bankReceivedWithdraw(Connection connection, int withdrawId) {
+	public boolean consolidateWithdraw(Connection connection, int withdrawId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean voidWithdraw(Connection connection, int transferIntentionId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean acceptWithdraw(Connection connection, int transferIntentionId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean rejectWithdraw(Connection connection, int transferIntentionId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
