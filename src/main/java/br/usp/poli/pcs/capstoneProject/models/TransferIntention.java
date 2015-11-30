@@ -11,6 +11,7 @@ public class TransferIntention {
 	public static final int ACCEPTED = 2;
 	public static final int VOIDED = 3;
 	public static final int CONSOLIDATED = 4;
+		
 	private int id;
 	private double value;
 	private int recipientId;
@@ -126,6 +127,10 @@ public class TransferIntention {
 	
 	public String creationDateInString() {
 		return (new DateFormatter()).call(creationDate);
+	}
+	
+	public boolean hasValidStatus() {
+		return status == ACCEPTED || status == DECLINED || status == CREATED || status == VOIDED || status == CONSOLIDATED;
 	}
 	
 }

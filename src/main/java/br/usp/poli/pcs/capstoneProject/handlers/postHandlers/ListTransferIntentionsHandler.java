@@ -24,7 +24,7 @@ public class ListTransferIntentionsHandler extends DefaultPostHandler {
 		return "{"
 				+ "\"status\": 0, \"message\": \"Transfers that you sent are present in sent field. Transfers that you recieved are in recieved field\", "
 				+ "\"sent\": "+(new TransferIntentionsListToJson()).call(sentTransfers, true)+", "
-				+ "\"received\": "+(new TransferIntentionsListToJson()).call(recievedTransfers, false)+""
+				+ "\"received\": "+(new TransferIntentionsListToJson()).call(receivedTransfers, false)+""
 			+ "}";
 	}
 	

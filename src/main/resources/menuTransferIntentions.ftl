@@ -49,10 +49,14 @@
 		   								<td>${transferIntention.value}</td>
 		   								<td>${transferIntention.statusToHuman()}</td>
 		   								<td>
-		   									<form action="/user/void-transfer">
-		   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
-		   										<input type="submit" value="Void transaction" class="btn btn-default btn-danger" />
-		   									</form>
+		   									<#if transferIntention.canChangeStatus() >
+			   									<form action="/user/void-transfer">
+			   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
+			   										<input type="submit" value="Void transaction" class="btn btn-default btn-danger" />
+			   									</form>
+			   								<#else>
+			   									No more actions to be done
+			   								</#if>
 		   								</td>
 		   							</tr>
 		   						</#list>
