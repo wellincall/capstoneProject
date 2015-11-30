@@ -121,6 +121,10 @@ public class TransferIntention {
 		return status == ACCEPTED;
 	}
 	
+	public boolean canBeVoided() {
+		return status == ACCEPTED || status == CREATED;
+	}
+	
 	public boolean canChangeStatus() {
 		return status == ACCEPTED || status == CREATED;
 	}

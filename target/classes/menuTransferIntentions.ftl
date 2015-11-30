@@ -50,10 +50,12 @@
 		   								<td>${transferIntention.statusToHuman()}</td>
 		   								<td>
 		   									<#if transferIntention.canChangeStatus() >
-			   									<form action="/user/void-transfer">
-			   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
-			   										<input type="submit" value="Void transaction" class="btn btn-default btn-danger" />
-			   									</form>
+		   										<#if transferIntention.canBeVoided() >
+				   									<form action="/user/void-transfer">
+				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
+				   										<input type="submit" value="Void transaction" class="btn btn-default btn-danger" />
+				   									</form>
+				   								</#if>
 			   								<#else>
 			   									No more actions to be done
 			   								</#if>
@@ -83,12 +85,36 @@
 		   						<#list received as transferIntention>
 		   							<tr>
 		   								<td>${transferIntention.id}</td>
-		   								<td>${trasnferIntention.creationDateInString()}</td>
+		   								<td>${transferIntention.creationDateInString()}</td>
 		   								<td>${transferIntention.senderName}</td>
 		   								<td>${transferIntention.senderPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>
 		   								<td>${transferIntention.statusToHuman()}</td>
-		   								<td></td>
+		   								<td>
+		   									<#if transferIntention.canChangeStatus() >
+		   										<#if transferIntention.canBeDeclined() >
+				   									<form action="/user/decline-transfer">
+				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
+				   										<input type="submit" value="Decline transaction" class="btn btn-default btn-danger" />
+				   									</form>
+				   								</#if>
+				   								<#if transferIntention.canBeAccepted() >
+				   									<form action="/user/accept-transfer">
+				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
+				   										<input type="submit" value="Accept transaction" class="btn btn-default btn-success" />
+				   									</form>
+				   								</#if>
+				   								<#if transferIntention.canBeVoided() >
+				   									<form action="/user/void-transfer">
+				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
+				   										<input type="submit" value="Void transaction" class="btn btn-default btn-warning" />
+				   									</form>
+				   								</#if>
+			   								<#else>
+			   									No more actions to be done
+			   								</#if>
+
+		   								</td>
 		   							</tr>
 		   						</#list>
 
