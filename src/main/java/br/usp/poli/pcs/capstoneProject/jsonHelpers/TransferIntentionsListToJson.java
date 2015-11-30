@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.StringJoiner;
 import br.usp.poli.pcs.capstoneProject.models.TransferIntention;
+import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;
+import br.usp.poli.pcs.capstoneProject.models.User;
 
 public class TransferIntentionsListToJson {
 	
@@ -23,10 +25,12 @@ public class TransferIntentionsListToJson {
 		StringJoiner objectJSON = new StringJoiner(", ", "{", "}");
 		objectJSON.add("\"id\": "+transfer.getId()).add("\"amount\": "+transfer.getValue()).add("\"status\": \""+transfer.statusToHuman()+"\"");
 		if (userIsSender) {
-			objectJSON.add("\"recipientId\": " + transfer.getRecipientId())
+			User recipient = (new GetUserByIdService()).call(transfer.getRecipientId());
+			objectJSON.add("\"recipient\": \"" + recipient.getName()+"\"")
 						.add("\"sentOn\": \"" + formatDate(transfer.getCreationDate())+"\"");
 		} else {
-			objectJSON.add("\"senderId\": " + transfer.getSenderId())
+			User sender = (new GetUserByIdService()).call(transfer.getSenderId());
+			objectJSON.add("\"sender\": \"" + sender.getName()+"\"")
 						.add("\"recievedOn\": \""+formatDate(transfer.getCreationDate())+"\"");
 		}
 		return objectJSON.toString();
