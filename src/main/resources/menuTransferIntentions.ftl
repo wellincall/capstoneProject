@@ -13,11 +13,20 @@
 	    </div>
 		   	<div class="row">
 		   		<div class="col-md-12">
-		   			<ul class="nav nav-tabs nav-justified">
-		   				<li class="js-show-sent">Sent</li>
-		   				<li class="js-show-recived">Recieved</li>
+		   			<ul class="nav nav-pills nav-stacked">
+		   				<li role="presentation">
+		   					<a href="javascript:void(0);" class="js-show-sent text-center">
+		   						Sent
+	   						</a>
+	   					</li>
+		   				<li role="presentation">
+		   					<a href="javascript:void(0);" class="js-show-recieved text-center">
+		   						Recieved
+	   						</a>
+	   					</li>
 		   			</ul>
-		   			<div class="sent-container">
+		   			<div class="sent-container container">
+		   				<h2>Transfers sent</h2>
 		   				<table class="table table-hover">
 		   					<thead>
 		   						<tr>
@@ -36,7 +45,7 @@
 		   								<td>${trasnferIntention.recipientName}</td>
 		   								<td>${trasnferIntention.recipientPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>
-		   								<td>${transferIntention.statusToHuman}</td>
+		   								<td>${transferIntention.statusToHuman()}</td>
 		   								<td></td>
 		   							</tr>
 		   						</#list>
@@ -45,7 +54,8 @@
 		   				</table>
 		   			</div>
 		   			
-		   			<div class="recieved-container">
+		   			<div class="recieved-container container">
+		   				<h2>Transfers recieved</h2>
 		   				<table class="table table-hover">
 		   					<thead>
 		   						<tr>
@@ -62,9 +72,9 @@
 		   							<tr>
 		   								<td>${transferIntention.id}</td>
 		   								<td>${transferIntention.senderName}</td>
-		   								<td>${transferIntention.senderPhoneNumber}}</td>
+		   								<td>${transferIntention.senderPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>
-		   								<td>${transferIntention.statusToHuman}</td>
+		   								<td>${transferIntention.statusToHuman()}</td>
 		   								<td></td>
 		   							</tr>
 		   						</#list>
@@ -76,5 +86,6 @@
 		   		</div>
 		   	</div>
 	    </div>
+	    <script type="text/javascript" src="/js/transfers-menu.js"></script>
 	</body>
 </html>

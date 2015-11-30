@@ -144,6 +144,9 @@ public class Server {
 			return (new ListTransferIntentionsHandler(request, response)).call();
 		});
 		
+		get("/user/transfer-intentions-menu", (request, response) -> {
+			return (new MenuTransferIntentionsDisplayHandler(request, response)).call();
+		});
 		
 	}
 }
