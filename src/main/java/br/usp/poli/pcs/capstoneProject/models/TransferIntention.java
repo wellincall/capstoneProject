@@ -107,5 +107,20 @@ public class TransferIntention {
 		return sender.getPhoneNumber();
 	}
 	
+	public boolean canBeAccepted() {
+		return status == CREATED;
+	}
+	
+	public boolean canBeDeclined() {
+		return status == CREATED;
+	}
+	
+	public boolean canBeConsolidated() {
+		return status == ACCEPTED;
+	}
+	
+	public boolean canChangeStatus() {
+		return status == ACCEPTED || status == CREATED;
+	}
 	
 }

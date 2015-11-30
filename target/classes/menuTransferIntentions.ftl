@@ -25,7 +25,7 @@
 	   						</a>
 	   					</li>
 		   			</ul>
-		   			<div class="sent-container container">
+		   			<div class="sent-container">
 		   				<h2>Transfers sent</h2>
 		   				<table class="table table-hover">
 		   					<thead>
@@ -41,12 +41,17 @@
 		   					<tbody>
 		   						<#list sent as transferIntention>
 		   							<tr>
-		   								<td>${trasnferIntention.id}</td>
-		   								<td>${trasnferIntention.recipientName}</td>
-		   								<td>${trasnferIntention.recipientPhoneNumber}</td>
+		   								<td>${transferIntention.id}</td>
+		   								<td>${transferIntention.recipientName}</td>
+		   								<td>${transferIntention.recipientPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>
 		   								<td>${transferIntention.statusToHuman()}</td>
-		   								<td></td>
+		   								<td>
+		   									<form action="/user/void-transfer">
+		   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
+		   										<input type="submit" value="Void transaction" class="btn btn-default btn-danger" />
+		   									</form>
+		   								</td>
 		   							</tr>
 		   						</#list>
 		   					</tbody>
@@ -54,7 +59,7 @@
 		   				</table>
 		   			</div>
 		   			
-		   			<div class="recieved-container container">
+		   			<div class="recieved-container">
 		   				<h2>Transfers recieved</h2>
 		   				<table class="table table-hover">
 		   					<thead>
