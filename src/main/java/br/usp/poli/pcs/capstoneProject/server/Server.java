@@ -148,5 +148,9 @@ public class Server {
 			return (new MenuTransferIntentionsDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/void-transfer", (request, response) -> {
+			return (new VoidTransferHandler(request, response)).call();
+		});
+		
 	}
 }

@@ -51,7 +51,7 @@
 		   								<td>
 		   									<#if transferIntention.canChangeStatus() >
 		   										<#if transferIntention.canBeVoided() >
-				   									<form action="/user/void-transfer">
+				   									<form action="/user/void-transfer" method="POST">
 				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
 				   										<input type="submit" value="Void transaction" class="btn btn-default btn-danger" />
 				   									</form>
@@ -93,19 +93,19 @@
 		   								<td>
 		   									<#if transferIntention.canChangeStatus() >
 		   										<#if transferIntention.canBeDeclined() >
-				   									<form action="/user/decline-transfer">
+				   									<form action="/user/decline-transfer" method="POST">
 				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
 				   										<input type="submit" value="Decline transaction" class="btn btn-default btn-danger" />
 				   									</form>
 				   								</#if>
 				   								<#if transferIntention.canBeAccepted() >
-				   									<form action="/user/accept-transfer">
+				   									<form action="/user/accept-transfer" method="POST">
 				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
 				   										<input type="submit" value="Accept transaction" class="btn btn-default btn-success" />
 				   									</form>
 				   								</#if>
 				   								<#if transferIntention.canBeVoided() >
-				   									<form action="/user/void-transfer">
+				   									<form action="/user/void-transfer" method="POST">
 				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
 				   										<input type="submit" value="Void transaction" class="btn btn-default btn-warning" />
 				   									</form>
