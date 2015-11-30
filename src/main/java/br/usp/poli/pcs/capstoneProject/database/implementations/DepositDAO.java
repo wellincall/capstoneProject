@@ -48,8 +48,9 @@ public class DepositDAO implements IDeposit {
 							.addParameter("trasnferId", transferIntentionId)
 							.executeAndFetchFirst(Deposit.class);
 		if (deposit != null) {
-			connection.createQuery("UPDATE deposits SET status = :status WHERE transferintentionid = :transferId")
+			connection.createQuery("UPDATE deposits SET status = :status WHERE id = :id AND transferintentionid = :transferId")
 					.addParameter("status", Deposit.VOIDED)
+					.addParameter("id", deposit.getId())
 					.addParameter("transferId", transferIntentionId)
 					.executeUpdate();
 			hasVoidedDeposit = true;
