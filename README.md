@@ -1,4 +1,4 @@
-#Configurando Eclipse:
+# Configurando Eclipse:
 * Utilizar jdk/jre acima de 1.8. Caso contrario, Spark nao funciona. Isso acontece pelo fato de lambdas nao serem suportados em versoes abaixo de 1.8 no java.
 # Configurando o banco de dados
 * crie o banco de dados:
