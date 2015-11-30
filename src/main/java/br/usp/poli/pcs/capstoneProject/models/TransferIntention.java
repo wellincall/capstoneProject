@@ -1,6 +1,8 @@
 package br.usp.poli.pcs.capstoneProject.models;
 
 import java.util.Date;
+import br.usp.poli.pcs.capstoneProject.models.User;
+import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;
 
 public class TransferIntention {
 	public static final int CREATED = 0;
@@ -16,6 +18,8 @@ public class TransferIntention {
 	private Withdraw withdraw;
 	private Deposit deposit;
 	private Date creationDate;
+	private User recipient;
+	private User sender;
 	public static int getCreated() {
 		return CREATED;
 	}
@@ -75,6 +79,33 @@ public class TransferIntention {
 		return status == VOIDED;
 	}
 	
+	public String getRecipientName() {
+		if (recipient == null) {
+			recipient = (new GetUserByIdService()).call(recipientId);
+		}
+		return recipient.getName();
+	}
+	
+	public String getSenderName() {
+		if (sender == null) {
+			sender = (new GetUserByIdService()).call(senderId);
+		}
+		return sender.getName();
+	}
+	
+	public String getRecipientPhoneNumber() {
+		if (recipient == null) {
+			recipient = (new GetUserByIdService()).call(recipientId);
+		}
+		return recipient.getPhoneNumber();
+	}
+	
+	public String getSenderPhoneNumber() {
+		if (sender == null) {
+			sender = (new GetUserByIdService()).call(senderId);
+		}
+		return sender.getPhoneNumber();
+	}
 	
 	
 }

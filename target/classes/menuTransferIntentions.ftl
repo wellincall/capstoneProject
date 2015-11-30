@@ -18,11 +18,56 @@
 		   				<li class="js-show-recived">Recieved</li>
 		   			</ul>
 		   			<div class="sent-container">
-		   				
+		   				<table class="table table-hover">
+		   					<thead>
+		   						<tr>
+		   							<th>Id</th>
+		   							<th>Recipient's name</th>
+		   							<th>Amount</th>
+		   							<th>Status</th>
+		   							<th>Actions</th>
+		   						</tr>
+		   					</thead>
+		   					<tbody>
+		   						<#list sent as transferIntention>
+		   							<tr>
+		   								<td>${trasnferIntention.id}</td>
+		   								<td>${trasnferIntention.recipientName}</td>
+		   								<td>${transferIntention.value}</td>
+		   								<td>${transferIntention.statusToHuman}</td>
+		   								<td></td>
+		   							</tr>
+		   						</#list>
+		   					</tbody>
+
+		   				</table>
 		   			</div>
 		   			
 		   			<div class="recieved-container">
-		   			
+		   				<table class="table table-hover">
+		   					<thead>
+		   						<tr>
+		   							<th>Id</th>
+		   							<th>Sender's name</th>
+		   							<th>Amount</th>
+		   							<th>Status</th>
+		   							<th>Actions</th>
+		   						</tr>
+		   					</thead>
+		   					<tbody>
+		   						<#list recieved as transferIntention>
+		   							<tr>
+		   								<td>${transferIntention.id}</td>
+		   								<td>${transferIntention.senderName}</td>
+		   								<td>${transferIntention.value}</td>
+		   								<td>${transferIntention.statusToHuman}</td>
+		   								<td></td>
+		   							</tr>
+		   						</#list>
+
+		   					</tbody>
+
+		   				</table>
 		   			</div>
 		   		</div>
 		   	</div>

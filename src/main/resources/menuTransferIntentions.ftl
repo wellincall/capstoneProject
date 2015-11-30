@@ -23,6 +23,7 @@
 		   						<tr>
 		   							<th>Id</th>
 		   							<th>Recipient's name</th>
+		   							<th>Recipient's phone number</th>
 		   							<th>Amount</th>
 		   							<th>Status</th>
 		   							<th>Actions</th>
@@ -33,6 +34,7 @@
 		   							<tr>
 		   								<td>${trasnferIntention.id}</td>
 		   								<td>${trasnferIntention.recipientName}</td>
+		   								<td>${trasnferIntention.recipientPhoneNumber}</td>
 		   								<td>${transferIntention.value}</td>
 		   								<td>${transferIntention.statusToHuman}</td>
 		   								<td></td>
@@ -49,6 +51,7 @@
 		   						<tr>
 		   							<th>Id</th>
 		   							<th>Sender's name</th>
+		   							<th>Sender's phone number</th>
 		   							<th>Amount</th>
 		   							<th>Status</th>
 		   							<th>Actions</th>
@@ -59,6 +62,7 @@
 		   							<tr>
 		   								<td>${transferIntention.id}</td>
 		   								<td>${transferIntention.senderName}</td>
+		   								<td>${transferIntention.senderPhoneNumber}}</td>
 		   								<td>${transferIntention.value}</td>
 		   								<td>${transferIntention.statusToHuman}</td>
 		   								<td></td>
