@@ -80,11 +80,6 @@ public class TransferIntentionDAO implements ITransferIntention {
 		return transferIntentions;
 	}
 
-	@Override
-	public boolean userVisualizedTransferIntention(Sql2o sql2o, int transferIntentionId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean userRejectedTransferIntention(Sql2o sql2o, int transferIntentionId) {
@@ -99,7 +94,13 @@ public class TransferIntentionDAO implements ITransferIntention {
 	}
 
 	@Override
-	public boolean userSuspendedTransferIntention(Sql2o sql2o, int trasnferIntentionId) {
+	public boolean userSuspendedTransferIntention(Sql2o sql2o, int transferIntentionId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean userVoidedTransferIntention(Sql2o sql2o, int transferIntentionId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
