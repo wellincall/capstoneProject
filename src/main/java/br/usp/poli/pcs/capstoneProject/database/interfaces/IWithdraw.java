@@ -12,5 +12,5 @@ public interface IWithdraw {
 	public boolean consolidateWithdraw(Connection connection, int withdrawId);
 	public boolean voidWithdraw(Connection connection, int transferIntentionId);
 	public boolean acceptWithdraw(Connection connection, int transferIntentionId);
-	public boolean rejectWithdraw(Connection connection, int transferIntentionId);
+	public boolean declineWithdraw(Connection connection, int transferIntentionId);
 }

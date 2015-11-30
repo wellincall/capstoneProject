@@ -65,7 +65,7 @@ public class WithdrawDAO implements IWithdraw {
 	}
 
 	@Override
-	public boolean rejectWithdraw(Connection connection, int transferIntentionId) {
+	public boolean declineWithdraw(Connection connection, int transferIntentionId) {
 		// TODO Auto-generated method stub
 		return false;
 	}

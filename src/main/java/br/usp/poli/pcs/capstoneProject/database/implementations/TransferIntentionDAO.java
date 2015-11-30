@@ -81,9 +81,28 @@ public class TransferIntentionDAO implements ITransferIntention {
 	}
 
 	@Override
-	public boolean rejectTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean declineTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
+		boolean hasRejectedTransfer = false;
+		try (Connection connection = sql2o.beginTransaction()) {
+			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :transferId AND recipientid = :userId")
+											.addParameter("transferId", transferIntentionId)
+											.addParameter("userId", userId)
+											.executeAndFetchFirst(TransferIntention.class);
+			if (transfer != null) {
+				if (transfer.canBeDeclined()) {
+					connection.createQuery("UPDATE transferintentions SET status = :status WHERE id = :transferId AND recipientid = :userId")
+							.addParameter("status", TransferIntention.DECLINED)
+							.addParameter("transferId", transfer.getId())
+							.addParameter("userId", userId)
+							.executeUpdate();
+					(new WithdrawDAO()).declineWithdraw(connection, transfer.getId());
+					(new DepositDAO()).declineDeposit(connection, transfer.getId());
+					hasRejectedTransfer = true;
+				}
+			}
+			connection.commit();
+		}
+		return hasRejectedTransfer;
 	}
 
 	@Override
