@@ -136,5 +136,9 @@ public class Server {
 			return (new NewTransferIntentionHandler(request, response)).call();
 		});
 		
+		get("/user/ask-transfer-intentions-list", (request, response) -> {
+			return (new ListTransferIntentionsDisplayHandler(request, response)).call();
+		});
+		
 	}
 }

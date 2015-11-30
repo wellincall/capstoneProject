@@ -55,9 +55,29 @@ public class TransferIntentionDAO implements ITransferIntention {
 	}
 
 	@Override
-	public List<TransferIntention> getUserTransferIntentions(Sql2o sql2o, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TransferIntention> getPendingUserTransferIntentionsAsRecipient(Sql2o sql2o, int userId) {
+		List<TransferIntention> transferIntentions = null;
+		try(Connection connection = sql2o.beginTransaction()) {
+			transferIntentions = connection.createQuery("SELECT * FROM transferintentions WHERE recipientid = :userId")
+									.addParameter("userId", userId)
+									.executeAndFetch(TransferIntention.class);
+			
+			connection.commit();
+		}
+		return transferIntentions;
+	}
+	
+	@Override
+	public List<TransferIntention> getPendingUserTransferIntentionsAsSender(Sql2o sql2o, int userId) {
+		List<TransferIntention> transferIntentions = null;
+		try(Connection connection = sql2o.beginTransaction()) {
+			transferIntentions = connection.createQuery("SELECT * FROM transferintentions WHERE sender = :userId")
+									.addParameter("userId", userId)
+									.executeAndFetch(TransferIntention.class);
+			
+			connection.commit();
+		}
+		return transferIntentions;
 	}
 
 	@Override
