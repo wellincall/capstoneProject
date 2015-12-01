@@ -30,8 +30,20 @@ public class WithdrawDAO implements IWithdraw {
 
 	@Override
 	public boolean consolidateWithdraw(Connection connection, int transferIntentionId) {
-		// TODO Auto-generated method stub
-		return false;
+		Withdraw withdraw = connection.createQuery("SELECT * FROM withdraws WHERE transferintentionid = :transferId")
+								.addParameter("transferId", transferIntentionId)
+								.executeAndFetchFirst(Withdraw.class);
+		
+		if (withdraw.canBeConsolidated()) {
+			connection.createQuery("UPDATE withdraws SET status = :status WHERE id = :withdrawId")
+					.addParameter("status", Withdraw.CONSOLIDATED)
+					.addParameter("id", withdraw.getId())
+					.executeUpdate();
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 	@Override
