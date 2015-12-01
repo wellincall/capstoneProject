@@ -164,5 +164,9 @@ public class Server {
 			return (new AcceptTransferHandler(request, response)).call();
 		});
 		
+		get("/ask-to-consolidate", (request, response) -> {
+			return (new ConsolidateTransfersDisplayHandler(request, response)).call();
+		});
+		
 	}
 }
