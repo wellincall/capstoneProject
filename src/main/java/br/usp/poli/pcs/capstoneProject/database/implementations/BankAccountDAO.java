@@ -7,7 +7,7 @@ import org.sql2o.Connection;
 
 import br.usp.poli.pcs.capstoneProject.models.BankAccount;
 import br.usp.poli.pcs.capstoneProject.database.interfaces.IBankAccount;
-import br.usp.poli.pcs.capstoneProject.helpers.TokenGenerator;
+import br.usp.poli.pcs.capstoneProject.security.TokenGeneratorService;
 
 public class BankAccountDAO implements IBankAccount {
 
@@ -15,7 +15,7 @@ public class BankAccountDAO implements IBankAccount {
 		BankAccount account = null;
 		try (Connection connection = sql2o.beginTransaction()) {
 			if (canRegisterAccount(connection, accountInformation)) {
-				String token = TokenGenerator.call(accountInformation);
+				String token = (new TokenGeneratorService()).call();
 				int accountId = connection.createQuery("INSERT INTO bankAccounts(bankId, accountNumber, "
 						+ "agencyNumber, accountOwnerName, accountOwnerCPF, accountOwnerBirthdayDate, "
 						+ "token) VALUES (:bankId, :accountNumber, "
