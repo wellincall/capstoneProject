@@ -14,14 +14,16 @@
 		   	<div class="row">
 		   		<div class="col-md-12">
 			   		<form class="form-horizontal" action="/verify-account" method="POST">
-		   				<div class="form-group">
-			   				<label for="verification-code" class="col-md-2 control-label">
-			   				Verification Code
-			   				</label>
-			   				<div class="col-md-10">
-			   					<input id="verification-code" name="verification-code" type="text" class="form-control" />
+			   			<#list formfields as field>
+			   				<div class="form-group">
+				   				<label for="${field.formFieldId}" class="col-md-2 control-label">
+				   				${field.formFieldCaption}
+				   				</label>
+				   				<div class="col-md-10">
+				   					<input id="${field.formFieldId}" name="${field.formFieldId}" type="${field.formFieldType}" class="form-control" />
+				   				</div>
 			   				</div>
-		   				</div>
+			   			</#list>
 			   			<div class="form-action">
 				   			<input type="submit" value="Submit" class="btn btn-default btn-primary pull-right" />
 				   			<input type="reset" value="Clean form" class="btn btn-default btn-danger pull-right" />

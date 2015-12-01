@@ -2,7 +2,11 @@ package br.usp.poli.pcs.capstoneProject.handlers.getHandlers;
 
 import spark.Request;
 import spark.Response;
+
 import java.util.Map;
+import java.util.HashMap;
+
+import br.usp.poli.pcs.capstoneProject.forms.VerificationForm;
 
 public class VerifyAccountDisplayHandler extends DefaultGetHandler {
 	
@@ -12,6 +16,8 @@ public class VerifyAccountDisplayHandler extends DefaultGetHandler {
 	}
 	
 	public Map<String, Object> process() {
-		return null;
+		Map<String, Object> form = new HashMap<String, Object>();
+		form.put("formfields", (new VerificationForm()).getFormFields());
+		return form;
 	}
 }
