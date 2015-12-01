@@ -13,3 +13,5 @@ CREATE DATABASE capstoneProject;
 * Importe o arquivo createDB.sql;
 * Execute os comandos presentes no arquivo;
 * Pronto! Banco de dados criado com sucesso;
+
+# Inclua a biblioteca javax.mail.jar na lista de dependencias do projeto.
