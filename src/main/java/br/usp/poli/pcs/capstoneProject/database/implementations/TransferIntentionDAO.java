@@ -119,7 +119,7 @@ public class TransferIntentionDAO implements ITransferIntention {
 					.addParameter("id", transfer.getId())
 					.addParameter("status", TransferIntention.ACCEPTED)
 					.executeUpdate();
-				if (!(new WithdrawDAO()).acceptWithdraw(connection, transferIntentionId) || !(new DepositDAO()).acceptDeposit(connection, transferIntentionId)) {
+				if (!(new WithdrawDAO()).acceptWithdraw(connection, transferIntentionId)) {
 					connection.rollback();
 				} else {
 					connection.commit();

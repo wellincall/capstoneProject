@@ -30,12 +30,6 @@ public class DepositDAO implements IDeposit {
 	}
 
 	@Override
-	public boolean acceptDeposit(Connection connection, int transferIntentionId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean declineDeposit(Connection connection, int transferIntentionId) {
 		boolean hasDeclinedDeposit = false;
 		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE transferintentionid = :transferId")

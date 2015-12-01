@@ -62,8 +62,21 @@ public class WithdrawDAO implements IWithdraw {
 
 	@Override
 	public boolean acceptWithdraw(Connection connection, int transferIntentionId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean hasAcceptedWithdraw = false;
+		Withdraw withdraw = connection.createQuery("SELECT * FROM withdraws WHERE transferintentionid = :transferId")
+								.addParameter("transferId", transferIntentionId)
+								.executeAndFetchFirst(Withdraw.class);
+		if (withdraw != null) {
+			if (withdraw.canBeVoided()) {
+				connection.createQuery("UPDATE withdraws SET status = :status WHERE id = :id AND transferintentionid = :transferId")
+							.addParameter("id", withdraw.getId())
+							.addParameter("status", Withdraw.ACCEPTED)
+							.addParameter("transferId", transferIntentionId)
+							.executeUpdate();
+				hasAcceptedWithdraw = true;
+			}
+		}
+		return hasAcceptedWithdraw;
 	}
 
 	@Override
