@@ -18,6 +18,7 @@ public class VerifyAccountHandler extends DefaultPostHandler {
 			int userId = request.session().attribute("user-id");
 			String verificationCode = request.queryParams("verification-code");
 			if ((new UserVerificationService()).call(userId, verificationCode)) {
+				request.session().attribute("is-verified", true);
 				return "{\"status\": 0, \"message\": \"Account verified successfully.\"}";
 			} else {
 				return "{\"status\": 1, \"message\": \"Invalid verification code.\"}";

@@ -12,7 +12,7 @@ import br.usp.poli.pcs.capstoneProject.database.implementations.UserDAO;
 import br.usp.poli.pcs.capstoneProject.database.interfaces.CapstoneConnection;
 import br.usp.poli.pcs.capstoneProject.database.interfaces.IUser;
 import br.usp.poli.pcs.capstoneProject.models.User;
-
+import br.usp.poli.pcs.capstoneProject.mailer.Mailer;
 
 public class RegisterUserHandler extends DefaultPostHandler {
 	public RegisterUserHandler(Request request, Response response) {
@@ -22,8 +22,9 @@ public class RegisterUserHandler extends DefaultPostHandler {
 		Form form = new NewUserForm();
 		if (form.isValid(request)) {
 			User user = persistUser();
+			(new Mailer()).sendVerificationCode(user);
 			if (user != null) {
-				return "{\"status\": 0, \"message\": \"User successfully registered \"}";
+				return "{\"status\": 0, \"message\": \"User successfully registered. An e-mail with verification code was was to your e-mail address. \"}";
 			} else {
 				return "{\"status\": 1, \"message\": \"User already registered\"}";
 			}

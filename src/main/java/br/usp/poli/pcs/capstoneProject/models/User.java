@@ -45,6 +45,10 @@ public class User {
 	public boolean isVerified() {
 		return isVerified;
 	}
+	
+	public String getVerificationCode() {
+		return verificationCode;
+	}
 	public boolean verifiesWith(String providedVerificationCode) {
 		return verificationCode.equals(providedVerificationCode);
 	}
