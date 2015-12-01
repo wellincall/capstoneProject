@@ -2,6 +2,7 @@ package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -175,7 +176,18 @@ public class TransferIntentionDAO implements ITransferIntention {
 
 	@Override
 	public List<TransferIntention> getTransferIntentionsToBeConsolidated(Sql2o sql2o) {
-		return null;
+		List<TransferIntention> transfersToConsolidate = null;
+		try (Connection connection = sql2o.beginTransaction()) {
+			Calendar dateLimit = Calendar.getInstance();
+			dateLimit.add(Calendar.HOUR_OF_DAY, -8);
+			transfersToConsolidate = connection.createQuery("SELECT * FROM transferintentions WHERE status = :status AND creationdate <= :limitToConsolidate")
+									.addParameter("status", TransferIntention.ACCEPTED)
+									.addParameter("limitToConsolidate", dateLimit.getTime())
+									.executeAndFetch(TransferIntention.class);
+			
+			connection.commit();
+		}
+		return transfersToConsolidate;
 	}
 
 	@Override
