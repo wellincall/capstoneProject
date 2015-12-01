@@ -37,8 +37,20 @@ public class DepositDAO implements IDeposit {
 
 	@Override
 	public boolean declineDeposit(Connection connection, int transferIntentionId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean hasDeclinedDeposit = false;
+		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE transferintentionid = :transferid")
+							.addParameter("transferId", transferIntentionId)
+							.executeAndFetchFirst(Deposit.class);
+		if (deposit != null) {
+			connection.createQuery("UPDATE deposits SET status = :status WHERE id = :depositId AND transferintentionid = :transferId")
+							.addParameter("depositId", deposit.getId())
+							.addParameter("transferId", transferIntentionId)
+							.addParameter("status", Deposit.DECLINED)
+							.executeUpdate();
+			hasDeclinedDeposit = true;
+		}
+		
+		return hasDeclinedDeposit;
 	}
 
 	@Override

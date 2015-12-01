@@ -75,6 +75,7 @@ public class WithdrawDAO implements IWithdraw {
 						.addParameter("status", Withdraw.DECLINED)
 						.addParameter("transferId", transferIntentionId)
 						.executeUpdate();
+			hasDeclinedWithdraw = false;
 		}
 		return hasDeclinedWithdraw;
 	}
