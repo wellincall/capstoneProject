@@ -173,6 +173,17 @@ public class TransferIntentionDAO implements ITransferIntention {
 		return transfer;
 	}
 
+	@Override
+	public List<TransferIntention> getTransferIntentionsToBeConsolidated(Sql2o sql2o) {
+		return null;
+	}
+
+	@Override
+	public TransferIntention consolidateTransferIntention(Sql2o sql2o, int transferIntention) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

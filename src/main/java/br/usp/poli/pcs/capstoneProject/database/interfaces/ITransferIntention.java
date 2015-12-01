@@ -13,4 +13,6 @@ public interface ITransferIntention {
 	public boolean declineTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
 	public boolean acceptTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
 	public boolean voidTransferIntention(Sql2o sql2o, int transferIntentionId, int userId);
+	public List<TransferIntention> getTransferIntentionsToBeConsolidated(Sql2o sql2o);
+	public TransferIntention consolidateTransferIntention(Sql2o sql2o, int transferIntentionId);
 }

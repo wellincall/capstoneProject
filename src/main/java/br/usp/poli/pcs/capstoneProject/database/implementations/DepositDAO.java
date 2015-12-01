@@ -1,6 +1,5 @@
 package br.usp.poli.pcs.capstoneProject.database.implementations;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Date;
 
