@@ -24,8 +24,6 @@ public class Server {
 		});
 		
 		get("/not-authenticated", (request, response) -> {
-			response.status(403);
-			response.type("application/json");
 			return "{status: 2, message: \"User not authenticated\"}"; 
 		});
 		
