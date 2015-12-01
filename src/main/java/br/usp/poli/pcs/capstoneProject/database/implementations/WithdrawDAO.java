@@ -48,12 +48,14 @@ public class WithdrawDAO implements IWithdraw {
 								.addParameter("transferId", transferIntentionId)
 								.executeAndFetchFirst(Withdraw.class);
 		if (withdraw != null) {
-			connection.createQuery("UPDATE withdraws SET status = :status WHERE id = :id AND transferintentionid = :transferId")
-						.addParameter("id", withdraw.getId())
-						.addParameter("status", Withdraw.VOIDED)
-						.addParameter("transferId", transferIntentionId)
-						.executeUpdate();
-			hasVoidedWithdraw = true;
+			if (withdraw.canBeVoided()) {
+				connection.createQuery("UPDATE withdraws SET status = :status WHERE id = :id AND transferintentionid = :transferId")
+							.addParameter("id", withdraw.getId())
+							.addParameter("status", Withdraw.VOIDED)
+							.addParameter("transferId", transferIntentionId)
+							.executeUpdate();
+				hasVoidedWithdraw = true;
+			}
 		}
 		return hasVoidedWithdraw;
 	}
@@ -71,11 +73,13 @@ public class WithdrawDAO implements IWithdraw {
 								.addParameter("transferId",transferIntentionId)
 								.executeAndFetchFirst(Withdraw.class);
 		if (withdraw != null) {
-			connection.createQuery("UPDATE withdraws SET status = :status WHERE transferintentionid = :transferId")
-						.addParameter("status", Withdraw.DECLINED)
-						.addParameter("transferId", transferIntentionId)
-						.executeUpdate();
-			hasDeclinedWithdraw = false;
+			if (withdraw.canBeDeclined()) {
+				connection.createQuery("UPDATE withdraws SET status = :status WHERE transferintentionid = :transferId")
+							.addParameter("status", Withdraw.DECLINED)
+							.addParameter("transferId", transferIntentionId)
+							.executeUpdate();
+				hasDeclinedWithdraw = true;
+			}
 		}
 		return hasDeclinedWithdraw;
 	}
