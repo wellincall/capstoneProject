@@ -2,6 +2,7 @@ package br.usp.poli.pcs.capstoneProject.database.implementations;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -19,8 +20,22 @@ public class DepositDAO implements IDeposit {
 
 	@Override
 	public Deposit createDeposit(Connection connection, Map<String, Object> depositInformation) {
-		// TODO Auto-generated method stub
-		return null;
+		int depositId = connection.createQuery("INSERT INTO deposits("
+				+ "bankid, accounttoken, transferintentionid, value, status, creationdate"
+				+ ") "
+				+ "VALUES "
+				+ "(:bankId, :accountToken, :transferId, :value, :status, :creationDate)", true)
+				.addParameter("bankId", depositInformation.get("bank-id"))
+				.addParameter("accountToken", depositInformation.get("account-token"))
+				.addParameter("transferId", depositInformation.get("transfer-id"))
+				.addParameter("value", depositInformation.get("amount"))
+				.addParameter("status", Deposit.ACCEPTED)
+				.addParameter("creationDate", new Date())
+				.executeUpdate().getKey(Integer.class);
+		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE id = :id")
+							.addParameter("id", depositId)
+							.executeAndFetchFirst(Deposit.class);
+		return deposit;
 	}
 
 	@Override
