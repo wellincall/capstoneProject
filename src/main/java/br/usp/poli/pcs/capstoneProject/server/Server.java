@@ -35,6 +35,10 @@ public class Server {
 			}
 		});
 		
+		get("/", (request, response) -> {
+			return (new HomePageHandler(request, response)).call();
+		});
+		
 		get("/not-authenticated", (request, response) -> {
 			response.status(403);
 			response.type("application/json");
