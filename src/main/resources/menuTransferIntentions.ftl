@@ -99,7 +99,7 @@
 				   									</form>
 				   								</#if>
 				   								<#if transferIntention.canBeAccepted() >
-				   									<form action="/user/accept-transfer" method="POST">
+				   									<form action="/user/accept-transfer-page" method="GET">
 				   										<input type="hidden" value="${transferIntention.id}" name="transfer-id" />
 				   										<input type="submit" value="Accept transaction" class="btn btn-default btn-success" />
 				   									</form>
