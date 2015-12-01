@@ -18,12 +18,21 @@ public class Server {
 			if (request.session().attribute("user-id") == null) {
 				response.redirect("/not-authenticated");
 			}
+			if (!(boolean) request.session().attribute("is-verified")) {
+				response.redirect("/not-verified");
+			}
 		});
 		
 		get("/not-authenticated", (request, response) -> {
 			response.status(403);
 			response.type("application/json");
 			return "{status: 2, message: \"User not authenticated\"}"; 
+		});
+		
+		get("/not-verified", (request, response) -> {
+			response.status(403);
+			response.type("application/json");
+			return "{status: 2, message: \"User not verified\"}"; 
 		});
 		
 		get("/new-user", (request, response) -> {
