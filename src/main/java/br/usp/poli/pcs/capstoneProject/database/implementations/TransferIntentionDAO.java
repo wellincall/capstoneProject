@@ -106,9 +106,20 @@ public class TransferIntentionDAO implements ITransferIntention {
 	}
 
 	@Override
-	public boolean approveTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean acceptTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
+		boolean hasApprovedTransfer = false;
+		try(Connection connection = sql2o.beginTransaction()) {
+			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :transferId AND recipientid = :userId")
+									.addParameter("transferId", transferIntentionId)
+									.addParameter("userId", userId)
+									.executeAndFetchFirst(TransferIntention.class);
+		
+			if (transfer.canBeAccepted())
+			
+			
+			connection.commit();
+		}
+		return hasApprovedTransfer;
 	}
 
 
