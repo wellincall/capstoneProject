@@ -7,6 +7,8 @@
 	birthdayDate date NOT NULL,
 	creationDate date NOT NULL,
 	password character varying NOT NULL,
+	verificationCode character(6) NOT NULL,
+	isVerified boolean NOT NULL,
 	CONSTRAINT usersPK PRIMARY KEY (id)
 );
 CREATE TABLE userBankAccounts(
