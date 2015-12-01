@@ -25,9 +25,9 @@ public class UserDAO implements IUser{
 		try(Connection connection = sql2o.beginTransaction()) {
 			if (canRegisterUser(connection, userInformation)) {
 				int userId = connection.createQuery("INSERT INTO users(name, phoneNumber," 
-						+ "cpf, email, birthdayDate, password, creationDate, verificationCode) "
+						+ "cpf, email, birthdayDate, password, creationDate, verificationCode, isverified) "
 						+ "VALUES (:name, :phoneNumber, :cpf, :email, :birthdayDate, "
-						+ ":password, :creationDate, :verificationCode)", true)
+						+ ":password, :creationDate, :verificationCode, false)", true)
 					.addParameter("name", (String) userInformation.get("name"))
 					.addParameter("phoneNumber", (String) userInformation.get("phone-number"))
 					.addParameter("cpf", (String) userInformation.get("cpf"))
@@ -83,14 +83,14 @@ public class UserDAO implements IUser{
 			String dataInDB = salt + hashedSecret;
 			if (userLogin.get("email") != null) {
 				int usersFound = connection.createQuery("SELECT count(id) FROM users WHERE "
-						+ "password = :secret AND email = :email AND isVerified = true")
+						+ "password = :secret AND email = :email")
 						.addParameter("secret", dataInDB)
 						.addParameter("email", userLogin.get("email"))
 						.executeScalar(Integer.class);
 				return usersFound == 1;
 			} else if (userLogin.get("phone-number") != null) {
 				int usersFound = connection.createQuery("SELECT count(id) FROM users WHERE "
-						+ "password = :secret AND phoneNumber = :phoneNumber AND isVerified = true")
+						+ "password = :secret AND phoneNumber = :phoneNumber")
 						.addParameter("secret", dataInDB)
 						.addParameter("phoneNumber", userLogin.get("phone-number"))
 						.executeScalar(Integer.class);
@@ -199,6 +199,18 @@ public class UserDAO implements IUser{
 			connection.commit();
 			return user.verifiesWith(verificationCode);
 		}
+	}
+
+	@Override
+	public boolean isVerified(Sql2o sql2o, int userId) {
+		boolean userIsVerified = false;
+		try (Connection connection = sql2o.beginTransaction()) {
+			userIsVerified = connection.createQuery("SELECT isVerified FROM users WHERE id = :userId")
+								.addParameter("userId", userId)
+								.executeAndFetchFirst(Boolean.class);
+			connection.commit();
+		}
+		return userIsVerified;
 	}
 	
 
