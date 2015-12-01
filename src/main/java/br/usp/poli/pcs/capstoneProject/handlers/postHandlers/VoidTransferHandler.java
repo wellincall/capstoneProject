@@ -17,7 +17,7 @@ public class VoidTransferHandler extends DefaultPostHandler {
 		if ((new VoidTransferIntentionService()).call(transferId, userId)) {
 			return "{\"status\": 0, \"message\": \"Transfer intention successfully voided.\"}";
 		} else {
-			return "{\"status\": 2, \"message\": \"It was not possible to void the requested transfer. You can't do this action right now.\"}";
+			return "{\"status\": 2, \"message\": \"It was not possible to void the requested transfer. You can't perform this action right now.\"}";
 		}		
 	}
 	
