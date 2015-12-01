@@ -40,12 +40,6 @@ public class BankAccountDAO implements IBankAccount {
 	}
 
 	@Override
-	public boolean deleteBankAccount(Sql2o sql2o, int bankAccountId, int bankId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean hasValidInformation(Sql2o sql2o, Map<String, Object> accountDetails) {
 		BankAccount bankAccount = null;
 		try(Connection connection = sql2o.beginTransaction()) {

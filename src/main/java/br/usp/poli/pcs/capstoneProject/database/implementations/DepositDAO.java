@@ -13,12 +13,6 @@ import br.usp.poli.pcs.capstoneProject.models.Deposit;
 public class DepositDAO implements IDeposit {
 
 	@Override
-	public List<Deposit> getUserDeposits(Sql2o sql2o, int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Deposit createDeposit(Sql2o sql2o, Map<String, Object> depositInformation) {
 		Deposit deposit = null;
 		try (Connection connection = sql2o.beginTransaction()) {

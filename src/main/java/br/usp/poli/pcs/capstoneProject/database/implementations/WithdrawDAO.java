@@ -12,11 +12,6 @@ import br.usp.poli.pcs.capstoneProject.models.Withdraw;
 
 public class WithdrawDAO implements IWithdraw {
 
-	@Override
-	public List<Withdraw> getUserWithdraws(Sql2o sql2o, int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Withdraw createWithdraw(Connection connection, Map<String, Object> withdrawInformation) {
