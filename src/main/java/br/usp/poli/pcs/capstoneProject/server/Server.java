@@ -160,5 +160,9 @@ public class Server {
 			return (new AcceptTransferDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/accept-transfer", (request, response) -> {
+			return (new AcceptTransferHandler(request, response)).call();
+		});
+		
 	}
 }
