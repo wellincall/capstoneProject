@@ -107,19 +107,31 @@ public class TransferIntentionDAO implements ITransferIntention {
 
 	@Override
 	public boolean acceptTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
-		boolean hasApprovedTransfer = false;
+		boolean hasAcceptedTransfer = false;
 		try(Connection connection = sql2o.beginTransaction()) {
 			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :transferId AND recipientid = :userId")
 									.addParameter("transferId", transferIntentionId)
 									.addParameter("userId", userId)
 									.executeAndFetchFirst(TransferIntention.class);
 		
-			if (transfer.canBeAccepted())
+			if (transfer.canBeAccepted()) {
+				connection.createQuery("UPDATE transferintentions SET status = :status WHERE id = :id")
+					.addParameter("id", transfer.getId())
+					.addParameter("status", TransferIntention.ACCEPTED)
+					.executeUpdate();
+				if (!(new WithdrawDAO()).acceptWithdraw(connection, transferIntentionId) || !(new DepositDAO()).acceptDeposit(connection, transferIntentionId)) {
+					connection.rollback();
+				} else {
+					connection.commit();
+					hasAcceptedTransfer = true;
+				}
+				
+			} else {
+				connection.commit();
+			}
 			
-			
-			connection.commit();
 		}
-		return hasApprovedTransfer;
+		return hasAcceptedTransfer;
 	}
 
 
