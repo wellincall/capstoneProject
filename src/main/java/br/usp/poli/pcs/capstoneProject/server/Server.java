@@ -29,6 +29,12 @@ public class Server {
 			}
 		});
 		
+		before("/verify-my-account", (request, response) -> {
+			if (request.session().attribute("user-id") == null) {
+				response.redirect("/not-authenticated");
+			}
+		});
+		
 		get("/not-authenticated", (request, response) -> {
 			response.status(403);
 			response.type("application/json");
@@ -43,6 +49,10 @@ public class Server {
 		
 		get("/verify-account", (request, response) -> {
 			return (new VerifyAccountDisplayHandler(request, response)).call(); 
+		});
+		
+		post("/verify-my-account", (request, response) -> {
+			return (new VerifyAccountHandler(request, response)).call();
 		});
 		
 		get("/new-user", (request, response) -> {
