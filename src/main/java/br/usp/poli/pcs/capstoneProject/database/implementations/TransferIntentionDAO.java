@@ -142,7 +142,6 @@ public class TransferIntentionDAO implements ITransferIntention {
 			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE "
 					+ "id = :transferId AND senderId = :senderId")
 						.addParameter("transferId", transferIntentionId)
-						.addParameter("recipientId", userId)
 						.addParameter("senderId", userId)
 						.executeAndFetchFirst(TransferIntention.class);
 			if (transfer != null) {

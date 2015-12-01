@@ -9,6 +9,7 @@ import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.AcceptTransferForm;
 import br.usp.poli.pcs.capstoneProject.dataHandler.IDataHandlerService;
 import br.usp.poli.pcs.capstoneProject.dataHandler.AcceptTransferDataHandler;
+import br.usp.poli.pcs.capstoneProject.database.services.AcceptTransferService;
 
 public class AcceptTransferHandler extends DefaultPostHandler {
 	
@@ -24,9 +25,13 @@ public class AcceptTransferHandler extends DefaultPostHandler {
 		Form form = new AcceptTransferForm(userId);
 		if (form.isValid(request)) {
 			Map<String, Object> transferData = dataHandler.call(request);
-			return "{has to be developed}";
+			if ((new AcceptTransferService()).call(transferData)) {
+				return "{\"status\": 0, \"message\": \"Transfer accepted successfully.\"}";
+			} else {
+				return "{\"status\": 1, \"message\": \"It was not possible to accept the requested transfer. You can't perform this action right now.\"}";
+			}
 		} else {
-			return "{\"status\": 2, \"message\": \"It was not possible to accept the request transfer. You can't perform this action right now.\"}";
+			return "{\"status\": 2, \"message\": \"It was not possible to accept the request transfer. Invalid data was sent.\"}";
 		}
 	}
 

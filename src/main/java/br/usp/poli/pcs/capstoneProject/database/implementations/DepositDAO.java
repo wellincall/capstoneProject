@@ -27,9 +27,9 @@ public class DepositDAO implements IDeposit {
 					+ ") "
 					+ "VALUES "
 					+ "(:bankId, :accountToken, :transferId, :value, :status, :creationDate)", true)
-					.addParameter("bankId", depositInformation.get("bank-id"))
-					.addParameter("accountToken", depositInformation.get("account-token"))
-					.addParameter("transferId", depositInformation.get("transfer-id"))
+					.addParameter("bankId", depositInformation.get("bankId"))
+					.addParameter("accountToken", depositInformation.get("accountToken"))
+					.addParameter("transferId", depositInformation.get("transferId"))
 					.addParameter("value", depositInformation.get("amount"))
 					.addParameter("status", Deposit.ACCEPTED)
 					.addParameter("creationDate", new Date())
@@ -37,6 +37,7 @@ public class DepositDAO implements IDeposit {
 			deposit = connection.createQuery("SELECT * FROM deposits WHERE id = :id")
 								.addParameter("id", depositId)
 								.executeAndFetchFirst(Deposit.class);
+			connection.commit();
 		}
 		return deposit;
 	}

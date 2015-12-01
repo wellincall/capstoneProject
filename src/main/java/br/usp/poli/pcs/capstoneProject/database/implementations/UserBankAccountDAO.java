@@ -107,7 +107,7 @@ public class UserBankAccountDAO implements IUserBankAccount{
 	public UserBankAccount getUserBankAccountById(Sql2o sql2o, int userBankAccountId, int userId) {
 		UserBankAccount account = null;
 		try (Connection connection = sql2o.beginTransaction()) {
-				getUserBankAccountById(connection, userBankAccountId, userId);
+				account = getUserBankAccountById(connection, userBankAccountId, userId);
 				connection.commit();
 		}
 		return account;
