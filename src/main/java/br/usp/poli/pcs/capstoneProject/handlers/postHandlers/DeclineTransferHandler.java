@@ -13,7 +13,7 @@ public class DeclineTransferHandler extends DefaultPostHandler {
 	
 	public String process() {
 		int userId = request.session().attribute("user-id");
-		int transferId = request.session().attribute("transfer-id");
+		int transferId = Integer.valueOf(String.valueOf(request.queryParams("transfer-id")));
 		if ((new DeclineTransferService()).call(transferId, userId)) {
 			return "{\"status\": 0, \"message\": \"Transfer intention successfully declined.\"}";
 		} else {

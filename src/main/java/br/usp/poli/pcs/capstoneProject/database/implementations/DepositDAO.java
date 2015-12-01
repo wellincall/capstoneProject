@@ -38,7 +38,7 @@ public class DepositDAO implements IDeposit {
 	@Override
 	public boolean declineDeposit(Connection connection, int transferIntentionId) {
 		boolean hasDeclinedDeposit = false;
-		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE transferintentionid = :transferid")
+		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE transferintentionid = :transferId")
 							.addParameter("transferId", transferIntentionId)
 							.executeAndFetchFirst(Deposit.class);
 		if (deposit != null) {
