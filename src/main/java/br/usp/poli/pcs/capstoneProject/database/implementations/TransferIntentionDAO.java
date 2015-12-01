@@ -137,7 +137,19 @@ public class TransferIntentionDAO implements ITransferIntention {
 		}
 		return hasVoidedTransfer;
 	}
-
+	
+	@Override
+	public TransferIntention getTransferIntentionById(Sql2o sql2o, int transferId, int recipientId) {
+		TransferIntention transfer = null;
+		try (Connection connection = sql2o.beginTransaction()) {
+			transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :transferId AND recipientid = :recipientId")
+								.addParameter("transferId", transferId)
+								.addParameter("recipientId", recipientId)
+								.executeAndFetchFirst(TransferIntention.class);
+			connection.commit();
+		}
+		return transfer;
+	}
 
 	
 
