@@ -19,22 +19,25 @@ public class DepositDAO implements IDeposit {
 	}
 
 	@Override
-	public Deposit createDeposit(Connection connection, Map<String, Object> depositInformation) {
-		int depositId = connection.createQuery("INSERT INTO deposits("
-				+ "bankid, accounttoken, transferintentionid, value, status, creationdate"
-				+ ") "
-				+ "VALUES "
-				+ "(:bankId, :accountToken, :transferId, :value, :status, :creationDate)", true)
-				.addParameter("bankId", depositInformation.get("bank-id"))
-				.addParameter("accountToken", depositInformation.get("account-token"))
-				.addParameter("transferId", depositInformation.get("transfer-id"))
-				.addParameter("value", depositInformation.get("amount"))
-				.addParameter("status", Deposit.ACCEPTED)
-				.addParameter("creationDate", new Date())
-				.executeUpdate().getKey(Integer.class);
-		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE id = :id")
-							.addParameter("id", depositId)
-							.executeAndFetchFirst(Deposit.class);
+	public Deposit createDeposit(Sql2o sql2o, Map<String, Object> depositInformation) {
+		Deposit deposit = null;
+		try (Connection connection = sql2o.beginTransaction()) {
+			int depositId = connection.createQuery("INSERT INTO deposits("
+					+ "bankid, accounttoken, transferintentionid, value, status, creationdate"
+					+ ") "
+					+ "VALUES "
+					+ "(:bankId, :accountToken, :transferId, :value, :status, :creationDate)", true)
+					.addParameter("bankId", depositInformation.get("bank-id"))
+					.addParameter("accountToken", depositInformation.get("account-token"))
+					.addParameter("transferId", depositInformation.get("transfer-id"))
+					.addParameter("value", depositInformation.get("amount"))
+					.addParameter("status", Deposit.ACCEPTED)
+					.addParameter("creationDate", new Date())
+					.executeUpdate().getKey(Integer.class);
+			deposit = connection.createQuery("SELECT * FROM deposits WHERE id = :id")
+								.addParameter("id", depositId)
+								.executeAndFetchFirst(Deposit.class);
+		}
 		return deposit;
 	}
 
