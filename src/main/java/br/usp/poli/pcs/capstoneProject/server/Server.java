@@ -152,5 +152,9 @@ public class Server {
 			return (new VoidTransferHandler(request, response)).call();
 		});
 		
+		post("/user/decline-transfer", (request, response) -> {
+			return (new DeclineTransferHandler(request, response)).call();
+		});
+		
 	}
 }
