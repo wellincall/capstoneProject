@@ -60,6 +60,8 @@ public class TransferIntention {
 			return "accepted";
 		case VOIDED:
 			return "voided";
+		case CONSOLIDATED: 
+			return "consolidated";
 		default:
 			return "invalid";
 		}
@@ -79,6 +81,10 @@ public class TransferIntention {
 	
 	public boolean isVoided() {
 		return status == VOIDED;
+	}
+	
+	public boolean isConsolidated() {
+		return status == CONSOLIDATED;
 	}
 	
 	public String getRecipientName() {

@@ -168,6 +168,8 @@ public class Server {
 			return (new ConsolidateTransfersDisplayHandler(request, response)).call();
 		});
 		
-		
+		post("/consolidate", (request, response) -> {
+			return (new ConsolidateTransfersHandler(request, response)).call();
+		});
 	}
 }

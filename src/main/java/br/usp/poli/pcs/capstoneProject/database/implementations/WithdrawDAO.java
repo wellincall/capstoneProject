@@ -37,7 +37,7 @@ public class WithdrawDAO implements IWithdraw {
 		if (withdraw.canBeConsolidated()) {
 			connection.createQuery("UPDATE withdraws SET status = :status WHERE id = :withdrawId")
 					.addParameter("status", Withdraw.CONSOLIDATED)
-					.addParameter("id", withdraw.getId())
+					.addParameter("withdrawId", withdraw.getId())
 					.executeUpdate();
 			return true;
 		} else {
