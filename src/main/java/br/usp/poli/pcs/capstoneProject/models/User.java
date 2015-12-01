@@ -12,6 +12,8 @@ public class User {
 	private Date birthdayDate;
 	private Date creationDate;
 	private String password;
+	private boolean isVerified;
+	private String verificationCode;
 	private List<BankAccount> accounts;
 	public int getId() {
 		return id;
@@ -39,5 +41,11 @@ public class User {
 	}
 	public String getCpf() {
 		return cpf;
+	}
+	public boolean isVerified() {
+		return isVerified;
+	}
+	public boolean verifiesWith(String providedVerificationCode) {
+		return verificationCode.equals(providedVerificationCode);
 	}
 }

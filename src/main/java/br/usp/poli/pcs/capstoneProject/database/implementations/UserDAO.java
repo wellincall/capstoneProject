@@ -186,7 +186,12 @@ public class UserDAO implements IUser{
 
 	@Override
 	public boolean verifiesUser(Sql2o sql2o, int userId, String verificationCode) {
-		
+		try (Connection connection = sql2o.beginTransaction()) {
+			User user = connection.createQuery("SELECT * FROM users WHERE id = :userId")
+							.addParameter("userId", userId)
+							.executeAndFetchFirst(User.class);
+			
+		}
 		return false;
 	}
 	
