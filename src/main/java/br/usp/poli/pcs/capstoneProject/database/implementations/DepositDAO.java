@@ -42,8 +42,19 @@ public class DepositDAO implements IDeposit {
 
 	@Override
 	public boolean consolidateDeposit(Connection connection, int transferIntentionId) {
-		// TODO Auto-generated method stub
-		return false;
+		Deposit deposit = connection.createQuery("SELECT * FROM deposits WHERE transferintentionid = :transferId")
+								.addParameter("transferId", transferIntentionId)
+								.executeAndFetchFirst(Deposit.class);
+		if (deposit.canBeConsolidated()) {
+			connection.createQuery("UPDATE deposits SET status = :status WHERE id = :depositId")
+						.addParameter("status", Deposit.CONSOLIDATED)
+						.addParameter("depositId", deposit.getId())
+						.executeUpdate();
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 	@Override
