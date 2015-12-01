@@ -191,9 +191,30 @@ public class TransferIntentionDAO implements ITransferIntention {
 	}
 
 	@Override
-	public TransferIntention consolidateTransferIntention(Sql2o sql2o, int transferIntention) {
-		// TODO Auto-generated method stub
-		return null;
+	public TransferIntention consolidateTransferIntention(Sql2o sql2o, int transferIntentionId) {
+		TransferIntention transfer = null;
+		try (Connection connection = sql2o.beginTransaction()) {
+			boolean shouldPerformRollback = false;
+			transfer = connection.createQuery("SELECT * FROM transferintentions WHERE id = :transferId")
+							.addParameter("transferId", transferIntentionId)
+							.executeAndFetchFirst(TransferIntention.class);
+			if (transfer != null && transfer.canBeConsolidated()) {
+				
+				connection.createQuery("UPDATE transferintentions SET status = :status WHERE id = :transferId")
+							.addParameter("transferId", transferIntentionId)
+							.addParameter("status", TransferIntention.CONSOLIDATED)
+							.executeUpdate();
+				shouldPerformRollback = (new WithdrawDAO()).consolidateWithdraw(connection, transferIntentionId) ? false : true;
+				shouldPerformRollback = (new DepositDAO()).consolidateDeposit(connection, transferIntentionId) ? false : true;
+				
+			}
+			if (shouldPerformRollback) {
+				connection.rollback();
+			} else {
+				connection.commit();
+			}
+		}
+		return transfer;
 	}
 
 	

@@ -29,7 +29,7 @@ public class WithdrawDAO implements IWithdraw {
 	}
 
 	@Override
-	public boolean consolidateWithdraw(Connection connection, int withdrawId) {
+	public boolean consolidateWithdraw(Connection connection, int transferIntentionId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
