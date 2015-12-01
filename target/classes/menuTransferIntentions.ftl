@@ -104,6 +104,9 @@
 				   										<input type="submit" value="Accept transaction" class="btn btn-default btn-success" />
 				   									</form>
 				   								</#if>
+				   								<#if transferIntention.canBeConsolidated() && transferIntention.isAccepted() >
+				   									Waiting for consolidation
+				   								</#if>
 			   								<#else>
 			   									No more actions to be done
 			   								</#if>
