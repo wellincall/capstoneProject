@@ -41,5 +41,19 @@ public class Withdraw {
 	public TransferIntention getTransferIntention() {
 		return transferIntention;
 	}
+	public boolean canBeDeclined() {
+		return status == CREATED;
+	}
 	
+	public boolean canBeVoided() {
+		return status == CREATED || status == ACCEPTED;
+	}
+	
+	public boolean canBeAccepted() {
+		return status == CREATED;
+	}
+	
+	public boolean canBeConsolidated() {
+		return status == ACCEPTED;
+	}
 }
