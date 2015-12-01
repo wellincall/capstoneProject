@@ -4,11 +4,11 @@ import br.usp.poli.pcs.capstoneProject.database.interfaces.IUserBankAccount;
 import br.usp.poli.pcs.capstoneProject.database.implementations.UserBankAccountDAO;
 import br.usp.poli.pcs.capstoneProject.models.UserBankAccount;
 
-public class GetUserBankAccountById extends DatabaseService {
+public class GetUserBankAccountByIdService extends DatabaseService {
 
 	private IUserBankAccount dao;
 	
-	public GetUserBankAccountById() {
+	public GetUserBankAccountByIdService() {
 		super();
 		dao = new UserBankAccountDAO();
 	}
