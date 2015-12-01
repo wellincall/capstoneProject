@@ -13,6 +13,7 @@ import br.usp.poli.pcs.capstoneProject.database.interfaces.IUser;
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.security.NewPasswordHashService;
 import br.usp.poli.pcs.capstoneProject.security.PasswordHashService;
+import br.usp.poli.pcs.capstoneProject.security.VerificationCodeGenerator;
 
 public class UserDAO implements IUser{
 
@@ -20,17 +21,19 @@ public class UserDAO implements IUser{
 	public User createUser(Sql2o sql2o, Map<String, Object> userInformation) {
 		User user = null;
 		String hashedPassword = (new NewPasswordHashService()).call((String) userInformation.get("password"));
+		String verificationCode = (new VerificationCodeGenerator()).call();
 		try(Connection connection = sql2o.beginTransaction()) {
 			if (canRegisterUser(connection, userInformation)) {
 				int userId = connection.createQuery("INSERT INTO users(name, phoneNumber," 
-						+ "cpf, email, birthdayDate, password, creationDate) "
+						+ "cpf, email, birthdayDate, password, creationDate, verificationCode) "
 						+ "VALUES (:name, :phoneNumber, :cpf, :email, :birthdayDate, "
-						+ ":password, :creationDate)", true)
+						+ ":password, :creationDate, :verificationCode)", true)
 					.addParameter("name", (String) userInformation.get("name"))
 					.addParameter("phoneNumber", (String) userInformation.get("phone-number"))
 					.addParameter("cpf", (String) userInformation.get("cpf"))
 					.addParameter("email", (String) userInformation.get("email"))
 					.addParameter("password", hashedPassword)
+					.addParameter("verificationCode", verificationCode)
 					.addParameter("birthdayDate", userInformation.get("birthday-date"))
 					.addParameter("creationDate", new Date())
 					.executeUpdate()
@@ -80,14 +83,14 @@ public class UserDAO implements IUser{
 			String dataInDB = salt + hashedSecret;
 			if (userLogin.get("email") != null) {
 				int usersFound = connection.createQuery("SELECT count(id) FROM users WHERE "
-						+ "password = :secret AND email = :email")
+						+ "password = :secret AND email = :email AND isVerified = true")
 						.addParameter("secret", dataInDB)
 						.addParameter("email", userLogin.get("email"))
 						.executeScalar(Integer.class);
 				return usersFound == 1;
 			} else if (userLogin.get("phone-number") != null) {
 				int usersFound = connection.createQuery("SELECT count(id) FROM users WHERE "
-						+ "password = :secret AND phoneNumber = :phoneNumber")
+						+ "password = :secret AND phoneNumber = :phoneNumber AND isVerified = true")
 						.addParameter("secret", dataInDB)
 						.addParameter("phoneNumber", userLogin.get("phone-number"))
 						.executeScalar(Integer.class);
@@ -179,6 +182,12 @@ public class UserDAO implements IUser{
 		users = connection.createQuery("SELECT id, name, phonenumber FROM users").executeAndFetch(User.class);
 		connection.commit();
 		return users;
+	}
+
+	@Override
+	public boolean verifiesUser(Sql2o sql2o, int userId, String verificationCode) {
+		
+		return false;
 	}
 	
 

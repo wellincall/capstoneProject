@@ -15,4 +15,5 @@ public interface IUser {
 	public boolean updatePassword(Sql2o sql2o, Map<String, Object> passwordInformation);
 	public List<Integer> getUsersId(Sql2o sql2o);
 	public List<User> getUsers(Sql2o sql2o);
+	public boolean verifiesUser(Sql2o sql2o, int userId, String verificationCode);
 }
