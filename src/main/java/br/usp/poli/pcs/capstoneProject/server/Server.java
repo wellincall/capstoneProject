@@ -156,5 +156,9 @@ public class Server {
 			return (new DeclineTransferHandler(request, response)).call();
 		});
 		
+		get("/user/accept-transfer-page", (request, response) -> {
+			return (new AcceptTransferDisplayHandler(request, response)).call();
+		});
+		
 	}
 }

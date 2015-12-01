@@ -20,7 +20,7 @@ public class AcceptTransferForm extends FormWithForeignKey {
 	
 	public boolean isValid(Request request) {
 		boolean isValid = true;
-		int userId = Integer.valueOf(String.valueOf(request.session().attribute("user-id")));
+		int userId = request.session().attribute("user-id");
 		for (FormField field : getFormFields()) {
 			if (request.queryParams(field.getFormFieldId()) == null) {
 				isValid = false;

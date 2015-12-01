@@ -15,32 +15,39 @@
 		   		<div class="col-md-12">
 			   		<form class="form-horizontal" action="/user/accept-transfer" method="POST">
 			   			<div class="transfer-info">
+			   					<input type="hidden" name="transfer-id" value="${transfer.id}" />
 			   					<div class="info-group">
 			   						<div class="col-md-2">
-			   							<p class="bold">Sender's name:</p>
+			   							<p class="text-right">
+			   								<strong>Sender's name:</strong>
+			   							</p>
 			   						</div>
 			   						<div class="col-md-10">
-			   							<p class="text-right">
+			   							<p>
 			   								${transfer.senderName}
 			   							</p>
 			   						</div>
 			   					</div>
 			   					<div class="info-group">
 			   						<div class="col-md-2">
-			   							<p class="bold">Sender's phone number:</p>
+			   							<p class="text-right">
+			   								<strong>Sender's phone number:</strong>
+			   							</p>
 			   						</div>
 			   						<div class="col-md-10">
-			   							<p class="text-right">
+			   							<p>
 			   								${transfer.senderPhoneNumber}
 			   							</p>
 			   						</div>
 			   					</div>
 			   					<div class="info-group">
 			   						<div class="col-md-2">
-			   							<p class="bold">Amount: </p>
+			   							<p class="text-right">
+			   								<strong>Amount: </strong>
+			   							</p>
 			   						</div>
 			   						<div class="col-md-10">
-			   							<p class="text-right">
+			   							<p>
 			   								${transfer.value}
 			   							</p>
 			   						</div>
