@@ -103,4 +103,13 @@ public class UserBankAccountDAO implements IUserBankAccount{
 					.executeAndFetchFirst(UserBankAccount.class);
 		return account;
 	}
+	
+	public UserBankAccount getUserBankAccountById(Sql2o sql2o, int userBankAccountId, int userId) {
+		UserBankAccount account = null;
+		try (Connection connection = sql2o.beginTransaction()) {
+				getUserBankAccountById(connection, userBankAccountId, userId);
+				connection.commit();
+		}
+		return account;
+	}
 }

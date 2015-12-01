@@ -12,4 +12,6 @@ public interface IUserBankAccount {
 	public boolean removeAccount(Sql2o sql2o, int userId, int userBankAccountId);
 	public List<Integer> getUserBankAccountsId(Sql2o sql2o, int userId);
 	public UserBankAccount getUserBankAccountById(Connection connection, int userBankAccountId, int userId);
+	public UserBankAccount getUserBankAccountById(Sql2o sql2o, int userBankAccountId, int userId);
+
 }
