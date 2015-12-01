@@ -42,12 +42,14 @@ public class DepositDAO implements IDeposit {
 							.addParameter("transferId", transferIntentionId)
 							.executeAndFetchFirst(Deposit.class);
 		if (deposit != null) {
-			connection.createQuery("UPDATE deposits SET status = :status WHERE id = :depositId AND transferintentionid = :transferId")
-							.addParameter("depositId", deposit.getId())
-							.addParameter("transferId", transferIntentionId)
-							.addParameter("status", Deposit.DECLINED)
-							.executeUpdate();
-			hasDeclinedDeposit = true;
+			if (deposit.canBeDeclined()) {
+				connection.createQuery("UPDATE deposits SET status = :status WHERE id = :depositId AND transferintentionid = :transferId")
+								.addParameter("depositId", deposit.getId())
+								.addParameter("transferId", transferIntentionId)
+								.addParameter("status", Deposit.DECLINED)
+								.executeUpdate();
+				hasDeclinedDeposit = true;
+			}
 		}
 		
 		return hasDeclinedDeposit;
@@ -60,12 +62,14 @@ public class DepositDAO implements IDeposit {
 							.addParameter("transferId", transferIntentionId)
 							.executeAndFetchFirst(Deposit.class);
 		if (deposit != null) {
-			connection.createQuery("UPDATE deposits SET status = :status WHERE id = :id AND transferintentionid = :transferId")
-					.addParameter("status", Deposit.VOIDED)
-					.addParameter("id", deposit.getId())
-					.addParameter("transferId", transferIntentionId)
-					.executeUpdate();
-			hasVoidedDeposit = true;
+			if (deposit.canBeVoided()) {
+				connection.createQuery("UPDATE deposits SET status = :status WHERE id = :id AND transferintentionid = :transferId")
+						.addParameter("status", Deposit.VOIDED)
+						.addParameter("id", deposit.getId())
+						.addParameter("transferId", transferIntentionId)
+						.executeUpdate();
+				hasVoidedDeposit = true;
+			}
 		}
 		return hasVoidedDeposit;
 	}
