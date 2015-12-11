@@ -3,6 +3,7 @@ package br.usp.poli.pcs.capstoneProject.server;
 import static spark.Spark.*;
 import br.usp.poli.pcs.capstoneProject.handlers.getHandlers.*;
 import br.usp.poli.pcs.capstoneProject.handlers.postHandlers.*;
+import spark.Spark;
 
 public class Server {
 	
@@ -10,9 +11,11 @@ public class Server {
 	static String STATIC_FILES_LOCATION = "/public";
 	
 	public static void main(String[] args) {
-		
 		port(PORT);
 		staticFileLocation(STATIC_FILES_LOCATION);
+		
+		//secure(args[0], args[1], null, null);
+
 		
 		before("/user/*", (request, response) -> {
 			if (request.session().attribute("user-id") == null) {
@@ -34,7 +37,7 @@ public class Server {
 				response.redirect("/not-authenticated");
 			}
 		});
-		
+
 		get("/", (request, response) -> {
 			return (new HomePageHandler(request, response)).call();
 		});

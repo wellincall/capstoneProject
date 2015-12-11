@@ -32,7 +32,12 @@ public class NewTransferIntentionForm extends FormWithForeignKey {
 					isValid = false;
 				}
 			} else if(formField instanceof ForeignKeyField && formField.getFormFieldId().equals("sender-account-id")) {
-				int foreignKeyValue = Integer.valueOf(request.queryParams(formField.getFormFieldId()));
+				int foreignKeyValue;
+				if (request.queryParams(formField.getFormFieldId()) != null ) {
+					foreignKeyValue = Integer.valueOf(request.queryParams(formField.getFormFieldId()));
+				} else {
+					foreignKeyValue = -1;
+				}
 				int userId = request.session().attribute("user-id");
 				if (!(new UserBankAccountForeignKeyValidator()).validates(foreignKeyValue, userId)) {
 					isValid = false;

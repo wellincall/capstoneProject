@@ -2,3 +2,5 @@
 *.jar
 .settings/*
 target/*
+*.jks
+
