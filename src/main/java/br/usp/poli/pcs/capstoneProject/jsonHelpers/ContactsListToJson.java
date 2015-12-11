@@ -9,7 +9,7 @@ public class ContactsListToJson {
 		StringJoiner joiner = new StringJoiner(", ", "[", "]");
 		for (User user : users) {
 			StringJoiner userJSON = new StringJoiner(", ", "{", "}");
-			userJSON.add("\"id\": "+user.getId()).add("\"name\": \""+user.getName()+"\"").add("\"phoneNumber\": \""+user.getPhoneNumber()+"\"");
+			userJSON.add("\"id\": "+user.getId()).add("\"phoneNumber\": \""+user.getPhoneNumber()+"\"");
 			joiner.add(userJSON.toString());
 		}
 		return joiner.toString();
