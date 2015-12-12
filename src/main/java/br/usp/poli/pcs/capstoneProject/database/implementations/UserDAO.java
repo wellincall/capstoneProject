@@ -55,7 +55,7 @@ public class UserDAO implements IUser{
 				user = connection.createQuery("SELECT * FROM users WHERE email = :email")
 						.addParameter("email", userInformation.get("email"))
 						.executeAndFetchFirst(User.class);
-			} else if (userInformation.get("phoneNumber") != null) {
+			} else if (userInformation.get("phone-number") != null) {
 				user = connection.createQuery("SELECT * FROM users WHERE phoneNumber = :phoneNumber")
 						.addParameter("phoneNumber", userInformation.get("phone-number"))
 						.executeAndFetchFirst(User.class);
