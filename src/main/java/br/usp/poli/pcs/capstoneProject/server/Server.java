@@ -110,8 +110,7 @@ public class Server {
 			if (request.session().attribute("user-id") != null) {
 				request.session().removeAttribute("user-id");
 			}
-			response.redirect("/login");
-			return "";
+			return "{\"status\": 0, \"message\": \"User successfully logged out.\"}";
 		});
 		
 		get("/user/reset-password", (request, response) -> {
