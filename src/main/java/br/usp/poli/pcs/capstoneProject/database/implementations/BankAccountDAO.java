@@ -66,11 +66,11 @@ public class BankAccountDAO implements IBankAccount {
 		StringBuffer token = new StringBuffer();
 		try(Connection connection = sql2o.beginTransaction()) {
 			token.append(connection.createQuery("SELECT token FROM bankaccounts WHERE "
-					+ "accountownercpf = :cpf AND accountownername = :name "
+					+ "accountownercpf = :cpf AND accountownerphonenumber = :phoneNumber "
 					+ "AND accountownerbirthdaydate = :birthdayDate AND "
 					+ "accountnumber = :accountNumber AND agencynumber = :agencyNumber "
 					+ "AND bankid = :bankId")
-					.addParameter("name" , accountDetails.get("name"))
+					.addParameter("phoneNumber" , accountDetails.get("phone-number"))
 					.addParameter("cpf" , accountDetails.get("cpf"))
 					.addParameter("birthdayDate" , accountDetails.get("birthday-date"))
 					.addParameter("accountNumber" , accountDetails.get("account-number"))
