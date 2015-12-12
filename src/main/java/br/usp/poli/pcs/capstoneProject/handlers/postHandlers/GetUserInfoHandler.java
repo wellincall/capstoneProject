@@ -5,6 +5,7 @@ import spark.Response;
 
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;
+import br.usp.poli.pcs.capstoneProject.jsonHelpers.UserToJson;
 
 public class GetUserInfoHandler extends DefaultPostHandler { 
 	public GetUserInfoHandler(Request request, Response response) {
@@ -14,6 +15,6 @@ public class GetUserInfoHandler extends DefaultPostHandler {
 	public String process() {
 		int userId = request.session().attribute("user-id");
 		User user = (new GetUserByIdService()).call(userId);
-		return "";
+		return (new UserToJson()).call(user);
 	}
 }

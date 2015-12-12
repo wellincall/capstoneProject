@@ -4,7 +4,7 @@ import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.helpers.DateFormatter;
 import java.util.StringJoiner;
 
-public class UserToJSon {
+public class UserToJson {
 	public String call(User user) {
 		StringJoiner json = new StringJoiner(", ", "{", "}");
 		json.add("\"name\": " + user.getName());
