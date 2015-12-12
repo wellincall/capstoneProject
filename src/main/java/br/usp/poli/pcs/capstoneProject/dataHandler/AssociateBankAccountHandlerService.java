@@ -18,7 +18,7 @@ public class AssociateBankAccountHandlerService implements IDataHandlerService {
 		}
 		User user = (new GetUserByIdService()).call(request.session().attribute("user-id"));
 		formData.put("user-id" , user.getId());
-		formData.put("name" , user.getName());
+		formData.put("phone-number" , user.getPhoneNumber());
 		formData.put("cpf", user.getCpf());
 		formData.put("birthday-date", user.getBirthdayDate());
 		return formData;
