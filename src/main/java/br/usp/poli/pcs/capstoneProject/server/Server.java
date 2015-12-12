@@ -205,5 +205,9 @@ public class Server {
 		post("/consolidate", (request, response) -> {
 			return (new ConsolidateTransfersHandler(request, response)).call();
 		});
+		
+		post("/user/my-profile", (request, response) -> {
+			return (new GetUserInfoHandler(request, response)).call();
+		});
 	}
 }
