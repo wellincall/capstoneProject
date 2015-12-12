@@ -31,6 +31,7 @@ CREATE TABLE bankAccounts (
 	accountNumber character(10) NOT NULL,
 	accountOwnerName character varying NOT NULL,
 	accountOwnerCPF character(14) NOT NULL,
+	accountOwnerPhoneNumber character(14) NOT NULL,
 	accountOwnerBirthdayDate date NOT NULL,
 	token character varying NOT NULL,
 	CONSTRAINT accountPK PRIMARY KEY (id),

@@ -9,6 +9,7 @@ public class BankAccount {
 	private String accountNumber;
 	private String accountOwnerName;
 	private String accountOwnerCPF;
+	private String accountOwnerPhoneNumber;
 	private Date accountOwnerBirthdayDate;
 	private String token;
 	private Bank bank;
@@ -38,5 +39,8 @@ public class BankAccount {
 	}
 	public Bank getBank() {
 		return bank;
+	}
+	public String getAccountOwnerPhoneNumber() {
+		return accountOwnerPhoneNumber;
 	}
 }

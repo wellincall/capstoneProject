@@ -18,15 +18,16 @@ public class BankAccountDAO implements IBankAccount {
 				String token = (new TokenGeneratorService()).call();
 				int accountId = connection.createQuery("INSERT INTO bankAccounts(bankId, accountNumber, "
 						+ "agencyNumber, accountOwnerName, accountOwnerCPF, accountOwnerBirthdayDate, "
-						+ "token) VALUES (:bankId, :accountNumber, "
+						+ "accountOwnerPhoneNumber, token) VALUES (:bankId, :accountNumber, "
 						+ ":agencyNumber, :accountOwnerName, :accountOwnerCPF, :accountOwnerBirthdayDate, "
-						+ ":token)", true)
+						+ ":accountOwnerPhoneNumber, :token)", true)
 					.addParameter("bankId", accountInformation.get("bank-id"))
 					.addParameter("accountNumber", accountInformation.get("account-number"))
 					.addParameter("agencyNumber", accountInformation.get("agency-number"))
 					.addParameter("accountOwnerName", accountInformation.get("account-owner-name"))
 					.addParameter("accountOwnerCPF", accountInformation.get("account-owner-cpf"))
 					.addParameter("accountOwnerBirthdayDate", accountInformation.get("account-owner-birthday-date"))
+					.addParameter("accountOwnerPhoneNumber", accountInformation.get("account-owner-phone-number"))
 					.addParameter("token", token)
 					.executeUpdate()
 					.getKey(Integer.class);
@@ -44,11 +45,11 @@ public class BankAccountDAO implements IBankAccount {
 		BankAccount bankAccount = null;
 		try(Connection connection = sql2o.beginTransaction()) {
 			bankAccount = connection.createQuery("SELECT * FROM bankaccounts WHERE "
-					+ "accountownercpf = :cpf AND accountownername = :name "
+					+ "accountownercpf = :cpf AND accountOwnerPhoneNumber = :phoneNumber "
 					+ "AND accountownerbirthdaydate = :birthdayDate AND "
 					+ "accountnumber = :accountNumber AND agencynumber = :agencyNumber "
 					+ "AND bankid = :bankId")
-					.addParameter("name" , accountDetails.get("name"))
+					.addParameter("phoneNumber" , accountDetails.get("phone-number"))
 					.addParameter("cpf" , accountDetails.get("cpf"))
 					.addParameter("birthdayDate" , accountDetails.get("birthday-date"))
 					.addParameter("accountNumber" , accountDetails.get("account-number"))
