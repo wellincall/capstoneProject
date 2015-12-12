@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import br.usp.poli.pcs.capstoneProject.forms.LoginForm;
+import br.usp.poli.pcs.capstoneProject.forms.PhoneLoginForm;
 
 public class LoginDisplayHandler extends DefaultGetHandler{
 	
@@ -17,6 +18,7 @@ public class LoginDisplayHandler extends DefaultGetHandler{
 	public Map<String, Object> process() {
 		Map<String, Object> form = new HashMap<String, Object>();
 		form.put("formfields", (new LoginForm()).getFormFields());
+		form.put("phonefields", (new PhoneLoginForm()).getFormFields());
 		return form;
 	}
 }

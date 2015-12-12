@@ -13,22 +13,44 @@
 	    </div>
 		   	<div class="row">
 		   		<div class="col-md-12">
-			   		<form class="form-horizontal" action="/authenticate" method="POST">
-			   			<#list formfields as formField>
-			   				<div class="form-group">
-				   				<label for="${formField.formFieldId}" class="col-md-2 control-label">
-				   				${formField.formFieldCaption}
-				   				</label>
-				   				<div class="col-md-10">
-				   					<input id="${formField.formFieldId}" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
+		   			<div>
+				   		<form class="form-horizontal" action="/authenticate" method="POST">
+				   			<#list formfields as formField>
+				   				<div class="form-group">
+					   				<label for="${formField.formFieldId}" class="col-md-2 control-label">
+					   				${formField.formFieldCaption}
+					   				</label>
+					   				<div class="col-md-10">
+					   					<input id="${formField.formFieldId}" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
+					   				</div>
 				   				</div>
-			   				</div>
-			   			</#list>
-			   			<div class="form-action">
-				   			<input type="submit" value="Submit" class="btn btn-default btn-primary pull-right" />
-				   			<input type="reset" value="Clean form" class="btn btn-default btn-danger pull-right" />
-			   			</div>
-			   		</form>
+				   			</#list>
+				   			<div class="form-action">
+					   			<input type="submit" value="Submit" class="btn btn-default btn-primary pull-right" />
+					   			<input type="reset" value="Clean form" class="btn btn-default btn-danger pull-right" />
+					   			<div class="clearfix"></div>
+				   			</div>
+				   		</form>
+				   	</div>
+			   		<div>
+				   		<form class="form-horizontal" action="/authenticate" method="POST">
+				   			<#list phonefields as formField>
+				   				<div class="form-group">
+					   				<label for="${formField.formFieldId}" class="col-md-2 control-label">
+					   				${formField.formFieldCaption}
+					   				</label>
+					   				<div class="col-md-10">
+					   					<input id="${formField.formFieldId}" name="${formField.formFieldId}" type="${formField.formFieldType}" class="form-control" />
+					   				</div>
+				   				</div>
+				   			</#list>
+				   			<div class="form-action">
+					   			<input type="submit" value="Submit" class="btn btn-default btn-primary pull-right" />
+					   			<input type="reset" value="Clean form" class="btn btn-default btn-danger pull-right" />
+					   			<div class="clearfix"></div>
+				   			</div>
+				   		</form>
+				   	</div>
 		   		</div>
 		   	</div>
 	    </div>

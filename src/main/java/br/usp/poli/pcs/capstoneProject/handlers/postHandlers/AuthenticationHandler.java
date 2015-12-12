@@ -2,6 +2,7 @@ package br.usp.poli.pcs.capstoneProject.handlers.postHandlers;
 
 import br.usp.poli.pcs.capstoneProject.forms.Form;
 import br.usp.poli.pcs.capstoneProject.forms.LoginForm;
+import br.usp.poli.pcs.capstoneProject.forms.PhoneLoginForm;
 import br.usp.poli.pcs.capstoneProject.database.services.AuthenticationService;
 import br.usp.poli.pcs.capstoneProject.database.services.GetUserService;
 import br.usp.poli.pcs.capstoneProject.models.User;
@@ -20,8 +21,9 @@ public class AuthenticationHandler extends DefaultPostHandler {
 	}
 	
 	public String process() {
-		Form form = new LoginForm();
-		if (form.isValid(request)) {
+		Form emailForm = new LoginForm();
+		Form phoneForm = new PhoneLoginForm();
+		if (emailForm.isValid(request) || phoneForm.isValid(request)) {
 			if ((new AuthenticationService()).call(request)) {
 				request.session(true);
 				User user = (new GetUserService()).call(getUserFields());
