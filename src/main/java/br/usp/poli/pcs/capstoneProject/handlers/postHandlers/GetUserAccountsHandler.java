@@ -15,6 +15,6 @@ public class GetUserAccountsHandler extends DefaultPostHandler {
 	
 	public String process() {
 		List<UserBankAccount> userBankAccounts = (new GetUserAccountsService()).call(request.session().attribute("user-id"));
-		return "{\"status\": 0, \"message\": \"Associated accountes are inside field accounts\", \"accounts\": "+(new UserAccountsListToJson()).call(userBankAccounts)+"}";
+		return "{\"status\": 0, \"message\": \"Associated accounts are inside field accounts\", \"accounts\": "+(new UserAccountsListToJson()).call(userBankAccounts)+"}";
 	}
 }
