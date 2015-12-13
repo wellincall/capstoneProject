@@ -16,12 +16,6 @@ public class ImportContactsForm extends Form {
 	}
 	
 	public boolean isValid(Request request) {
-		boolean isValid = true;
-		for (String phoneNumber : request.queryParamsValues("phone-number[]")) {
-			if (!validator.validates(phoneNumber)) {
-				isValid = false;
-			}
-		}
-		return isValid;
+		return true;
 	}
 }
