@@ -140,10 +140,13 @@ public class TransferIntentionDAO implements ITransferIntention {
 	public boolean voidTransferIntention(Sql2o sql2o, int transferIntentionId, int userId) {
 		boolean hasVoidedTransfer = false;
 		try(Connection connection = sql2o.beginTransaction()){
+			Calendar dateLimit = Calendar.getInstance();
+			dateLimit.add(Calendar.HOUR_OF_DAY, -8);
 			TransferIntention transfer = connection.createQuery("SELECT * FROM transferintentions WHERE "
-					+ "id = :transferId AND senderId = :senderId")
+					+ "id = :transferId AND senderId = :senderId AND creationDate >= :dateLimit")
 						.addParameter("transferId", transferIntentionId)
 						.addParameter("senderId", userId)
+						.addParameter("dateLimit", dateLimit)
 						.executeAndFetchFirst(TransferIntention.class);
 			if (transfer != null) {
 				if (transfer.canBeVoided()) {
