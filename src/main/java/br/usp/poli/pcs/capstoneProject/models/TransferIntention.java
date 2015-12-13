@@ -23,9 +23,6 @@ public class TransferIntention {
 	private Date creationDate;
 	private User recipient;
 	private User sender;
-	public static int getCreated() {
-		return CREATED;
-	}
 	public int getId() {
 		return id;
 	}
