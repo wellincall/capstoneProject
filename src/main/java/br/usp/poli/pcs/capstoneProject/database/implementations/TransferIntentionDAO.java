@@ -146,7 +146,7 @@ public class TransferIntentionDAO implements ITransferIntention {
 					+ "id = :transferId AND senderId = :senderId AND creationDate >= :dateLimit")
 						.addParameter("transferId", transferIntentionId)
 						.addParameter("senderId", userId)
-						.addParameter("dateLimit", dateLimit)
+						.addParameter("dateLimit", dateLimit.getTime())
 						.executeAndFetchFirst(TransferIntention.class);
 			if (transfer != null) {
 				if (transfer.canBeVoided()) {

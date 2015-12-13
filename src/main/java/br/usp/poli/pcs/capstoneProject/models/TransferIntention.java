@@ -1,5 +1,6 @@
 package br.usp.poli.pcs.capstoneProject.models;
 
+import java.util.Calendar;
 import java.util.Date;
 import br.usp.poli.pcs.capstoneProject.models.User;
 import br.usp.poli.pcs.capstoneProject.database.services.GetUserByIdService;
@@ -128,7 +129,7 @@ public class TransferIntention {
 	}
 	
 	public boolean canBeVoided() {
-		return status == ACCEPTED || status == CREATED;
+		return (status == ACCEPTED || status == CREATED) && allowedLimitToBeVoided();
 	}
 	
 	public boolean canChangeStatus() {
@@ -141,6 +142,12 @@ public class TransferIntention {
 	
 	public boolean hasValidStatus() {
 		return status == ACCEPTED || status == DECLINED || status == CREATED || status == VOIDED || status == CONSOLIDATED;
+	}
+	
+	private boolean allowedLimitToBeVoided () {
+		Calendar dateLimit = Calendar.getInstance();
+		dateLimit.add(Calendar.HOUR_OF_DAY, -8);
+		return dateLimit.getTime().compareTo(creationDate) < 0;
 	}
 	
 }
