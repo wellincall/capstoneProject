@@ -51,7 +51,7 @@ public class TransferIntention {
 	public String statusToHuman() {
 		switch (status) {
 		case CREATED: 
-			return "created";
+			return "pending";
 		case DECLINED:
 			return "declined";
 		case ACCEPTED:
