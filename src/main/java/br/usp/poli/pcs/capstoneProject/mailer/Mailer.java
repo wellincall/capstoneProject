@@ -42,7 +42,7 @@ public class Mailer {
 			message.setSubject("Verification Code");
 			message.setText("Dear "+user.getName()+","
 				+ "\n\nYour verification code is: "+user.getVerificationCode()+".\n\n"
-				+ "Hope that you have a good experience with us.\n\n"
+				+ "Hope you have a good experience with us.\n\n"
 				+ "Equipe Sistema de Agendamentos de Transferencias Bancarias - SATB");
 
 			Transport.send(message);
