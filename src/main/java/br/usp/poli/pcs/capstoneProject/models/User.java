@@ -19,7 +19,7 @@ public class User {
 		return id;
 	}
 	public String getName() {
-		return name;
+		return name.replaceAll("<|/|>", "");
 	}
 	public String getPhoneNumber() {
 		return phoneNumber;
