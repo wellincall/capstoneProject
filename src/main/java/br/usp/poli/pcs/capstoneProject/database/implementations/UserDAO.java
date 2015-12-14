@@ -190,7 +190,7 @@ public class UserDAO implements IUser{
 			User user = connection.createQuery("SELECT * FROM users WHERE id = :userId")
 							.addParameter("userId", userId)
 							.executeAndFetchFirst(User.class);
-			if (user.verifiesWith(verificationCode)) {
+			if (user.verifiesWith(verificationCode.toUpperCase())) {
 				connection.createQuery("UPDATE users SET isverified = true WHERE id = :userId")
 						.addParameter("userId", userId)
 						.executeUpdate();
