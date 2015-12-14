@@ -20,6 +20,7 @@ public class RegisterUserHandler extends DefaultPostHandler {
 	}
 	public String process() {
 		Form form = new NewUserForm();
+		
 		if (form.isValid(request)) {
 			User user = persistUser();
 			(new Mailer()).sendVerificationCode(user);
