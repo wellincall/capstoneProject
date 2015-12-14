@@ -23,8 +23,8 @@ public class RegisterUserHandler extends DefaultPostHandler {
 		
 		if (form.isValid(request)) {
 			User user = persistUser();
-			(new Mailer()).sendVerificationCode(user);
 			if (user != null) {
+				(new Mailer()).sendVerificationCode(user);
 				return "{\"status\": 0, \"message\": \"User successfully registered. An e-mail with verification code was was to your e-mail address. \"}";
 			} else {
 				return "{\"status\": 1, \"message\": \"User already registered\"}";
