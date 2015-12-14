@@ -201,6 +201,10 @@ public class Server {
 			return (new ConsolidateTransfersDisplayHandler(request, response)).call();
 		});
 		
+		post("/user/is-verified", (request, response) -> {
+			return (new UserHasVerifiedHandler(request, response)).call();
+		});
+		
 		post("/consolidate", (request, response) -> {
 			return (new ConsolidateTransfersHandler(request, response)).call();
 		});
